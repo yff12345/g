@@ -27,7 +27,7 @@ def test(args):
 
   # Instantiate models
   targets = ['valence','arousal','dominance','liking'][:args.n_targets]
-  models = [GNNLSTM(in_channels,hidden_channels=64, target=target).to(device).eval() for target in targets]
+  models = [GNNLSTM(in_channels,hidden_channels=64).to(device).eval() for target in targets]
 
   # Load best performing params on validation
   for i in range(len(targets)):

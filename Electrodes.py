@@ -23,7 +23,7 @@ class Electrodes:
     # Global connections will get a weight of -1 in the adj matrix
     self.global_connections = np.array([['Fp1','Fp2'],['AF3','AF4'],['F3','F4'],['FC5','FC6'],['T7','T8'],['CP5','CP6'],['P3','P4'],['PO3','PO4'],['O1','O2']])
     self.positions_2d = self.get_proyected_2d_positions()
-    self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections=False)
+    self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections=True)
 
   # Helper function for get_proyected_2d_positions
   def azim_proj(self, pos):

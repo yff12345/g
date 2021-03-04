@@ -10,7 +10,8 @@ from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 # Define training and eval functions for each epoch (will be shared for all models)
-def train_epoch(model,loader,optim,criterion,device):
+def train_epoch(model,loader,optim,criterion,device,target):
+    target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
     if model.eval_patience_reached:
       return -1
     model.train()
@@ -20,14 +21,14 @@ def train_epoch(model,loader,optim,criterion,device):
       batch = batch.to(device)
       out = model(batch, visualize_convolutions=False)
       # Gets first label for every graph
-      target = batch.y.T[model.target].unsqueeze(1)
-      mse_loss = criterion(out, target)
+      target_label = batch.y.T[target].unsqueeze(1)
+      mse_loss = criterion(out, target_label)
       # REGULARIZATION
-      l1_regularization, l2_regularization = torch.tensor(0, dtype=torch.float).to(device), torch.tensor(0, dtype=torch.float).to(device)
-      for param in model.parameters():
-        l1_regularization += (torch.norm(param, 1)**2).float()
-        # l2_regularization += (torch.norm(param, 2)**2).float()
-      loss = mse_loss + 0.02 * l1_regularization
+      # l1_regularization, l2_regularization = torch.tensor(0, dtype=torch.float).to(device), torch.tensor(0, dtype=torch.float).to(device)
+      # for param in model.parameters():
+      #   l1_regularization += (torch.norm(param, 1)**2).float()
+      #   l2_regularization += (torch.norm(param, 2)**2).float()
+      loss = mse_loss
       loss.backward()
       optim.step()
       epoch_losses.append(mse_loss.item())
@@ -35,7 +36,8 @@ def train_epoch(model,loader,optim,criterion,device):
     model.train_losses.append(epoch_mean_loss)
     return epoch_mean_loss
 
-def eval_epoch(model,loader,device,epoch=-1, model_is_training = False, early_stopping_patience = None):
+def eval_epoch(model,loader,device,target,epoch=-1, model_is_training = False, early_stopping_patience = None):
+    target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target] 
     if model.eval_patience_reached and model_is_training:
       return [-1,-1]
     model.eval()
@@ -43,11 +45,11 @@ def eval_epoch(model,loader,device,epoch=-1, model_is_training = False, early_st
     l1s = []
     # Evaluation
     for batch in loader:
-      batch = batch.to(device)
+      batch = batch.to(device) 
       out = model(batch)
-      target = batch.y.T[model.target].unsqueeze(1)
-      mses.append(F.mse_loss(out,target).item())
-      l1s.append(F.l1_loss(out,target).item())
+      target_label = batch.y.T[target].unsqueeze(1)
+      mses.append(F.mse_loss(out,target_label).item())
+      l1s.append(F.l1_loss(out,target_label).item())
     e_mse, e_l1 = np.array(mses).mean(), np.array(l1s).mean()
     # Early stopping and checkpoint
     if model_is_training:
@@ -56,7 +58,7 @@ def eval_epoch(model,loader,device,epoch=-1, model_is_training = False, early_st
       if e_mse < model.best_val_mse:
         model.best_val_mse = e_mse
         model.best_epoch = epoch
-        torch.save(model.state_dict(),f'./best_params_{model.target}')
+        torch.save(model.state_dict(),f'./best_params_{target}')
         model.eval_patience_count = 0
       # Early stopping
       elif early_stopping_patience is not None:
@@ -74,7 +76,7 @@ def train (args):
   # Initialize dataset
   dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR, participant_from=args.participant_from, participant_to=args.participant_to)
   # 30 samples are used for training, 5 for validation and 5 are saved for testing
-  train_set, val_set, _ = train_val_test_split(dataset)
+  train_set, val_set, _ = train_val_test_split(dataset)                    
   # Describe graph structure (same for all instances)
   describe_graph(train_set[0])
   # Set batch size
@@ -96,15 +98,34 @@ def train (args):
   plt.figure(figsize=(10, 10))
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
   MAX_EPOCH_N = args.max_epoch
+  model = GNNLSTM(in_channels,hidden_channels=64).to(device)
+  optim = torch.optim.Adam(model.parameters())
   for i,target in enumerate(targets):
+    if i != 0 and device.type == 'cuda':
+      # Reset model parameters for new emotion
+      # for layers in model.children():
+      #   if hasattr(layers, 'reset_parameters'):
+      #     layers.reset_parameters()
+      #   else:
+      #     for layer in layers:
+      #       layer.reset_parameters()
+      model.reset_model()
+      print('Empty cuda cache')
+      torch.cuda.empty_cache()
+      torch.cuda.synchronize()
+      
+    if device.type == 'cuda':
+      print(torch.cuda.get_device_name(0))
+      print('Memory Usage:')
+      print('Allocated:', round(torch.cuda.memory_allocated(0)/1024**3,1), 'GB')
+      print('Cached:   ', round(torch.cuda.memory_reserved(0)/1024**3,1), 'GB')
     print(f'Now training {target} model')
-    model = GNNLSTM(in_channels,hidden_channels=64, target=target).to(device)
-    optim = torch.optim.Adam(model.parameters())
+
     for epoch in range(MAX_EPOCH_N):
       # Train epoch for every model
-      t_e_loss = train_epoch(model,train_loader,optim,criterion,device)
+      t_e_loss = train_epoch(model,train_loader,optim,criterion,device,target=target)
       # Validation epoch for every model
-      v_e_loss = eval_epoch(model,val_loader,device,epoch,model_is_training = True, early_stopping_patience=4) 
+      v_e_loss = eval_epoch(model,val_loader,device,target,epoch,model_is_training = True, early_stopping_patience=args.early_stopping_patience) 
       # Break if model has reached patience limit. Model parameters are saved to 'best_params' file.
       if t_e_loss == -1:
         break
@@ -124,12 +145,13 @@ def train (args):
   # Print losses over time (train and val)
   # plt.figure(figsize=(10, 10))
   # Load best performing parameters on validation for each model
+  model.reset_model()
   print(f'------ Final model eval ------ \n')
   for i,target in enumerate(targets):
-    model = GNNLSTM(in_channels,hidden_channels=64, target=target).to(device)
+    # model = GNNLSTM(in_channels,hidden_channels=64).to(device)
     model.load_state_dict(torch.load(f'./best_params_{i}'))
     # Evaluating best models
-    final_eval = eval_epoch(model, val_loader,device,model_is_training = False)
+    final_eval = eval_epoch(model, val_loader,device,model_is_training = False,target=target)
     print (f'{target} (epoch {model.best_epoch}): Validation mse: {final_eval[0]:.2f}')
 
 

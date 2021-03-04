@@ -12,24 +12,37 @@ from einops import reduce, rearrange
 from DEAPDataset import visualize_graph
 
 class GNNLSTM(torch.nn.Module):
-  def __init__(self, input_dim,hidden_channels,target,num_layers=2 ):
+  def __init__(self, input_dim,hidden_channels,num_layers=2 ):
     super(GNNLSTM, self).__init__()
 
-    self.gconv1 = GraphConv(in_channels=8064, out_channels=5000, aggr='add')
-    self.gconv2 = GraphConv(in_channels=5000, out_channels=4000, aggr='add')
+    self.gconv1 = GraphConv(in_channels=8064, out_channels=2016, aggr='mean')
+    self.gconv2 = GraphConv(in_channels=2016, out_channels=504, aggr='mean')
 
-    self.lstm = nn.LSTM(2, 3, 2,bidirectional=True)
+    self.lstm = nn.LSTM(32, 32, 1,bidirectional=True)
 
-    self.mlp = Sequential(Linear(15000, 1))
+    self.mlp = Sequential(Linear(32256, 128),ReLU(),Linear(128, 1))
 
     # MODEL CLASS ATTRIBUTES
-    self.target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
-    self.best_val_mse = float('inf')
-    self.best_epoch = 0
-    self.train_losses = []
-    self.eval_losses = []
-    self.eval_patience_count = 0
-    self.eval_patience_reached = False
+    # self.target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
+    self.reset_model(reset_params=False)
+    
+
+  def reset_model(self,reset_params = True):
+      # Reset model parameters
+      if reset_params:
+        for layers in self.children():
+          if hasattr(layers, 'reset_parameters'):
+            layers.reset_parameters()
+          else:
+            for layer in layers:
+              if hasattr(layers, 'reset_parameters'):
+                layers.reset_parameters()
+      self.best_val_mse = float('inf')
+      self.best_epoch = 0
+      self.train_losses = []
+      self.eval_losses = []
+      self.eval_patience_count = 0
+      self.eval_patience_reached = False
 
   def forward(self, batch, visualize_convolutions = False):
     x = batch.x
@@ -42,23 +55,27 @@ class GNNLSTM(torch.nn.Module):
       visualize_graph(x[:32])
     
     x = self.gconv1(x,edge_index,edge_attr)
-    x = F.dropout(x, p=0.3, training=self.training)
+    x = F.relu(x)
+    # x = F.dropout(x, p=0.5, training=self.training)
 
     if visualize_convolutions:
       visualize_graph(x[:32])
 
-    # x = self.gconv2(x,edge_index,edge_attr)
-    # x = F.dropout(x, p=0.2, training=self.training)
+    x = self.gconv2(x,edge_index,edge_attr)
+    # x = F.dropout(x, p=0.3, training=self.training)
+    x = F.relu(x)
 
-    # if visualize_convolutions:
-    #   visualize_graph(x[:32])
-    x = gaddp(x, batch)
-    # print(x.shape)
-    x = rearrange(x,'b (sl i) -> sl b i',i=2)
-    # print(x.shape)
+    if visualize_convolutions:
+      visualize_graph(x[:32])
+
+
+    x = rearrange(x,'(bs ec) sl -> sl bs ec',bs=bs)
+
     output, (c_n,h_n)  = self.lstm(x)
-    # print(x.shape)
+
+    
     x = rearrange(output,'sl b i -> b (sl i)')
+    # x = F.dropout(x, p=0.2, training=self.training)
     x = self.mlp(x)
 
     return x
