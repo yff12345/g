@@ -22,14 +22,19 @@ labels = torch.stack(labels)
 predictions = labels.mean(dim=0)
 
 mses = []
+l1s = []
 for data in test_set:
     print('Prediction: ')
     print(predictions.detach().numpy())
     print('Ground truth: ')
     print(data.y.detach().numpy())
     print(f'Mean average error: {F.l1_loss(predictions,data.y).item()}')
+    l1 = F.l1_loss(predictions,data.y).item()
     mse = F.mse_loss(predictions,data.y).item()
     print(f'Mean squared error: {mse}')
+    print(f'Mean average error: {l1}')
     mses.append(mse)
+    l1s.append(l1)
 print('----------------')
+print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(l1).mean()}')
 print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(mses).mean()}')

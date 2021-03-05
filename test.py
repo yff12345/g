@@ -34,6 +34,7 @@ def test(args):
     models[i].load_state_dict(torch.load(f'./best_params_{i}'))
 
   mses = []
+  l1s = []
   for batch in test_loader:
     batch = batch.to(device)
     predictions = [model(batch, visualize_convolutions=False) for model in models]
@@ -43,9 +44,12 @@ def test(args):
     print('-Ground truth-')
     print(batch.y.cpu().detach().numpy(),'\n')
     mse = F.mse_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
+    l1 = F.l1_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
     mses.append(mse)
-    print(f'Mean average error: {F.l1_loss(predictions,batch.y.narrow(1,0,len(targets))).item()}')
+    l1s.append(l1)
+    print(f'Mean average error: {l1}')
     print(f'Mean squared error: {mse}')
 
   print('----------------')
+  print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(l1).mean()}')
   print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(mses).mean()}')

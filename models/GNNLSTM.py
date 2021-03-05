@@ -73,8 +73,9 @@ class GNNLSTM(torch.nn.Module):
 
     output, (c_n,h_n)  = self.lstm(x)
 
-    
+    # print(x.shape)
     x = rearrange(output,'sl b i -> b (sl i)')
+    # print(x.shape)
     # x = F.dropout(x, p=0.2, training=self.training)
     x = self.mlp(x)
 
