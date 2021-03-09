@@ -7,7 +7,7 @@ from einops import rearrange
 32 channels 
 '''
 class Electrodes:
-  def __init__(self):
+  def __init__(self,add_global_connections=True):
     # X, Y, Z coordinates of the electrodes
     self.positions_3d = np.array([[-27,83,-3],[-36,76,24],[-71,51,-3],[-48,59,44],
       [-33,33,74],[-78,30,27],[-87,0,-3],[-63,0,61],
@@ -23,7 +23,7 @@ class Electrodes:
     # Global connections will get a weight of -1 in the adj matrix
     self.global_connections = np.array([['Fp1','Fp2'],['AF3','AF4'],['F3','F4'],['FC5','FC6'],['T7','T8'],['CP5','CP6'],['P3','P4'],['PO3','PO4'],['O1','O2']])
     self.positions_2d = self.get_proyected_2d_positions()
-    self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections=True)
+    self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections)
 
   # Helper function for get_proyected_2d_positions
   def azim_proj(self, pos):
@@ -71,7 +71,7 @@ class Electrodes:
   # get_adjacency_matrix is the main method for the Electrodes class. It returns a fixed adjacency matrix for the graph based on the 3-d coordinates of the electrodes
   # Symetrical, contains self-loops (learnable [?])
   # Calibration constant should keep 20% of the links acording to the paper
-  def get_adjacency_matrix(self, calibration_constant = 6, active_threshold = 0.1, add_global_connections = False):
+  def get_adjacency_matrix(self,add_global_connections, calibration_constant = 6, active_threshold = 0.1 ):
     # Expand 3d position vector to a 32*32 matrix
     distance_3d_matrix = np.array([self.positions_3d,]*len(self.positions_3d))
     # Transpose

@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 # Define training and eval functions for each epoch (will be shared for all models)
-def train_epoch(model,loader,optim,criterion,device,target):
+def train_epoch(model,loader,optim,criterion,device,target,args):
     target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
     if model.eval_patience_reached:
       return -1
@@ -19,16 +19,16 @@ def train_epoch(model,loader,optim,criterion,device,target):
     for batch in tqdm(loader):
       optim.zero_grad()
       batch = batch.to(device)
-      out = model(batch, visualize_convolutions=False)
+      out = model(batch, visualize_convolutions=args.visualize_convs)
       # Gets first label for every graph
       target_label = batch.y.T[target].unsqueeze(1)
       mse_loss = criterion(out, target_label)
       # REGULARIZATION
-      # l1_regularization, l2_regularization = torch.tensor(0, dtype=torch.float).to(device), torch.tensor(0, dtype=torch.float).to(device)
-      # for param in model.parameters():
-      #   l1_regularization += (torch.norm(param, 1)**2).float()
-      #   l2_regularization += (torch.norm(param, 2)**2).float()
-      loss = mse_loss
+      l1_regularization, l2_regularization = torch.tensor(0, dtype=torch.float).to(device), torch.tensor(0, dtype=torch.float).to(device)
+      for param in model.parameters():
+        l1_regularization += (torch.norm(param, 1)**2).float()
+        l2_regularization += (torch.norm(param, 2)**2).float()
+      loss = mse_loss + 0.05 * l2_regularization
       loss.backward()
       optim.step()
       epoch_losses.append(mse_loss.item())
@@ -74,7 +74,7 @@ def train (args):
   RAW_DIR = 'data/matlabPREPROCESSED'
   PROCESSED_DIR = 'data/graphProcessedData'
   # Initialize dataset
-  dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR, participant_from=args.participant_from, participant_to=args.participant_to)
+  dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR, participant_from=args.participant_from, participant_to=args.participant_to,args=args)
   # 30 samples are used for training, 5 for validation and 5 are saved for testing
   train_set, val_set, _ = train_val_test_split(dataset)                    
   # Describe graph structure (same for all instances)
@@ -123,7 +123,7 @@ def train (args):
 
     for epoch in range(MAX_EPOCH_N):
       # Train epoch for every model
-      t_e_loss = train_epoch(model,train_loader,optim,criterion,device,target=target)
+      t_e_loss = train_epoch(model,train_loader,optim,criterion,device,target=target,args=args)
       # Validation epoch for every model
       v_e_loss = eval_epoch(model,val_loader,device,target,epoch,model_is_training = True, early_stopping_patience=args.early_stopping_patience) 
       # Break if model has reached patience limit. Model parameters are saved to 'best_params' file.

@@ -13,7 +13,7 @@ def test(args):
   ROOT_DIR = './'
   RAW_DIR = 'data/matlabPREPROCESSED'
   PROCESSED_DIR = 'data/graphProcessedData'
-  dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR, participant_from=args.participant_from, participant_to=args.participant_to)
+  dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR, participant_from=args.participant_from, participant_to=args.participant_to,args=args)
   # 5 testing samples per participant (30/5/5)
   _, _, test_set = train_val_test_split(dataset)
 
@@ -37,7 +37,7 @@ def test(args):
   l1s = []
   for batch in test_loader:
     batch = batch.to(device)
-    predictions = [model(batch, visualize_convolutions=False) for model in models]
+    predictions = [model(batch, visualize_convolutions=args.visualize_convs) for model in models]
     predictions = torch.stack(predictions,dim=1).squeeze()
     print('-Predictions-')
     print(predictions.cpu().detach().numpy(),'\n')

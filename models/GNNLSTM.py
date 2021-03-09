@@ -15,12 +15,13 @@ class GNNLSTM(torch.nn.Module):
   def __init__(self, input_dim,hidden_channels,num_layers=2 ):
     super(GNNLSTM, self).__init__()
 
-    self.gconv1 = GraphConv(in_channels=8064, out_channels=2016, aggr='mean')
-    self.gconv2 = GraphConv(in_channels=2016, out_channels=504, aggr='mean')
+    self.gconv1 = GraphConv(in_channels=7680, out_channels=4032, aggr='mean')
+    self.gconv2 = GraphConv(in_channels=4032, out_channels=512, aggr='mean')
+    # self.gconv3 = GraphConv(in_channels=2016, out_channels=512, aggr='mean')
 
-    self.lstm = nn.LSTM(32, 32, 1,bidirectional=True)
+    self.lstm = nn.LSTM(32, 32, 2,bidirectional=True)
 
-    self.mlp = Sequential(Linear(32256, 128),ReLU(),Linear(128, 1))
+    self.mlp = Sequential(Linear(32768, 128),ReLU(),Linear(128, 1))
 
     # MODEL CLASS ATTRIBUTES
     # self.target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
@@ -45,6 +46,7 @@ class GNNLSTM(torch.nn.Module):
       self.eval_patience_reached = False
 
   def forward(self, batch, visualize_convolutions = False):
+    # SETUP
     x = batch.x
     edge_index = batch.edge_index
     edge_attr = batch.edge_attr
@@ -53,30 +55,34 @@ class GNNLSTM(torch.nn.Module):
     # Information propagation trough graph visualization
     if visualize_convolutions:
       visualize_graph(x[:32])
-    
+
+    # GRAPH CONVOLUTIONS
     x = self.gconv1(x,edge_index,edge_attr)
     x = F.relu(x)
-    # x = F.dropout(x, p=0.5, training=self.training)
-
+    x = F.dropout(x, p=0.3, training=self.training)
     if visualize_convolutions:
       visualize_graph(x[:32])
 
     x = self.gconv2(x,edge_index,edge_attr)
-    # x = F.dropout(x, p=0.3, training=self.training)
     x = F.relu(x)
-
+    x = F.dropout(x, p=0.2, training=self.training)
     if visualize_convolutions:
       visualize_graph(x[:32])
+    
+    # x = self.gconv3(x,edge_index,edge_attr)
+    # x = F.relu(x)
+    # # x = F.dropout(x, p=0.2, training=self.training)
+    # if visualize_convolutions:
+    #   visualize_graph(x[:32])
 
-
+    # LSTM
     x = rearrange(x,'(bs ec) sl -> sl bs ec',bs=bs)
-
     output, (c_n,h_n)  = self.lstm(x)
 
-    # print(x.shape)
+    # MLP
     x = rearrange(output,'sl b i -> b (sl i)')
+    x = F.dropout(x, p=0.2, training=self.training)
     # print(x.shape)
-    # x = F.dropout(x, p=0.2, training=self.training)
     x = self.mlp(x)
 
     return x

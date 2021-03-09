@@ -77,7 +77,7 @@ class DEAPDataset(InMemoryDataset):
   # 1 participant per dataset
   # Theoretically it doesn't make sense to train for all participants -> unless aiming for subject-independent classification (not atm)
   # PyG represents graphs sparsely, which refers to only holding the coordinates/values for which entries in  A  are non-zero.
-  def __init__(self, root, raw_dir,processed_dir,participant_from,participant_to=None, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None, window_size=None):
+  def __init__(self, root, raw_dir,processed_dir,participant_from,args,participant_to=None, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None):
       self._raw_dir = raw_dir
       self._processed_dir = processed_dir
       self.participant_from = participant_from
@@ -87,9 +87,8 @@ class DEAPDataset(InMemoryDataset):
       # If true there will be 1024 links as opposed to 528
       self.undirected_graphs = undirected_graphs
       # Instantiate class to handle electrode positions
-      self.electrodes = Electrodes()
-      # Define the size of the windows -> 672: 12, 5.25 second windows
-      self.window_size = window_size
+      print('Using global connections' if args.dont_global_connections else 'Not using global connections')
+      self.electrodes = Electrodes(args.dont_global_connections)
       super(DEAPDataset, self).__init__(root, transform, pre_transform)
       self.data, self.slices = torch.load(self.processed_paths[0])
 
@@ -118,10 +117,6 @@ class DEAPDataset(InMemoryDataset):
       # Number of nodes per graph
       n_nodes = len(self.electrodes.channel_names)
 
-      NODE_FEATURE_N = 8064
-      if self.window_size is not None and NODE_FEATURE_N % self.window_size != 0:
-        raise 'Error, window number of features should be divisible by window size' 
-
       if self.undirected_graphs:
         source_nodes, target_nodes = np.repeat(np.arange(0,n_nodes),n_nodes), np.tile(np.arange(0,n_nodes),n_nodes)
       else:
@@ -143,12 +138,10 @@ class DEAPDataset(InMemoryDataset):
         pbar.set_description(raw_name)
         # Load raw file as np array
         participant_data = scipy.io.loadmat(f'{self.raw_dir}/{raw_name}')
-        signal_data = torch.FloatTensor(participant_data['data'][:,:32,:])
+        signal_data = torch.FloatTensor(participant_data['data'][:,:32,128*3:])
         labels = torch.Tensor(participant_data['labels'])
-        # Create time windows
-        if self.window_size != None:
-          signal_data = rearrange(signal_data,'v c (s w) -> v s c w',w = self.window_size)
-        # Enumerate videos / graphs -> 
+
+        # For each video / graph -> 
         for index_video,node_features in enumerate(signal_data):
           # Create graph
           y = torch.FloatTensor(labels[index_video]).unsqueeze(0)
