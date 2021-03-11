@@ -5,41 +5,41 @@ import numpy as np
 import torch.nn.functional as F
 from torch_geometric.data import DataLoader
 from DEAPDataset import DEAPDataset, train_val_test_split, plot_graph, describe_graph, plot_graph
-from models.GNNLSTM import GNNLSTM
+from models.STGCN.STGCN import STGCN
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
 # Define training and eval functions for each epoch (will be shared for all models)
 def train_epoch(model,loader,optim,criterion,device,target,args):
     target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
-    if model.eval_patience_reached:
-      return -1
+    # if model.eval_patience_reached:
+    #   return -1
     model.train()
     epoch_losses = []
     for batch in tqdm(loader):
       optim.zero_grad()
       batch = batch.to(device)
-      out = model(batch, visualize_convolutions=args.visualize_convs)
+      out = model(batch)
       # Gets first label for every graph
       target_label = batch.y.T[target].unsqueeze(1)
       mse_loss = criterion(out, target_label)
       # REGULARIZATION
       l1_regularization, l2_regularization = torch.tensor(0, dtype=torch.float).to(device), torch.tensor(0, dtype=torch.float).to(device)
       for param in model.parameters():
-        l1_regularization += (torch.norm(param, 1)**2).float()
+      #   l1_regularization += (torch.norm(param, 1)**2).float()
         l2_regularization += (torch.norm(param, 2)**2).float()
-      loss = mse_loss + 0.05 * l2_regularization
+      loss = mse_loss + l2_regularization * 0.05
       loss.backward()
       optim.step()
       epoch_losses.append(mse_loss.item())
     epoch_mean_loss = np.array(epoch_losses).mean()
-    model.train_losses.append(epoch_mean_loss)
+    # model.train_losses.append(epoch_mean_loss)
     return epoch_mean_loss
 
 def eval_epoch(model,loader,device,target,epoch=-1, model_is_training = False, early_stopping_patience = None):
     target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target] 
-    if model.eval_patience_reached and model_is_training:
-      return [-1,-1]
+    # if model.eval_patience_reached and model_is_training:
+    #   return [-1,-1]
     model.eval()
     mses = []
     l1s = []
@@ -52,19 +52,19 @@ def eval_epoch(model,loader,device,target,epoch=-1, model_is_training = False, e
       l1s.append(F.l1_loss(out,target_label).item())
     e_mse, e_l1 = np.array(mses).mean(), np.array(l1s).mean()
     # Early stopping and checkpoint
-    if model_is_training:
-      model.eval_losses.append(e_mse)
-      # Save current best model locally
-      if e_mse < model.best_val_mse:
-        model.best_val_mse = e_mse
-        model.best_epoch = epoch
-        torch.save(model.state_dict(),f'./best_params_{target}')
-        model.eval_patience_count = 0
-      # Early stopping
-      elif early_stopping_patience is not None:
-          model.eval_patience_count += 1
-          if model.eval_patience_count >= early_stopping_patience:
-            model.eval_patience_reached = True
+    # if model_is_training:
+    #   model.eval_losses.append(e_mse)
+    #   # Save current best model locally
+    #   if e_mse < model.best_val_mse:
+    #     model.best_val_mse = e_mse
+    #     model.best_epoch = epoch
+    #     torch.save(model.state_dict(),f'./best_params_{target}')
+    #     model.eval_patience_count = 0
+    #   # Early stopping
+    #   elif early_stopping_patience is not None:
+    #       model.eval_patience_count += 1
+    #       if model.eval_patience_count >= early_stopping_patience:
+    #         model.eval_patience_reached = True
     return e_mse, e_l1
 
 
@@ -92,13 +92,13 @@ def train (args):
   targets = ['valence','arousal','dominance','liking'][:args.n_targets]
 
   # MODEL PARAMETERS
-  in_channels = train_set[0].num_node_features
+  # in_channels = train_set[0].num_node_features
 
   # Print losses over time (train and val)
   plt.figure(figsize=(10, 10))
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
   MAX_EPOCH_N = args.max_epoch
-  model = GNNLSTM(in_channels,hidden_channels=64).to(device)
+  model = STGCN().to(device)
   optim = torch.optim.Adam(model.parameters())
   for i,target in enumerate(targets):
     if i != 0 and device.type == 'cuda':
