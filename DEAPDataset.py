@@ -77,11 +77,11 @@ class DEAPDataset(InMemoryDataset):
   # 1 participant per dataset
   # Theoretically it doesn't make sense to train for all participants -> unless aiming for subject-independent classification (not atm)
   # PyG represents graphs sparsely, which refers to only holding the coordinates/values for which entries in  A  are non-zero.
-  def __init__(self, root, raw_dir,processed_dir,participant_from,args,participant_to=None, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None):
+  def __init__(self, root, raw_dir,processed_dir,args, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None):
       self._raw_dir = raw_dir
       self._processed_dir = processed_dir
-      self.participant_from = participant_from
-      self.participant_to = participant_from if participant_to is None else participant_to
+      self.participant_from = args.participant_from
+      self.participant_to = args.participant_from if args.participant_to is None else args.participant_to
       # Whether or not to include edge_attr in the dataset
       self.include_edge_attr = include_edge_attr
       # If true there will be 1024 links as opposed to 528

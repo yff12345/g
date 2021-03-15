@@ -9,7 +9,7 @@ parser.add_argument('-t', '--n_targets', choices=[1,2,3,4], type=int, default=4,
                     help='Number of targets to be used. Default is all (4)')
 parser.add_argument('-pf', '--participant_from', choices=range(1,32), type=int, default=1,
                     help='Which participant data to be used')
-parser.add_argument('-pt', '--participant_to', choices=range(1,33), type=int, default=2,
+parser.add_argument('-pt', '--participant_to', choices=range(1,33), type=int, default=None,
                     help='Which participant data to be used')
 parser.add_argument('-bs', '--batch_size', type=int, default=1,
                     help='Batch size')
@@ -21,6 +21,10 @@ parser.add_argument('-vc','--visualize_convs', default=False, action='store_true
 parser.add_argument('-dgc','--dont_global_connections', default=True, action='store_false',help='Don\'t add global connections to the graph adjacency matrix')
 parser.add_argument('-esp', '--early_stopping_patience', type=int, default=3,
                     help='Early stopping patience (epochs)')
+parser.add_argument('-l1', '--l1_reg_alpha',  type=float, default=0,
+                    help='l1 regularization')
+parser.add_argument('-l2', '--l2_reg_beta',  type=float, default=0,
+                    help='l2 regularization')
 
 args = parser.parse_args()
 
