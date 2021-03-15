@@ -3,6 +3,8 @@ import torch.nn.functional as F
 import torch.nn as nn
 from einops import rearrange
 
+from torch_geometric.nn import global_add_pool as gap
+
 from models.STGCN.SpatioTemporalBlock import SpatioTemporalBlock
 
 
@@ -18,13 +20,17 @@ class STGCN(torch.nn.Module):
         self.window_size = window_size
 
         # Spatio-temporal block 1
-        self.stb1 = SpatioTemporalBlock(in_channels=self.window_size,hidden_channels=32,out_channels=64,kernel_size=8)
-        self.stb2 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=64,kernel_size=8)
-        self.stb3 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=128,kernel_size=8)
-        self.stb4 = SpatioTemporalBlock(in_channels=128,hidden_channels=64,out_channels=256,kernel_size=6)
-        self.stb5 = SpatioTemporalBlock(in_channels=256,hidden_channels=128,out_channels=256,kernel_size=6)
-        self.conv = nn.Conv1d(128 ,1, 18)
-        self.fc = nn.Linear(32,1)
+        self.stb1 = SpatioTemporalBlock(in_channels=self.window_size,hidden_channels=64,out_channels=256,kernel_size=16)
+        self.stb2 = SpatioTemporalBlock(in_channels=256,hidden_channels=64,out_channels=128,kernel_size=15)
+        # self.stb3 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=64,kernel_size=2)
+        # self.stb4 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=64,kernel_size=8)
+        # self.stb5 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=64,kernel_size=2)
+        self.conv = nn.Conv1d(128 ,1, 2)
+        # self.fc = nn.Linear(128,1)
+
+        self.temp = 0
+
+        self.sigmoid = nn.Sigmoid()
 
         self.reset_model(False)
 
@@ -61,37 +67,45 @@ class STGCN(torch.nn.Module):
         batch = batch.batch
         bs = len(torch.unique(batch))
 
-        print(x.shape)
-        exit()
-
         # Divide into time windows 
         # Y ∈ R M×n×Ci
         # Number of windows x number of electrodes x number of channels
         # bs: batch size ec: electrode count  wn: window count cs: channel size
+        # il: input length
         x = rearrange(x,'(bs ec) (wc cs) -> (bs ec) cs wc',bs=bs, cs = self.window_size)
 
+ 
         x = self.stb1(x,edge_index,edge_attr,batch)
-        x = x.relu()
-        
-        # x = F.dropout(x, p=0.2, training=self.training)
+        # print(x)
         x = self.stb2(x,edge_index,edge_attr,batch)
-        x = x.relu()
-
-        # x = F.dropout(x, p=0.05, training=self.training)
-
-        x = self.stb3(x,edge_index,edge_attr,batch)
-        x = x.relu()
+        # print(x)
+        # print(x.shape)
+        # x = self.stb3(x,edge_index,edge_attr,batch)
         # x = self.stb4(x,edge_index,edge_attr,batch)
         # x = self.stb5(x,edge_index,edge_attr,batch)
+        
+        x = F.dropout(x, p=0.3, training=self.training)
 
-        print(x.shape)
-        exit()
+        # print(x)
+        x = gap(x,batch)
+        # print(x)
+        x = x.relu()
         
         # print(x.shape)
         x = self.conv(x)
-        x = rearrange(x,'(bs ec) cs wc -> bs (ec cs wc)',bs=bs)
-        # print(x.shape)
+        # print(x)
         
-        x = F.relu(self.fc(x))
+        # print(x.shape)
+        x = rearrange(x,'bs cs wc -> bs (cs wc)',bs=bs)
+        # x = self.fc(x)
+
+        x = self.sigmoid(x)
+        x = torch.multiply(x,10)
+        # print(x)
+
+        # self.temp += 1
+        # if self.temp == 20:
+        #   exit()
+       
         return x
         

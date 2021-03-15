@@ -104,7 +104,7 @@ def train (args):
   plt.figure(figsize=(10, 10))
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
   model = STGCN(window_size=128).to(device)
-  optim = torch.optim.Adam(model.parameters())
+  optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
 
   for epoch in range(args.max_epoch):
     # Train epoch for every model

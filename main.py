@@ -25,6 +25,8 @@ parser.add_argument('-l1', '--l1_reg_alpha',  type=float, default=0,
                     help='l1 regularization')
 parser.add_argument('-l2', '--l2_reg_beta',  type=float, default=0,
                     help='l2 regularization')
+parser.add_argument('-lr', '--learning_rate',  type=float, default=0.001,
+                    help='learning rate')
 
 args = parser.parse_args()
 

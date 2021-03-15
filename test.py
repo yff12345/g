@@ -28,7 +28,7 @@ def test(args):
   # Instantiate models
   targets = ['valence','arousal','dominance','liking'][args.n_targets-1:args.n_targets]
   target_index = {'valence':0,'arousal':1,'dominance':2,'liking':3}
-  models = [STGCN().to(device).eval() for target in targets]
+  models = [STGCN(window_size=128).to(device).eval() for target in targets]
 
   # Load best performing params on validation
   for i,target in enumerate(targets):
@@ -42,15 +42,15 @@ def test(args):
     predictions = torch.stack(predictions,dim=1).squeeze()
     print('-Predictions-')
     print(predictions.cpu().detach().numpy(),'\n')
-    # print('-Ground truth-')
-    # print(batch.y.cpu().detach().numpy(),'\n')
-    # mse = F.mse_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
-    # l1 = F.l1_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
-    # mses.append(mse)
+    print('-Ground truth-')
+    print(batch.y.cpu().detach().numpy(),'\n')
+    mse = F.mse_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
+    l1 = F.l1_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
+    mses.append(mse)
     # l1s.append(l1)
-    # print(f'Mean average error: {l1}')
-    # print(f'Mean squared error: {mse}')
+    print(f'Mean average error: {l1}')
+    print(f'Mean squared error: {mse}')
 
-  # print('----------------')
-  # print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(l1).mean()}')
-  # print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(mses).mean()}')
+  print('----------------')
+  print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(l1).mean()}')
+  print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(mses).mean()}')

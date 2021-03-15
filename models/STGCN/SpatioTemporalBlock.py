@@ -8,7 +8,7 @@ from models.STGCN.TemporalGatedConv  import TemporalGatedConv
 from torch_geometric.nn import GCNConv
 
 class SpatioTemporalBlock(torch.nn.Module):
-    def __init__(self,in_channels,hidden_channels,out_channels,kernel_size):
+    def __init__(self,in_channels,hidden_channels,out_channels,kernel_size,stride=1):
         super(SpatioTemporalBlock, self).__init__()
 
         # Temporal gated convs
@@ -19,7 +19,6 @@ class SpatioTemporalBlock(torch.nn.Module):
 
         # Temporal gated convs
         self.tgc2 = TemporalGatedConv(hidden_channels//4,out_channels,kernel_size)
-
 
 
     def reset_parameters(self):
@@ -33,6 +32,8 @@ class SpatioTemporalBlock(torch.nn.Module):
                         layers.reset_parameters()
 
     def forward(self, x,edge_index,edge_attr,batch):
+        # res = self.residual(x)
+        # print(res.shape)
         x = self.tgc1(x)
         # X ∈ RM×n×Ci
         x = rearrange(x,'ec cs wc -> wc ec cs')
