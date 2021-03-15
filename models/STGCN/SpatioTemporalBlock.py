@@ -15,10 +15,10 @@ class SpatioTemporalBlock(torch.nn.Module):
         self.tgc1 = TemporalGatedConv(in_channels,hidden_channels,kernel_size)
 
         # Spatial graph convs
-        self.sgc = GCNConv(hidden_channels,hidden_channels//2)
+        self.sgc = GCNConv(hidden_channels,hidden_channels//4)
 
         # Temporal gated convs
-        self.tgc2 = TemporalGatedConv(hidden_channels//2,out_channels,kernel_size)
+        self.tgc2 = TemporalGatedConv(hidden_channels//4,out_channels,kernel_size)
 
 
 

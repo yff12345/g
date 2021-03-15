@@ -13,7 +13,7 @@ from tqdm import tqdm
 def train_epoch(model,loader,optim,criterion,device,target,args):
     target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
     if model.eval_patience_reached:
-      return -1
+      return -1, -1
     model.train()
     epoch_losses = []
     for batch in tqdm(loader):
@@ -33,7 +33,7 @@ def train_epoch(model,loader,optim,criterion,device,target,args):
       optim.step()
       epoch_losses.append(loss.item())
     epoch_mean_loss = np.array(epoch_losses).mean()
-    return epoch_mean_loss
+    return epoch_mean_loss, mse_loss
 
 def eval_epoch(model,loader,device,target,args,epoch=-1, model_is_training = False, early_stopping_patience = None):
     target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target] 
@@ -46,6 +46,7 @@ def eval_epoch(model,loader,device,target,args,epoch=-1, model_is_training = Fal
       batch = batch.to(device) 
       out = model(batch)
       target_label = batch.y.T[target].unsqueeze(1)
+      print(out.detach().cpu())
       mses.append(F.mse_loss(out,target_label).item())
       l1s.append(F.l1_loss(out,target_label).item())
     e_mse, e_l1 = np.array(mses).mean(), np.array(l1s).mean()
@@ -68,7 +69,7 @@ def eval_epoch(model,loader,device,target,args,epoch=-1, model_is_training = Fal
           model.eval_patience_count += 1
           if model.eval_patience_count >= args.early_stopping_patience:
             model.eval_patience_reached = True
-    return loss, e_l1
+    return loss, e_l1, e_mse
 
 
 def train (args):
@@ -93,6 +94,8 @@ def train (args):
   # Define model targets. Each target has a model associated to it.
   # Train 1 target at a time
   target = ['valence','arousal','dominance','liking'][args.n_targets-1]
+  
+  print(f'Training {target} model...')
 
   # MODEL PARAMETERS
   # in_channels = train_set[0].num_node_features
@@ -100,7 +103,7 @@ def train (args):
   # Print losses over time (train and val)
   plt.figure(figsize=(10, 10))
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
-  model = STGCN().to(device)
+  model = STGCN(window_size=128).to(device)
   optim = torch.optim.Adam(model.parameters())
 
   for epoch in range(args.max_epoch):
@@ -109,11 +112,11 @@ def train (args):
     # Validation epoch for every model
     v_e_loss = eval_epoch(model,val_loader,device,target,args,epoch,model_is_training = True) 
     # Break if model has reached patience limit. Model parameters are saved to 'best_params' file.
-    if t_e_loss == -1:
+    if t_e_loss[0] == -1:
       break
     # Epoch results
     print(f'------ Epoch {epoch} ------')
-    print(f'{target}: Train loss: {t_e_loss:.2f} | Val loss: {v_e_loss[0]:.2f}')
+    print(f'{target}: Train loss: {t_e_loss[0]:.2f} | Train mse: {t_e_loss[1]:.2f} | Val loss: {v_e_loss[0]:.2f} | Val mse: {v_e_loss[2]:.2f}')
   
   # plt.subplot(2,2,i+1)
   plt.plot(model.train_losses)
@@ -130,4 +133,4 @@ def train (args):
   model.load_state_dict(torch.load(f'./best_params_{args.n_targets-1}'))
   # Evaluating best models
   final_eval = eval_epoch(model, val_loader,device,model_is_training = False,target=target,args=args)
-  print (f'{target} (epoch {model.best_epoch}): Validation mse: {final_eval[0]:.2f}')
+  print (f'{target} (epoch {model.best_epoch}): Validation mse: {final_eval[2]:.2f}')
