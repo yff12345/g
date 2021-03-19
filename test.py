@@ -17,7 +17,7 @@ def test(args):
   # 5 testing samples per participant (30/5/5)
   _, _, test_set = train_val_test_split(dataset)
 
-  test_loader = DataLoader(test_set, batch_size=8)
+  test_loader = DataLoader(test_set, batch_size=args.batch_size)
 
    # MODEL PARAMETERS
   # in_channels = test_set[0].num_node_features
