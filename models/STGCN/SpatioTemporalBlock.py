@@ -5,7 +5,7 @@ from einops import rearrange
 
 from models.STGCN.TemporalGatedConv  import TemporalGatedConv
 # from models.STGCN.SpatialGraphConv  import SpatialGraphConv
-from torch_geometric.nn import GraphConv
+from torch_geometric.nn import GCNConv
 
 class SpatioTemporalBlock(torch.nn.Module):
     def __init__(self,in_channels,hidden_channels,out_channels,kernel_size,stride=1):
@@ -15,7 +15,7 @@ class SpatioTemporalBlock(torch.nn.Module):
         self.tgc1 = TemporalGatedConv(in_channels,out_channels,kernel_size)
 
         # Spatial graph convs
-        self.sgc = GraphConv(out_channels,hidden_channels)
+        self.sgc = GCNConv(out_channels,hidden_channels,cached=True)
 
         # Temporal gated convs
         self.tgc2 = TemporalGatedConv(hidden_channels,out_channels,kernel_size)
