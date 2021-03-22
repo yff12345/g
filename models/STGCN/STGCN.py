@@ -24,19 +24,13 @@ class STGCN(torch.nn.Module):
         self.stb2 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=8)
         self.stb3 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=8)
         self.stb4 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=8)
-        # self.stb5 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=8)
         self.stb5 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=2)
-        # self.stb3 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=64,kernel_size=2)
-        # self.stb4 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=64,kernel_size=8)
-        # self.stb5 = SpatioTemporalBlock(in_channels=64,hidden_channels=32,out_channels=64,kernel_size=2)
-        self.conv = nn.Conv1d(64 ,64, 2)
-        self.fc = nn.Linear(64,1)
+        self.conv = nn.Conv1d(64 ,1, 2)
+        # self.fc = nn.Linear(64,1)
 
         self.sigmoid = nn.Sigmoid()
 
         self.reset_model(False)
-
-    
 
     def forward(self, batch):
 
@@ -58,7 +52,7 @@ class STGCN(torch.nn.Module):
         x = rearrange(x,'(N n) (M c) -> N M n c',N=bs, c = self.window_size)
 
         x = self.stb1(x,edge_index,edge_attr,batch)
-        # print(x)
+
         x = F.dropout(x, p=0.1, training=self.training)
         x = self.stb2(x,edge_index,edge_attr,batch)
         x = F.dropout(x, p=0.1, training=self.training)
@@ -67,40 +61,16 @@ class STGCN(torch.nn.Module):
         x = self.stb4(x,edge_index,edge_attr,batch)
         x = F.dropout(x, p=0.1, training=self.training)
         x = self.stb5(x,edge_index,edge_attr,batch)
-        # print(x)
+
         x = rearrange(x,'N M n c -> (N n) c M')
+        x = x.relu()
         x = self.conv(x)
         x = rearrange(x,'n c M -> n (c M)')
         x = gap(x,batch)
-        x = x.relu()
-        # print(x.shape)
-        # exit()
-        # x = self.stb3(x,edge_index,edge_attr,batch)
-        # x = self.stb4(x,edge_index,edge_attr,batch)
-        # 
-        
-        
+        # x = x.relu()
 
-        # print(x)
-        
-        # print(x)
-        
-        
-        # print(x.shape)
-        
-        # print(x)
-        
-        # print(x.shape)
-        # x = rearrange(x,'bs cs wc -> bs (cs wc)',bs=bs)
-        x = self.fc(x)
+        # x = self.fc(x)
 
-        # x = self.sigmoid(x)
-        # x = torch.multiply(x,10)
-        # print(x)
-
-        # self.temp += 1
-        # if self.temp == 20:
-        #   exit()
        
         return x
 

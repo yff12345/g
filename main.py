@@ -3,6 +3,7 @@
 import argparse
 from train import train
 from test import test
+from baseline import baseline
 
 parser = argparse.ArgumentParser(description='Process eeg emotions. http://www.eecs.qmul.ac.uk/mmv/datasets/deap/')
 parser.add_argument('-t', '--n_targets', choices=[1,2,3,4], type=int, default=4,
@@ -17,6 +18,7 @@ parser.add_argument('-me', '--max_epoch', type=int, default=100,
                     help='Max epochs for training')
 parser.add_argument('-dst','--dont_shuffle_train', default=False, action='store_true')
 parser.add_argument('--test', default=False, action='store_true')
+parser.add_argument('--baseline', default=False, action='store_true')
 parser.add_argument('-vc','--visualize_convs', default=False, action='store_true')
 parser.add_argument('-dgc','--dont_global_connections', default=True, action='store_false',help='Don\'t add global connections to the graph adjacency matrix')
 parser.add_argument('-esp', '--early_stopping_patience', type=int, default=3,
@@ -32,6 +34,8 @@ args = parser.parse_args()
 
 if args.test:
     test(args)
+elif args.baseline:
+    baseline(args)
 else:
     train(args)
 

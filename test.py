@@ -26,7 +26,7 @@ def test(args):
   print(f'Device: {device}')
 
   # Instantiate models
-  targets = ['valence','arousal','dominance','liking'][args.n_targets-1:args.n_targets]
+  targets = ['valence','arousal','dominance','liking']
   target_index = {'valence':0,'arousal':1,'dominance':2,'liking':3}
   models = [STGCN(window_size=128).to(device).eval() for target in targets]
 

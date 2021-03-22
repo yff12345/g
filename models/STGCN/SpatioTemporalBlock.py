@@ -22,7 +22,6 @@ class SpatioTemporalBlock(torch.nn.Module):
 
     def forward(self, x,edge_index,edge_attr,batch):
         x = self.tgc1(x)
-        bs = x.shape[0]
 
         x = self.sgc(x,edge_index,edge_attr)
 
