@@ -38,17 +38,21 @@ def test(args):
     index = target_index[target]
     models[i].load_state_dict(torch.load(f'./best_params_{index}'))
 
-  mses,l1s = [],[]
+  mses,l1s,accs = [],[],[]
   for batch in test_loader:
     batch = batch.to(device)
+    predictions = [model(batch) for model in models]
     if args.all_targets:
-      target = batch.y.narrow(1,0,len(targets))
+      target = batch.y.narrow(1,0,len(targets)).view(-1)
+      predictions = torch.stack(predictions,dim=1).view(-1)
     else:
       target = batch.y.narrow(1,0,len(targets)).view(-1)
+      predictions = torch.stack(predictions,dim=1).view(1)
     
-   
-    predictions = [model(batch) for model in models]
-    predictions = torch.stack(predictions,dim=1).view(1)
+    right = (target > 5) == (predictions > 5)
+    acc = (right.sum()/len(target)).item()
+    accs.append(acc)
+    
     print('-Predictions-')
     print(predictions.cpu().detach().numpy(),'\n')
     print('-Ground truth-')
@@ -59,7 +63,9 @@ def test(args):
     l1s.append(l1)
     print(f'Mean average error: {l1}')
     print(f'Mean squared error: {mse}')
+    print(f'Accuracy: {acc*100}%')
 
   print('----------------')
   print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(l1s).mean()}')
   print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(mses).mean()}')
+  print(f'MEAN ACCURACY: {np.array(accs).mean()}')

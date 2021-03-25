@@ -2,7 +2,6 @@ import os
 import torch
 import scipy
 import numpy as np
-import itertools
 import matplotlib
 import matplotlib.pyplot as plt
 import mne
@@ -12,32 +11,7 @@ from Electrodes import Electrodes
 from einops import rearrange
 
 
-# Get 30 videos for each participant for training, 5 for validation and 5 for testing
-def train_val_test_split(dataset):
-  train_mask = np.append(np.repeat(1,30),np.repeat(0,10))
-  train_mask = np.tile(train_mask,int(len(dataset)/40))
-  val_mask = np.append(np.append(np.repeat(0,30),np.repeat(1,5)),np.repeat(0,5))
-  val_mask = np.tile(val_mask,int(len(dataset)/40))
-  test_mask = np.append(np.repeat(0,35),np.repeat(1,5))
-  test_mask = np.tile(test_mask,int(len(dataset)/40))
 
-  train_set = [c for c in itertools.compress(dataset,train_mask)]
-  val_set = [c for c in itertools.compress(dataset,val_mask)]
-  test_set = [c for c in itertools.compress(dataset,test_mask)]
-
-  return train_set, val_set, test_set
-
-# Get 35 videos for each participant for training (train and val 30/5) and 5 for testing
-def train_test_split(dataset):
-  train_mask = np.append(np.repeat(1,35),np.repeat(0,5))
-  train_mask = np.tile(train_mask,int(len(dataset)/40))
-  test_mask = np.append(np.repeat(0,35),np.repeat(1,5))
-  test_mask = np.tile(test_mask,int(len(dataset)/40))
-
-  train_set = [c for c in itertools.compress(dataset,train_mask)]
-  test_set = [c for c in itertools.compress(dataset,test_mask)]
-
-  return train_set, test_set
 
 def plot_graph(graph_data):
     import networkx as nx
@@ -90,6 +64,7 @@ class DEAPDataset(InMemoryDataset):
   # Theoretically it doesn't make sense to train for all participants -> unless aiming for subject-independent classification (not atm)
   # PyG represents graphs sparsely, which refers to only holding the coordinates/values for which entries in  A  are non-zero.
   def __init__(self, root, raw_dir,processed_dir,args, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None):
+      self.classification = args.classification_labels 
       self._raw_dir = raw_dir
       self._processed_dir = processed_dir
       self.participant_from = args.participant_from
@@ -99,10 +74,11 @@ class DEAPDataset(InMemoryDataset):
       # If true there will be 1024 links as opposed to 528
       self.undirected_graphs = undirected_graphs
       # Instantiate class to handle electrode positions
-      print('Using global connections' if args.dont_global_connections else 'Not using global connections')
-      self.electrodes = Electrodes(args.dont_global_connections)
+      print('Using global connections' if args.global_connections else 'Not using global connections')
+      self.electrodes = Electrodes(args.global_connections)
       super(DEAPDataset, self).__init__(root, transform, pre_transform)
       self.data, self.slices = torch.load(self.processed_paths[0])
+      
 
   @property
   def raw_dir(self):
@@ -156,7 +132,9 @@ class DEAPDataset(InMemoryDataset):
         # For each video / graph -> 
         for index_video,node_features in enumerate(signal_data):
           # Create graph
-          y = torch.FloatTensor(labels[index_video]).unsqueeze(0)
+          y = torch.FloatTensor(labels[index_video])
+          if self.classification:
+            y = (y>5).float()
           # 1 graph per window (12 per video with window size 672)
           data = Data(x=node_features,edge_attr=edge_attr,edge_index=edge_index, y=y) if self.include_edge_attr else Data(x=node_features, edge_index=edge_index, y=y)
           data_list.append(data)   

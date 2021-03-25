@@ -70,7 +70,7 @@ class STGCN(torch.nn.Module):
         # x = x.relu()
 
         # x = self.fc(x)
-
+        x = torch.sigmoid(x)
        
         return x
 

@@ -74,29 +74,24 @@ def eval_epoch(model,loader,device,target,args,epoch=-1, model_is_training = Fal
     return loss, e_l1, e_mse
 
 
-def train (args):
-  ROOT_DIR = './'
-  RAW_DIR = 'data/matlabPREPROCESSED'
-  PROCESSED_DIR = 'data/graphProcessedData'
-  # Initialize dataset
-  dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR,args=args)
-  # 30 samples are used for training, 5 for validation and 5 are saved for testing
-  train_set, _ = train_test_split(dataset)            
-  # Describe graph structure (same for all instances)
-  describe_graph(train_set[0])
-  # Set batch size
+def train (args, train_data, device):
+
   BATCH_SIZE = args.batch_size
 
-  # Use GPU if available
-  device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-  print(f'Device: {device}')
   # Define loss function 
-  criterion = torch.nn.MSELoss()
+  # criterion = torch.nn.MSELoss()
+  criterion = torch.nn.BCELoss()
+
   # Define model targets. Each target has a model associated to it.
   # Train 1 target at a time
-  target = ['valence','arousal','dominance','liking'][args.n_targets-1]
-  
-  print(f'Training {target} model...')
+  targets = ['valence','arousal','dominance','liking']
+  if args.single_target:
+    targets = targets[args.n_targets]
+  else:
+    targets = targets[:args.n_targets]
+
+  for target in targets:
+    print(f'Training {target} model...')
 
   # MODEL PARAMETERS
   # in_channels = train_set[0].num_node_features
@@ -108,9 +103,9 @@ def train (args):
   # optim = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=args.l2_reg_beta, amsgrad=False)
   # optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
   # optim = torch.optim.SGD(model.parameters(),lr=args.learning_rate, momentum= 0.7)
-  # optim = torch.optim.Adagrad(model.parameters(), lr=0.01, lr_decay=0.001, weight_decay=0, initial_accumulator_value=0, eps=1e-10)
+  optim = torch.optim.Adagrad(model.parameters(), lr=0.01, lr_decay=0.001, weight_decay=args.l2_reg_beta, initial_accumulator_value=0, eps=1e-10)
   # optim = torch.optim.Adadelta(model.parameters(), lr=1.0, rho=0.9, eps=1e-06, weight_decay=args.l2_reg_beta)
-  optim = torch.optim.RMSprop(model.parameters(), lr=0.01, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_beta, momentum=0, centered=False)
+  # optim = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_beta, momentum=0, centered=False)
 
   k_fold_splits = 7
   k_fold_size = 5   
@@ -146,8 +141,8 @@ def train (args):
 
   # Final evaluation
   print(f'------ Final model eval ------ \n')
-
+  be = model.best_epoch
   model.load_state_dict(torch.load(f'./best_params_{args.n_targets-1}'))
   # Evaluating best models
   final_eval = eval_epoch(model, val_loader,device,model_is_training = False,target=target,args=args)
-  print (f'{target} (epoch {model.best_epoch}): Validation mse: {final_eval[2]:.2f}')
+  print (f'{target} (epoch {be}): Validation mse: {final_eval[2]:.2f}')
