@@ -18,6 +18,7 @@ parser.add_argument('-me', '--max_epoch', type=int, default=100,
                     help='Max epochs for training')
 parser.add_argument('-dst','--dont_shuffle_train', default=False, action='store_true')
 parser.add_argument('--test', default=False, action='store_true')
+parser.add_argument('--all-targets', default=False, action='store_true')
 parser.add_argument('--baseline', default=False, action='store_true')
 parser.add_argument('-vc','--visualize_convs', default=False, action='store_true')
 parser.add_argument('-dgc','--dont_global_connections', default=True, action='store_false',help='Don\'t add global connections to the graph adjacency matrix')

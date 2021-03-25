@@ -12,7 +12,7 @@ from Electrodes import Electrodes
 from einops import rearrange
 
 
-# Get 30 videos for each participant for test, 5 for validation and 5 for testing
+# Get 30 videos for each participant for training, 5 for validation and 5 for testing
 def train_val_test_split(dataset):
   train_mask = np.append(np.repeat(1,30),np.repeat(0,10))
   train_mask = np.tile(train_mask,int(len(dataset)/40))
@@ -26,6 +26,18 @@ def train_val_test_split(dataset):
   test_set = [c for c in itertools.compress(dataset,test_mask)]
 
   return train_set, val_set, test_set
+
+# Get 35 videos for each participant for training (train and val 30/5) and 5 for testing
+def train_test_split(dataset):
+  train_mask = np.append(np.repeat(1,35),np.repeat(0,5))
+  train_mask = np.tile(train_mask,int(len(dataset)/40))
+  test_mask = np.append(np.repeat(0,35),np.repeat(1,5))
+  test_mask = np.tile(test_mask,int(len(dataset)/40))
+
+  train_set = [c for c in itertools.compress(dataset,train_mask)]
+  test_set = [c for c in itertools.compress(dataset,test_mask)]
+
+  return train_set, test_set
 
 def plot_graph(graph_data):
     import networkx as nx

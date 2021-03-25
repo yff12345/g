@@ -4,7 +4,7 @@ import torch
 import numpy as np
 import torch.nn.functional as F
 from torch_geometric.data import DataLoader
-from DEAPDataset import DEAPDataset, train_val_test_split, plot_graph, describe_graph, plot_graph
+from DEAPDataset import DEAPDataset, train_test_split, plot_graph, describe_graph, plot_graph
 from models.GNNLSTM import GNNLSTM
 from matplotlib import pyplot as plt
 from tqdm import tqdm
@@ -28,7 +28,8 @@ def train_epoch(model,loader,optim,criterion,device,target,args):
       for param in model.parameters():
         l1_regularization += (torch.norm(param, 1)**2).float()
         l2_regularization += (torch.norm(param, 2)**2).float()
-      loss = mse_loss + args.l2_reg_beta * l2_regularization + args.l1_reg_alpha * l1_regularization
+      # loss = mse_loss + args.l2_reg_beta * l2_regularization + args.l1_reg_alpha * l1_regularization
+      loss = mse_loss
       loss.backward()
       optim.step()
       epoch_losses.append(loss.item())
@@ -54,7 +55,8 @@ def eval_epoch(model,loader,device,target,args,epoch=-1, model_is_training = Fal
     for param in model.parameters():
       l1_regularization += (torch.norm(param, 1)**2).float()
       l2_regularization += (torch.norm(param, 2)**2).float()
-    loss = e_mse + args.l2_reg_beta * l2_regularization + args.l1_reg_alpha * l1_regularization
+    # loss = e_mse + args.l2_reg_beta * l2_regularization + args.l1_reg_alpha * l1_regularization
+    loss = e_mse
     # Early stopping and checkpoint
     if model_is_training:
       model.eval_losses.append(loss)
@@ -79,13 +81,12 @@ def train (args):
   # Initialize dataset
   dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR,args=args)
   # 30 samples are used for training, 5 for validation and 5 are saved for testing
-  train_set, val_set, _ = train_val_test_split(dataset)                    
+  train_set, _ = train_test_split(dataset)            
   # Describe graph structure (same for all instances)
   describe_graph(train_set[0])
   # Set batch size
   BATCH_SIZE = args.batch_size
-  train_loader = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=not args.dont_shuffle_train)
-  val_loader = DataLoader(val_set, batch_size=BATCH_SIZE)
+
   # Use GPU if available
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   print(f'Device: {device}')
@@ -104,9 +105,25 @@ def train (args):
   plt.figure(figsize=(10, 10))
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
   model = GNNLSTM().to(device)
-  optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
+  # optim = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=args.l2_reg_beta, amsgrad=False)
+  # optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
+  # optim = torch.optim.SGD(model.parameters(),lr=args.learning_rate, momentum= 0.7)
+  # optim = torch.optim.Adagrad(model.parameters(), lr=0.01, lr_decay=0.001, weight_decay=0, initial_accumulator_value=0, eps=1e-10)
+  # optim = torch.optim.Adadelta(model.parameters(), lr=1.0, rho=0.9, eps=1e-06, weight_decay=args.l2_reg_beta)
+  optim = torch.optim.RMSprop(model.parameters(), lr=0.01, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_beta, momentum=0, centered=False)
 
+  k_fold_splits = 7
+  k_fold_size = 5   
   for epoch in range(args.max_epoch):
+    # KFOLD train/val split (30/5)
+    val_data = train_set[(epoch%k_fold_splits)*k_fold_size:(epoch%k_fold_splits+1)*k_fold_size]
+    a = train_set[0:(epoch%k_fold_splits)*k_fold_size]
+    b = train_set[(epoch%k_fold_splits+1)*k_fold_size:]
+    train_data = a + b
+    # Create loaders for epoch
+    train_loader = DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=not args.dont_shuffle_train)
+    val_loader = DataLoader(val_data, batch_size=BATCH_SIZE)
+   
     # Train epoch for every model
     t_e_loss = train_epoch(model,train_loader,optim,criterion,device,target=target,args=args)
     # Validation epoch for every model

@@ -25,11 +25,11 @@ def test(args):
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   print(f'Device: {device}')
 
-  # Instantiate models
-  # Train for all models
-  targets = ['valence','arousal','dominance','liking']
-  # Train for one model
-  # targets = ['valence','arousal','dominance','liking'][args.n_targets-1:args.n_targets]
+  if args.all_targets:
+    targets = ['valence','arousal','dominance','liking']
+  else:
+    targets = ['valence','arousal','dominance','liking'][args.n_targets-1:args.n_targets]
+
   target_index = {'valence':0,'arousal':1,'dominance':2,'liking':3}
   models = [GNNLSTM().to(device).eval() for target in targets]
 
@@ -41,19 +41,25 @@ def test(args):
   mses,l1s = [],[]
   for batch in test_loader:
     batch = batch.to(device)
+    if args.all_targets:
+      target = batch.y.narrow(1,0,len(targets))
+    else:
+      target = batch.y.narrow(1,0,len(targets)).view(-1)
+    
+   
     predictions = [model(batch) for model in models]
-    predictions = torch.stack(predictions,dim=1).squeeze()
+    predictions = torch.stack(predictions,dim=1).view(1)
     print('-Predictions-')
     print(predictions.cpu().detach().numpy(),'\n')
     print('-Ground truth-')
-    print(batch.y.cpu().detach().numpy(),'\n')
-    mse = F.mse_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
-    l1 = F.l1_loss(predictions,batch.y.narrow(1,0,len(targets))).item()
+    print(target.cpu().detach().numpy(),'\n')
+    mse = F.mse_loss(predictions,target).item()
+    l1 = F.l1_loss(predictions,target).item()
     mses.append(mse)
-    # l1s.append(l1)
+    l1s.append(l1)
     print(f'Mean average error: {l1}')
     print(f'Mean squared error: {mse}')
 
   print('----------------')
-  print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(l1).mean()}')
+  print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(l1s).mean()}')
   print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(mses).mean()}')

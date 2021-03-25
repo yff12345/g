@@ -53,13 +53,13 @@ class STGCN(torch.nn.Module):
 
         x = self.stb1(x,edge_index,edge_attr,batch)
 
-        x = F.dropout(x, p=0.2, training=self.training)
+        x = F.dropout(x, p=0.5, training=self.training)
         x = self.stb2(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.2, training=self.training)
+        x = F.dropout(x, p=0.5, training=self.training)
         x = self.stb3(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.2, training=self.training)
+        x = F.dropout(x, p=0.5, training=self.training)
         x = self.stb4(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.2, training=self.training)
+        x = F.dropout(x, p=0.5, training=self.training)
         x = self.stb5(x,edge_index,edge_attr,batch)
 
         x = rearrange(x,'N M n c -> (N n) c M')
