@@ -12,7 +12,7 @@ from einops import reduce, rearrange
 from DEAPDataset import visualize_graph
 
 class GNNLSTM(torch.nn.Module):
-  def __init__(self, input_dim,hidden_channels,num_layers=2 ):
+  def __init__(self):
     super(GNNLSTM, self).__init__()
 
     self.gconv1 = GraphConv(in_channels=7680, out_channels=4032, aggr='mean')

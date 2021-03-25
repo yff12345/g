@@ -5,7 +5,7 @@ import numpy as np
 import torch.nn.functional as F
 from torch_geometric.data import DataLoader
 from DEAPDataset import DEAPDataset, train_val_test_split, plot_graph, describe_graph, plot_graph
-from models.STGCN.STGCN import STGCN
+from models.GNNLSTM import GNNLSTM
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
@@ -103,7 +103,7 @@ def train (args):
   # Print losses over time (train and val)
   plt.figure(figsize=(10, 10))
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
-  model = STGCN(window_size=128).to(device)
+  model = GNNLSTM().to(device)
   optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
 
   for epoch in range(args.max_epoch):

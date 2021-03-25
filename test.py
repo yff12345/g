@@ -3,7 +3,7 @@
 import torch
 import numpy as np
 import torch.nn.functional as F
-from models.STGCN.STGCN import STGCN
+from models.GNNLSTM import GNNLSTM
 from DEAPDataset import DEAPDataset, train_val_test_split
 from torch_geometric.data import DataLoader
 import itertools
@@ -26,9 +26,12 @@ def test(args):
   print(f'Device: {device}')
 
   # Instantiate models
+  # Train for all models
   targets = ['valence','arousal','dominance','liking']
+  # Train for one model
+  # targets = ['valence','arousal','dominance','liking'][args.n_targets-1:args.n_targets]
   target_index = {'valence':0,'arousal':1,'dominance':2,'liking':3}
-  models = [STGCN(window_size=128).to(device).eval() for target in targets]
+  models = [GNNLSTM().to(device).eval() for target in targets]
 
   # Load best performing params on validation
   for i,target in enumerate(targets):
