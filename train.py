@@ -4,7 +4,6 @@ import torch
 import numpy as np
 import torch.nn.functional as F
 from torch_geometric.data import DataLoader
-from DEAPDataset import DEAPDataset, train_test_split, plot_graph, describe_graph, plot_graph
 from models.GNNLSTM import GNNLSTM
 from matplotlib import pyplot as plt
 from tqdm import tqdm
@@ -15,33 +14,48 @@ def train_epoch(model,loader,optim,criterion,device,target,args):
     if model.eval_patience_reached:
       return -1, -1
     model.train()
-    epoch_losses = []
+    metrics = {
+      # Loss + L1/L2 regularisation
+      "loss_reg":[],
+      # Main loss as calculated from criterion
+      "loss":[]
+    }
     for batch in tqdm(loader):
       optim.zero_grad()
       batch = batch.to(device)
       out = model(batch)
       # Gets first label for every graph
       target_label = batch.y.T[target].unsqueeze(1)
-      mse_loss = criterion(out, target_label)
+      main_loss = criterion(out, target_label)
       # REGULARIZATION
-      l1_regularization, l2_regularization = torch.tensor(0, dtype=torch.float).to(device), torch.tensor(0, dtype=torch.float).to(device)
-      for param in model.parameters():
-        l1_regularization += (torch.norm(param, 1)**2).float()
-        l2_regularization += (torch.norm(param, 2)**2).float()
-      # loss = mse_loss + args.l2_reg_beta * l2_regularization + args.l1_reg_alpha * l1_regularization
-      loss = mse_loss
+      if args.l1_reg_alpha != 0 or args.l2_reg_alpha != 0:
+        l1_regularization, l2_regularization = torch.tensor(0, dtype=torch.float).to(device), torch.tensor(0, dtype=torch.float).to(device)
+        for param in model.parameters():
+          l1_regularization += (torch.norm(param, 1)**2).float()
+          l2_regularization += (torch.norm(param, 2)**2).float()
+        loss = main_loss + args.l2_reg_alpha * l2_regularization + args.l1_reg_alpha * l1_regularization
+      else:
+        loss = main_loss
+      # Update parameters
       loss.backward()
       optim.step()
-      epoch_losses.append(loss.item())
-    epoch_mean_loss = np.array(epoch_losses).mean()
-    return epoch_mean_loss, mse_loss
+      # Record metrics
+      metrics["loss_reg"].append(loss.item())
+      metrics["loss"].append(main_loss.item())
+    return np.array(metrics["loss_reg"]).mean(), np.array(metrics["loss"]).mean()
 
 def eval_epoch(model,loader,device,target,args,epoch=-1, model_is_training = False, early_stopping_patience = None):
     target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target] 
     if model.eval_patience_reached and model_is_training:
-      return [-1,-1]
+      return -1,-1
     model.eval()
-    mses,l1s = [],[]
+    metrics = {
+      # Loss + L1/L2 regularisation
+      "mse":[],
+      # Main loss as calculated from criterion
+      "l1":[],
+      "mse":[],
+    }
     # Evaluation
     for batch in loader:
       batch = batch.to(device) 
@@ -80,26 +94,22 @@ def train (args, train_data, device):
 
   # Define loss function 
   # criterion = torch.nn.MSELoss()
-  criterion = torch.nn.BCELoss()
+  criterion = torch.nn.BCELoss() if args.classification_labels else torch.nn.MSELoss()
 
   # Define model targets. Each target has a model associated to it.
   # Train 1 target at a time
   targets = ['valence','arousal','dominance','liking']
-  if args.single_target:
-    targets = targets[args.n_targets]
-  else:
-    targets = targets[:args.n_targets]
 
-  for target in targets:
-    print(f'Training {target} model...')
-
-  # MODEL PARAMETERS
-  # in_channels = train_set[0].num_node_features
+  target = targets[args.n_targets]
+  print(f'Training {target} model...')
 
   # Print losses over time (train and val)
-  plt.figure(figsize=(10, 10))
+  plt.figure(figsize=(10, 10)) # TODO: fix
+
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
   model = GNNLSTM().to(device)
+
+  # Define optimizer
   # optim = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=args.l2_reg_beta, amsgrad=False)
   # optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
   # optim = torch.optim.SGD(model.parameters(),lr=args.learning_rate, momentum= 0.7)
@@ -107,13 +117,14 @@ def train (args, train_data, device):
   # optim = torch.optim.Adadelta(model.parameters(), lr=1.0, rho=0.9, eps=1e-06, weight_decay=args.l2_reg_beta)
   # optim = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_beta, momentum=0, centered=False)
 
+  # Number of slices (7 of 5 videos each)
   k_fold_splits = 7
-  k_fold_size = 5   
+  k_fold_size = int(35/k_fold_splits)
   for epoch in range(args.max_epoch):
     # KFOLD train/val split (30/5)
-    val_data = train_set[(epoch%k_fold_splits)*k_fold_size:(epoch%k_fold_splits+1)*k_fold_size]
-    a = train_set[0:(epoch%k_fold_splits)*k_fold_size]
-    b = train_set[(epoch%k_fold_splits+1)*k_fold_size:]
+    val_data = train_data[(epoch%k_fold_splits)*k_fold_size:(epoch%k_fold_splits+1)*k_fold_size]
+    a = train_data[0:(epoch%k_fold_splits)*k_fold_size]
+    b = train_data[(epoch%k_fold_splits+1)*k_fold_size:]
     train_data = a + b
     # Create loaders for epoch
     train_loader = DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=not args.dont_shuffle_train)

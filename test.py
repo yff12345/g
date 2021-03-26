@@ -10,6 +10,15 @@ import itertools
 np.set_printoptions(precision=2)
 
 def test(args):
+
+  if args.single_target:
+    targets = targets[args.n_targets]
+  else:
+    targets = targets[:args.n_targets]
+
+
+
+
   ROOT_DIR = './'
   RAW_DIR = 'data/matlabPREPROCESSED'
   PROCESSED_DIR = 'data/graphProcessedData'

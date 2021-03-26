@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
+import torch
 import argparse
 from train import train
 # from test import test
 from baseline import baseline
 
-from DEAPDataset import DEAPDataset
+from DEAPDataset import DEAPDataset, describe_graph
+
+
 from util import train_test_split
 
 # ARGUMENTS
@@ -33,7 +36,7 @@ parser.add_argument('-esp', '--early_stopping_patience', type=int, default=3,
                     help='Early stopping patience (epochs)')
 parser.add_argument('-l1', '--l1_reg_alpha',  type=float, default=0,
                     help='l1 regularization')
-parser.add_argument('-l2', '--l2_reg_beta',  type=float, default=0,
+parser.add_argument('-l2', '--l2_reg_alpha',  type=float, default=0,
                     help='l2 regularization')
 parser.add_argument('-lr', '--learning_rate',  type=float, default=0.001,
                     help='learning rate')
@@ -63,8 +66,8 @@ describe_graph(train_data[0])
 
 
  # Use GPU if available
-  device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-  print(f'Device: {device}')
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f'Device: {device}')
 
 
 
@@ -75,7 +78,7 @@ elif args.baseline:
     baseline(args,train_data,test_data)
     pass
 else:
-    train(args, device)
+    train(args,train_data, device)
     pass
 
 

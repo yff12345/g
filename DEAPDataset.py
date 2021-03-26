@@ -132,7 +132,7 @@ class DEAPDataset(InMemoryDataset):
         # For each video / graph -> 
         for index_video,node_features in enumerate(signal_data):
           # Create graph
-          y = torch.FloatTensor(labels[index_video])
+          y = torch.FloatTensor(labels[index_video]).unsqueeze(0)
           if self.classification:
             y = (y>5).float()
           # 1 graph per window (12 per video with window size 672)
