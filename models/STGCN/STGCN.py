@@ -38,8 +38,6 @@ class STGCN(torch.nn.Module):
 
         self.sigmoid = nn.Sigmoid()
 
-        self.reset_model(False)
-
     def forward(self, batch):
 
         x = batch.x
@@ -60,21 +58,18 @@ class STGCN(torch.nn.Module):
         x = rearrange(x,'(N n) (M c) -> N M n c',N=bs, c = self.window_size)
 
         x = self.stb1(x,edge_index,edge_attr,batch)
-
-        x = F.dropout(x, p=0.5, training=self.training)
+        x = F.dropout(x, p=0.1, training=self.training)
         x = self.stb2(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.5, training=self.training)
         x = self.stb3(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.5, training=self.training)
         x = self.stb4(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.5, training=self.training)
         x = self.stb5(x,edge_index,edge_attr,batch)
-
+        x = F.dropout(x, p=0.5, training=self.training)
         x = rearrange(x,'N M n c -> (N n) c M')
         x = x.relu()
         x = self.conv(x)
         x = rearrange(x,'n c M -> n (c M)')
         x = gap(x,batch)
+        # x = torch.clamp(x,0,10)
         # x = x.relu()
 
         # x = self.fc(x)

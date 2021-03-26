@@ -4,6 +4,7 @@ import torch
 import numpy as np
 import torch.nn.functional as F
 from models.GNNLSTM import GNNLSTM
+from models.STGCN.STGCN import STGCN
 from DEAPDataset import DEAPDataset
 from torch_geometric.data import DataLoader
 np.set_printoptions(precision=2)
@@ -19,7 +20,6 @@ def test(args, test_data_in, device):
   test_loader = DataLoader(test_data_in, batch_size=args.batch_size)
 
   target_index = {'valence':0,'arousal':1,'dominance':2,'liking':3}
-
   models = [GNNLSTM().to(device).eval() for target in targets]
 
   # Load best performing params on validation
@@ -43,15 +43,13 @@ def test(args, test_data_in, device):
     else:
       target = batch.y.narrow(1,0,len(targets)).view(-1,len(targets))
 
-    print(f'Predictions:\n {predictions.cpu().detach().numpy()}')
+    print(f'Predictions:\n {(predictions>0.5).int().cpu().detach().numpy()}')
     print(f'Target (gt):\n {target.cpu().detach().numpy()}')
-      
-    
-    right = (target > 5) == (predictions > 5)
     
     mse = F.mse_loss(predictions,target).item()
     l1 = F.l1_loss(predictions,target).item()
-    acc = (right.sum()/(len(target)*args.batch_size)).item()    
+    right = (target > 5) == (predictions > 5) if not args.classification_labels else (target > 0.5) == (predictions > 0.5)
+    acc = (right.sum().item()/(target.shape[0]*target.shape[1]))
     metrics["mse"].append(mse)
     metrics["l1"].append(l1)
     metrics["acc"].append(acc)
@@ -62,4 +60,4 @@ def test(args, test_data_in, device):
   print('----------------')
   print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(metrics["mse"]).mean()}')
   print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(metrics["l1"]).mean()}')
-  print(f'MEAN ACCURACY: {np.array(metrics["acc"]).mean()}')
+  print(f'MEAN ACCURACY: {np.array(metrics["acc"]).mean()*100}%')

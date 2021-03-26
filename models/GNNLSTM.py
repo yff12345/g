@@ -24,26 +24,13 @@ class GNNLSTM(torch.nn.Module):
     self.mlp = Sequential(Linear(32768, 128),ReLU(),Linear(128, 1))
 
     # MODEL CLASS ATTRIBUTES
-    # self.target = {'valence':0,'arousal':1,'dominance':2,'liking':3}[target]
-    self.reset_model(reset_params=False)
-    
-
-  def reset_model(self,reset_params = True):
-      # Reset model parameters
-      if reset_params:
-        for layers in self.children():
-          if hasattr(layers, 'reset_parameters'):
-            layers.reset_parameters()
-          else:
-            for layer in layers:
-              if hasattr(layers, 'reset_parameters'):
-                layers.reset_parameters()
-      self.best_val_loss = float('inf')
-      self.best_epoch = 0
-      self.train_losses = []
-      self.eval_losses = []
-      self.eval_patience_count = 0
-      self.eval_patience_reached = False
+    self.best_val_loss = float('inf')
+    self.best_epoch = 0
+    self.train_losses = []
+    self.eval_losses = []
+    self.eval_patience_count = 0
+    self.eval_patience_reached = False
+     
 
   def forward(self, batch, visualize_convolutions = False):
     # SETUP
@@ -84,5 +71,6 @@ class GNNLSTM(torch.nn.Module):
     x = F.dropout(x, p=0.2, training=self.training)
     # print(x.shape)
     x = self.mlp(x)
+    x = x.sigmoid()
 
     return x

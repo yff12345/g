@@ -5,6 +5,7 @@ import numpy as np
 import torch.nn.functional as F
 from torch_geometric.data import DataLoader
 from models.GNNLSTM import GNNLSTM
+from models.STGCN.STGCN import STGCN
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
@@ -98,13 +99,14 @@ def train (args, train_data_in, device):
   # optim = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=args.l2_reg_beta, amsgrad=False)
   # optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
   # optim = torch.optim.SGD(model.parameters(),lr=args.learning_rate, momentum= 0.7)
-  optim = torch.optim.Adagrad(model.parameters(), lr=0.01, lr_decay=0.001, weight_decay=args.l2_reg_alpha, initial_accumulator_value=0, eps=1e-10)
+  # optim = torch.optim.Adagrad(model.parameters(), lr=args.learning_rate, lr_decay=0.001, weight_decay=args.l2_reg_alpha, initial_accumulator_value=0, eps=1e-10)
   # optim = torch.optim.Adadelta(model.parameters(), lr=1.0, rho=0.9, eps=1e-06, weight_decay=args.l2_reg_beta)
-  # optim = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_beta, momentum=0, centered=False)
+  optim = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_alpha, momentum=0, centered=False)
 
   # Number of slices (7 of 5 videos each)
+  
   k_fold_splits = 7
-  k_fold_size = int(35/k_fold_splits)
+  k_fold_size = int(int(35/k_fold_splits) * len(train_data_in) / 35)
   for epoch in range(args.max_epoch):
     # KFOLD train/val split (30/5)
     val_data = train_data_in[(epoch%k_fold_splits)*k_fold_size:(epoch%k_fold_splits+1)*k_fold_size]

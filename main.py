@@ -69,8 +69,6 @@ describe_graph(train_data[0])
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f'Device: {device}')
 
-
-
 if args.test:
     test(args,test_data,device)
     pass
