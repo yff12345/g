@@ -38,7 +38,7 @@ class GNNLSTM(torch.nn.Module):
             for layer in layers:
               if hasattr(layers, 'reset_parameters'):
                 layers.reset_parameters()
-      self.best_val_mse = float('inf')
+      self.best_val_loss = float('inf')
       self.best_epoch = 0
       self.train_losses = []
       self.eval_losses = []

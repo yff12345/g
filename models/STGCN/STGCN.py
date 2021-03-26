@@ -18,6 +18,14 @@ class STGCN(torch.nn.Module):
         super(STGCN, self).__init__()
 
         self.window_size = window_size
+        # Early stopping
+        self.best_val_loss = float('inf')
+        self.eval_patience_count = 0
+        self.eval_patience_reached = False
+        # Record metrics
+        self.train_losses = []
+        self.eval_losses = []
+        self.best_epoch = -1
 
         # Spatio-temporal block 1
         self.stb1 = SpatioTemporalBlock(in_channels=self.window_size,hidden_channels=32,out_channels=64,kernel_size=8)
@@ -74,19 +82,4 @@ class STGCN(torch.nn.Module):
        
         return x
 
-    def reset_model(self,reset_params = True):
-      # Reset model parameters
-      if reset_params:
-        for layers in self.children():
-          if hasattr(layers, 'reset_parameters'):
-            layers.reset_parameters()
-          else:
-            for layer in layers:
-              if hasattr(layers, 'reset_parameters'):
-                layers.reset_parameters()
-      self.best_val_mse = float('inf')
-      self.train_losses = []
-      self.eval_losses = []
-      self.eval_patience_count = 0
-      self.eval_patience_reached = False
         

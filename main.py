@@ -3,7 +3,7 @@
 import torch
 import argparse
 from train import train
-# from test import test
+from test import test
 from baseline import baseline
 
 from DEAPDataset import DEAPDataset, describe_graph
@@ -72,7 +72,7 @@ print(f'Device: {device}')
 
 
 if args.test:
-    # test(args)
+    test(args,test_data,device)
     pass
 elif args.baseline:
     baseline(args,train_data,test_data)
