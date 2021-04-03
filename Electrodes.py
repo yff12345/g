@@ -54,11 +54,12 @@ class Electrodes:
     incX, incY = p1[0]-p2[0] , p1[1]-p2[1]
     return m.sqrt(incX**2 + incY**2)
 
-  def plot_2d_projection(self):
+  def plot_2d_projection(self, points = None):
+    points = self.positions_2d if points == None else points
     fig, ax = plt.subplots()
-    ax.scatter(self.positions_2d[:,0],self.positions_2d[:,1])
+    ax.scatter(points[:,0],points[:,1])
     for i,name in enumerate(self.channel_names):
-        plt.text(self.positions_2d[:,0][i],self.positions_2d[:,1][i],name)
+        plt.text(points[:,0][i],points[:,1][i],name)
     plt.show()
 
   # Distance using 3d positions

@@ -64,7 +64,7 @@ class DEAPDataset(InMemoryDataset):
   # Theoretically it doesn't make sense to train for all participants -> unless aiming for subject-independent classification (not atm)
   # PyG represents graphs sparsely, which refers to only holding the coordinates/values for which entries in  A  are non-zero.
   def __init__(self, root, raw_dir,processed_dir,args, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None):
-      self.classification = args.classification_labels 
+      self.regression = args.regression_labels
       self._raw_dir = raw_dir
       self._processed_dir = processed_dir
       self.participant_from = args.participant_from
@@ -133,7 +133,7 @@ class DEAPDataset(InMemoryDataset):
         for index_video,node_features in enumerate(signal_data):
           # Create graph
           y = torch.FloatTensor(labels[index_video]).unsqueeze(0)
-          if self.classification:
+          if not self.regression:
             y = (y>5).float()
           # 1 graph per window (12 per video with window size 672)
           data = Data(x=node_features,edge_attr=edge_attr,edge_index=edge_index, y=y) if self.include_edge_attr else Data(x=node_features, edge_index=edge_index, y=y)

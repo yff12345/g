@@ -28,12 +28,12 @@ class STGCN(torch.nn.Module):
         self.best_epoch = -1
 
         # Spatio-temporal block 1
-        self.stb1 = SpatioTemporalBlock(in_channels=self.window_size,hidden_channels=32,out_channels=64,kernel_size=8)
-        self.stb2 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=8)
-        self.stb3 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=8)
-        self.stb4 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=8)
-        self.stb5 = SpatioTemporalBlock(in_channels=64,hidden_channels=16,out_channels=64,kernel_size=2)
-        self.conv = nn.Conv1d(64 ,1, 2)
+        self.stb1 = SpatioTemporalBlock(in_channels=self.window_size,hidden_channels=32,out_channels=128,kernel_size=8)
+        self.stb2 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=8)
+        self.stb3 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=8)
+        self.stb4 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=8)
+        self.stb5 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=2)
+        self.conv = nn.Conv1d(128 ,1, 2)
         # self.fc = nn.Linear(64,1)
 
         self.sigmoid = nn.Sigmoid()
@@ -58,15 +58,28 @@ class STGCN(torch.nn.Module):
         x = rearrange(x,'(N n) (M c) -> N M n c',N=bs, c = self.window_size)
 
         x = self.stb1(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.1, training=self.training)
-        x = self.stb2(x,edge_index,edge_attr,batch)
-        x = self.stb3(x,edge_index,edge_attr,batch)
-        x = self.stb4(x,edge_index,edge_attr,batch)
-        x = self.stb5(x,edge_index,edge_attr,batch)
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = rearrange(x,'N M n c -> (N n) c M')
         x = x.relu()
+        x = F.dropout(x, p=0.2, training=self.training)
+        x = self.stb2(x,edge_index,edge_attr,batch)
+        x = x.relu()
+        x = F.dropout(x, p=0.2, training=self.training)
+        x = self.stb3(x,edge_index,edge_attr,batch)
+        x = x.relu()
+        x = self.stb4(x,edge_index,edge_attr,batch)
+        x = x.relu()
+        x = self.stb5(x,edge_index,edge_attr,batch)
+        x = x.relu()
+        x = F.dropout(x, p=0.3, training=self.training)
+
+        # print(x.shape)
+        # exit()
+        
+        x = rearrange(x,'N M n c -> (N n) c M')
+
         x = self.conv(x)
+        # x = x.relu()
+        x = F.dropout(x, p=0.5, training=self.training)
+        
         x = rearrange(x,'n c M -> n (c M)')
         x = gap(x,batch)
         # x = torch.clamp(x,0,10)

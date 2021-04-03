@@ -6,6 +6,7 @@ from train import train
 from test import test
 from baseline import baseline
 
+
 from DEAPDataset import DEAPDataset, describe_graph
 
 
@@ -28,8 +29,8 @@ parser.add_argument('-bs', '--batch_size', type=int, default=1,
 parser.add_argument('-me', '--max_epoch', type=int, default=100,
                     help='Max epochs for training')
 parser.add_argument('-gc','--global_connections', default=True, action='store_false',help='Add global connections to the graph adjacency matrix')
-parser.add_argument('-cl','--classification_labels', default=False, action='store_true',
-                    help='Use high[>5],low[<5] emotion labels for classification instead of regression')
+parser.add_argument('-rl','--regression_labels', default=False, action='store_true',
+                    help='Use regression labels instead of high[>5],low[<5] emotion labels')
 # Train logic args
 parser.add_argument('-dst','--dont_shuffle_train', default=False, action='store_true')
 parser.add_argument('-esp', '--early_stopping_patience', type=int, default=3,
@@ -40,6 +41,10 @@ parser.add_argument('-l2', '--l2_reg_alpha',  type=float, default=0,
                     help='l2 regularization')
 parser.add_argument('-lr', '--learning_rate',  type=float, default=0.001,
                     help='learning rate')
+parser.add_argument('-sg', '--scheduler_gamma',  type=float, default=0.7,
+                    help='learning rate')
+parser.add_argument('-dkv', '--dont_kfold_validation', default=False, action='store_true',
+                    help='Disable k fold validation')
 # Test logic args
 parser.add_argument('--test', default=False, action='store_true')
 # Baseline logic
@@ -64,20 +69,16 @@ train_data, test_data = train_test_split(dataset,35)
 # Describe graph structure (same for all instances)
 describe_graph(train_data[0])
 
-
- # Use GPU if available
+# Use GPU if available
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f'Device: {device}')
 
 if args.test:
     test(args,test_data,device)
-    pass
 elif args.baseline:
     baseline(args,train_data,test_data)
-    pass
 else:
     train(args,train_data, device)
-    pass
 
 
 

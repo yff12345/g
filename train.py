@@ -4,6 +4,7 @@ import torch
 import numpy as np
 import torch.nn.functional as F
 from torch_geometric.data import DataLoader
+from torch.optim.lr_scheduler import StepLR
 from models.GNNLSTM import GNNLSTM
 from models.STGCN.STGCN import STGCN
 from matplotlib import pyplot as plt
@@ -61,7 +62,7 @@ def eval_epoch(model,loader,device,target,args,criterion,epoch=-1, model_is_trai
     if model_is_training:
       model.eval_losses.append(loss)
       # Save current best model locally
-      if loss < model.best_val_loss:
+      if loss < model.best_val_loss and (loss > 0.005 or epoch == 0):
         model.best_val_loss = loss
         model.best_epoch = epoch
         torch.save(model.state_dict(),f'./best_params_{target}') 
@@ -80,7 +81,7 @@ def train (args, train_data_in, device):
 
   # Define loss function 
   # criterion = torch.nn.MSELoss()
-  criterion = torch.nn.BCELoss() if args.classification_labels else torch.nn.MSELoss()
+  criterion = torch.nn.BCELoss() if not args.regression_labels else torch.nn.MSELoss()
 
   # Define model targets. Each target has a model associated to it.
   # Train 1 target at a time
@@ -93,30 +94,42 @@ def train (args, train_data_in, device):
   plt.figure(figsize=(10, 10)) # TODO: fix
 
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
-  model = GNNLSTM().to(device)
+  model = STGCN(window_size=128).to(device)
+
+  # print(sum(p.numel() for p in model.parameters()))
+  # exit()
 
   # Define optimizer
   # optim = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=args.l2_reg_beta, amsgrad=False)
   # optim = torch.optim.Adam(model.parameters(),lr=args.learning_rate)
-  # optim = torch.optim.SGD(model.parameters(),lr=args.learning_rate, momentum= 0.7)
+  # optim = torch.optim.SGD(model.parameters(),lr=args.learning_rate, momentum= 0.7, weight_decay=args.l2_reg_alpha)
   # optim = torch.optim.Adagrad(model.parameters(), lr=args.learning_rate, lr_decay=0.001, weight_decay=args.l2_reg_alpha, initial_accumulator_value=0, eps=1e-10)
-  # optim = torch.optim.Adadelta(model.parameters(), lr=1.0, rho=0.9, eps=1e-06, weight_decay=args.l2_reg_beta)
-  optim = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_alpha, momentum=0, centered=False)
+  optim = torch.optim.Adadelta(model.parameters(), lr=args.learning_rate, rho=0.9, eps=1e-06, weight_decay=args.l2_reg_alpha)
+  # optim = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_alpha, momentum=0, centered=False)
+
+  # Instantiate optimizer
+  scheduler = StepLR(optim, step_size=30, gamma=args.scheduler_gamma)
 
   # Number of slices (7 of 5 videos each)
-  
   k_fold_splits = 7
   k_fold_size = int(int(35/k_fold_splits) * len(train_data_in) / 35)
+
   for epoch in range(args.max_epoch):
-    # KFOLD train/val split (30/5)
-    val_data = train_data_in[(epoch%k_fold_splits)*k_fold_size:(epoch%k_fold_splits+1)*k_fold_size]
-    a = train_data_in[0:(epoch%k_fold_splits)*k_fold_size]
-    b = train_data_in[(epoch%k_fold_splits+1)*k_fold_size:]
-    print(f'a length : {len(a)}')
-    print(f'b length : {len(b)}')
-    train_data = a + b
-    print(f'Val data length : {len(val_data)}')
-    print(f'Train data length : {len(train_data)}')
+    if args.dont_kfold_validation:
+      assert args.batch_size == 1
+      # 'TODO: Disable kfold with bs != 1'
+      val_data = train_data_in[30:]
+      train_data = train_data_in[:30]
+    else:
+      # KFOLD train/val split (30/5)
+      val_data = train_data_in[(epoch%k_fold_splits)*k_fold_size:(epoch%k_fold_splits+1)*k_fold_size]
+      a = train_data_in[0:(epoch%k_fold_splits)*k_fold_size]
+      b = train_data_in[(epoch%k_fold_splits+1)*k_fold_size:]
+      print(f'a length : {len(a)}')
+      print(f'b length : {len(b)}')
+      train_data = a + b
+      print(f'Val data length : {len(val_data)}')
+      print(f'Train data length : {len(train_data)}')
     # Create loaders for epoch
     train_loader = DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=not args.dont_shuffle_train)
     val_loader = DataLoader(val_data, batch_size=BATCH_SIZE)
@@ -131,6 +144,8 @@ def train (args, train_data_in, device):
     # Epoch results
     print(f'------ Epoch {epoch} ------')
     print(f'{target}: Train loss: {t_e_loss:.2f} | Val loss: {v_e_metrics[0]:.2f} | Val mse: {v_e_metrics[1]:.2f} | Val l1: {v_e_metrics[2]:.2f}')
+    # Gradually reduce lr
+    scheduler.step()
   
   # plt.subplot(2,2,i+1)
   plt.plot(model.train_losses)
