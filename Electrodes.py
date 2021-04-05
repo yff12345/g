@@ -42,8 +42,9 @@ class Electrodes:
   def pol2cart(self, theta, rho):
     return rho * m.cos(theta), rho * m.sin(theta)
 
-  def get_proyected_2d_positions(self):
-    pos_2d = np.array([self.azim_proj(pos_3d) for pos_3d in self.positions_3d])
+  def get_proyected_2d_positions(self, positions_3d=None):
+    positions_3d = self.positions_3d if positions_3d is None else positions_3d
+    pos_2d = np.array([self.azim_proj(pos_3d) for pos_3d in positions_3d])
     return pos_2d
 
   # Distance using projected coordinates
@@ -54,8 +55,8 @@ class Electrodes:
     incX, incY = p1[0]-p2[0] , p1[1]-p2[1]
     return m.sqrt(incX**2 + incY**2)
 
-  def plot_2d_projection(self, points = None):
-    points = self.positions_2d if points == None else points
+  def plot_2d_projection(self, points = np.array([])):
+    points = self.positions_2d if points.size == 0 else points
     fig, ax = plt.subplots()
     ax.scatter(points[:,0],points[:,1])
     for i,name in enumerate(self.channel_names):
@@ -72,13 +73,14 @@ class Electrodes:
   # get_adjacency_matrix is the main method for the Electrodes class. It returns a fixed adjacency matrix for the graph based on the 3-d coordinates of the electrodes
   # Symetrical, contains self-loops (learnable [?])
   # Calibration constant should keep 20% of the links acording to the paper
-  def get_adjacency_matrix(self,add_global_connections, calibration_constant = 6, active_threshold = 0.1 ):
+  def get_adjacency_matrix(self,add_global_connections,positions_3d = np.array([]), calibration_constant = 6, active_threshold = 0.1 ):
+    positions_3d = self.positions_3d if positions_3d.size == 0 else positions_3d
     # Expand 3d position vector to a 32*32 matrix
-    distance_3d_matrix = np.array([self.positions_3d,]*len(self.positions_3d))
+    distance_3d_matrix = np.array([positions_3d,]*len(positions_3d))
     # Transpose
     distance_3d_matrix = rearrange(distance_3d_matrix,'h w d -> w h d')
     # Calculate 3d distances (m.sqrt(incX**2 + incY**2 + incZ**2))
-    distance_3d_matrix = distance_3d_matrix - self.positions_3d
+    distance_3d_matrix = distance_3d_matrix - positions_3d
     distance_3d_matrix = distance_3d_matrix**2
     distance_3d_matrix = distance_3d_matrix.sum(axis=-1)
     distance_3d_matrix = np.sqrt(distance_3d_matrix)
