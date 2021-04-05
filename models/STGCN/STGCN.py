@@ -35,7 +35,7 @@ class STGCN(torch.nn.Module):
         # self.stb4 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=8)
         # self.stb5 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=2)
         self.conv = nn.Conv1d(64 ,1, 2)
-        self.fc = nn.Linear(32,1)
+        self.fc = nn.Linear(104,1)
 
         self.sigmoid = nn.Sigmoid()
 
@@ -101,7 +101,6 @@ class STGCN(torch.nn.Module):
         # x = gap(x,batch)
         # x = torch.clamp(x,0,10)
         # x = x.relu()
-
         x = self.fc(x)
         x = torch.sigmoid(x)
        

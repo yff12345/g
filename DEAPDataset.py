@@ -1,6 +1,7 @@
 import os
 import torch
 import scipy
+import scipy.interpolate
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -103,7 +104,7 @@ class DEAPDataset(InMemoryDataset):
 
   def process(self):
       # Number of nodes per graph
-      n_nodes = len(self.electrodes.channel_names)
+      n_nodes = len(self.electrodes.positions_3d)
 
       if self.undirected_graphs:
         source_nodes, target_nodes = np.repeat(np.arange(0,n_nodes),n_nodes), np.tile(np.arange(0,n_nodes),n_nodes)
@@ -127,6 +128,14 @@ class DEAPDataset(InMemoryDataset):
         # Load raw file as np array
         participant_data = scipy.io.loadmat(f'{self.raw_dir}/{raw_name}')
         signal_data = torch.FloatTensor(participant_data['data'][:,:32,128*3:])
+        # Expand signal data if needed
+        if signal_data.shape[1] != n_nodes:
+          e_signal_data = []
+          # print(signal_data.shape)
+          for video in signal_data:
+            e_signal_data.append(torch.FloatTensor(scipy.interpolate.griddata(self.electrodes.original_positions_3d, video, self.electrodes.positions_3d, method='linear')))
+          signal_data = torch.stack(e_signal_data)
+
         labels = torch.Tensor(participant_data['labels'])
 
         # For each video / graph -> 

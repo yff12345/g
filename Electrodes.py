@@ -7,7 +7,7 @@ from einops import rearrange
 32 channels 
 '''
 class Electrodes:
-  def __init__(self,add_global_connections=True):
+  def __init__(self,add_global_connections=True, expand_3d = True):
     # X, Y, Z coordinates of the electrodes
     self.positions_3d = np.array([[-27,83,-3],[-36,76,24],[-71,51,-3],[-48,59,44],
       [-33,33,74],[-78,30,27],[-87,0,-3],[-63,0,61],
@@ -24,6 +24,10 @@ class Electrodes:
     self.global_connections = np.array([['Fp1','Fp2'],['AF3','AF4'],['F3','F4'],['FC5','FC6'],['T7','T8'],['CP5','CP6'],['P3','P4'],['PO3','PO4'],['O1','O2']])
     self.positions_2d = self.get_proyected_2d_positions()
     self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections)
+    if expand_3d:
+      self.original_positions_3d = self.positions_3d.copy()
+      self.positions_3d = self.generate_in_between_positions(num_points = 1, verbose = False)
+      self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections=True,positions_3d = self.positions_3d )
 
   # Helper function for get_proyected_2d_positions
   def azim_proj(self, pos):
@@ -103,4 +107,32 @@ class Electrodes:
       adj_matrix[global_indices[:,1],global_indices[:,0]] = -1
 
     return adj_matrix # adj_matrix = local connections + self-loops + (optional) global connections
+
+  def generate_in_between_positions(self, num_points = 1, verbose = False):
+    """
+    Returns new positions in-between current electrodes with a link between them
+    :param positions_3d: List of 3D electrode positional information [x,y,z]
+    :param adjacency_matrix: Graph adjacency matrix. Will determine where to include the new points
+    :param num_points: Number of points to include for each value in the adjacency matrix > 0
+    :return: List of positions [x,y,z]
+    """
+    if num_points < 1:
+        return self.positions_3d
+    # Assumes symmetric adj.matrix
+    new_points = []
+    for i in range(32):
+        for j in range(i,32):
+            a = self.adjacency_matrix[i,j]
+            if i != j and a != 0 and a != -1:
+                if verbose:
+                    print(self.channel_names[i],self.channel_names[j],a)
+                    print(self.positions_3d[i], self.positions_3d[j])
+                inc = (self.positions_3d[i] - self.positions_3d[j])
+                inc_step = inc / (num_points + 1)
+                for n in range(1,num_points+1):
+                    new_point = self.positions_3d[j] + (n*inc_step)
+                    if verbose:
+                        print(new_point)
+                    new_points.append(new_point)
+    return np.vstack([self.positions_3d, np.array(new_points)])
     
