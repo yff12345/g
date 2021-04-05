@@ -2,6 +2,7 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 from einops import rearrange
+import matplotlib.pyplot as plt
 
 from torch_geometric.nn import global_add_pool as gap
 
@@ -27,7 +28,7 @@ class STGCN(torch.nn.Module):
         self.eval_losses = []
         self.best_epoch = -1
 
-        # Spatio-temporal block 1
+        # Spatio-temporal blocks
         self.stb1 = SpatioTemporalBlock(in_channels=self.window_size,hidden_channels=32,out_channels=128,kernel_size=8)
         self.stb2 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=8)
         self.stb3 = SpatioTemporalBlock(in_channels=128,hidden_channels=32,out_channels=128,kernel_size=8)
@@ -38,7 +39,7 @@ class STGCN(torch.nn.Module):
 
         self.sigmoid = nn.Sigmoid()
 
-    def forward(self, batch):
+    def forward(self, batch, args):
 
         x = batch.x
         edge_index = batch.edge_index[:,:194]
@@ -59,16 +60,31 @@ class STGCN(torch.nn.Module):
 
         x = self.stb1(x,edge_index,edge_attr,batch)
         x = x.relu()
+        if args.visualize_convs:
+            plt.matshow(x[0,0,:,:].cpu().detach().numpy())
+            plt.show()
         x = F.dropout(x, p=0.2, training=self.training)
         x = self.stb2(x,edge_index,edge_attr,batch)
         x = x.relu()
+        if args.visualize_convs:
+            plt.matshow(x[0,0,:,:].cpu().detach().numpy())
+            plt.show()
         x = F.dropout(x, p=0.2, training=self.training)
         x = self.stb3(x,edge_index,edge_attr,batch)
         x = x.relu()
+        if args.visualize_convs:
+            plt.matshow(x[0,0,:,:].cpu().detach().numpy())
+            plt.show()
         x = self.stb4(x,edge_index,edge_attr,batch)
         x = x.relu()
+        if args.visualize_convs:
+            plt.matshow(x[0,0,:,:].cpu().detach().numpy())
+            plt.show()
         x = self.stb5(x,edge_index,edge_attr,batch)
         x = x.relu()
+        if args.visualize_convs:
+            plt.matshow(x[0,0,:,:].cpu().detach().numpy())
+            plt.show()
         x = F.dropout(x, p=0.3, training=self.training)
 
         # print(x.shape)

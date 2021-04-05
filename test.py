@@ -42,7 +42,7 @@ def test(args, test_data_in, device):
     }
   for batch in test_loader:
     batch = batch.to(device)
-    predictions = [model(batch) for model in models]
+    predictions = [model(batch,args) for model in models]
     predictions = torch.stack(predictions,dim=1).view(-1,len(targets))
     # target = batch.y.narrow(1,0,len(targets)).view(-1)
 
@@ -54,7 +54,7 @@ def test(args, test_data_in, device):
     for p, t in zip(predictions.T,target.T):
        metrics["f1"].append(f1_loss(p,t).item())
 
-    print(f'Predictions:\n {(predictions>0.5).int().cpu().detach().numpy()}')
+    print(f'Predictions:\n {predictions.cpu().detach().numpy()}')
     print(f'Target (gt):\n {target.cpu().detach().numpy()}')
     
     mse = F.mse_loss(predictions,target).item()
