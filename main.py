@@ -29,8 +29,8 @@ parser.add_argument('-bs', '--batch_size', type=int, default=1,
 parser.add_argument('-me', '--max_epoch', type=int, default=100,
                     help='Max epochs for training')
 parser.add_argument('-gc','--global_connections', default=True, action='store_false',help='Add global connections to the graph adjacency matrix')
-parser.add_argument('-rl','--regression_labels', default=False, action='store_true',
-                    help='Use regression labels instead of high[>5],low[<5] emotion labels')
+parser.add_argument('-cl','--classification_labels', default=False, action='store_true',
+                    help='Use classification, high[>5],low[<5] emotion labels')
 # Train logic args
 parser.add_argument('-dst','--dont_shuffle_train', default=False, action='store_true')
 parser.add_argument('-esp', '--early_stopping_patience', type=int, default=3,
