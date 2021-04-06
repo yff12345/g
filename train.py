@@ -67,6 +67,8 @@ def eval_epoch(model,loader,device,target,args,criterion,epoch=-1, model_is_trai
         model.best_epoch = epoch
         torch.save(model.state_dict(),f'./best_params_{target}') 
         model.eval_patience_count = 0
+        if loss < 0.0005:
+          model.eval_patience_reached = True
       # Early stopping
       elif args.early_stopping_patience is not None:
           model.eval_patience_count += 1
@@ -94,7 +96,7 @@ def train (args, train_data_in, device):
   plt.figure(figsize=(10, 10)) # TODO: fix
 
   # Train models one by one as opposed to having an array [] of models. Avoids CUDA out of memory error
-  model = STGCN(window_size=128).to(device)
+  model = GNNLSTM().to(device)
 
   # print(sum(p.numel() for p in model.parameters()))
   # exit()

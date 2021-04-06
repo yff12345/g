@@ -1,1 +1,153 @@
 participant 1
+Using global connections
+Data(edge_attr=[1970], edge_index=[2, 1970], x=[104, 7680], y=[1, 4])
+==============================================================
+Number of nodes: 104
+Number of edges: 1970
+Average node degree: 18.94
+Contains isolated nodes: False
+Contains self-loops: True
+Is undirected: True
+Device: cuda
+Predictions:
+ [[1.   0.43 1.   1.  ]]
+Target (gt):
+ [[0. 1. 1. 0.]]
+Mean squared error: 0.5814778804779053
+Mean average error: 0.6429321765899658
+Accuracy: 25.0%
+Predictions:
+ [[0.89 0.99 0.02 1.  ]]
+Target (gt):
+ [[0. 1. 0. 1.]]
+Mean squared error: 0.19794616103172302
+Mean average error: 0.22871622443199158
+Accuracy: 75.0%
+Predictions:
+ [[0.   0.07 0.   0.33]]
+Target (gt):
+ [[0. 1. 1. 1.]]
+Mean squared error: 0.5791753530502319
+Mean average error: 0.6509057283401489
+Accuracy: 25.0%
+Predictions:
+ [[0.5 1.  0.  1. ]]
+Target (gt):
+ [[0. 1. 1. 1.]]
+Mean squared error: 0.31253620982170105
+Mean average error: 0.37602829933166504
+Accuracy: 50.0%
+Predictions:
+ [[0.91 0.96 1.   1.  ]]
+Target (gt):
+ [[1. 1. 1. 1.]]
+Mean squared error: 0.002424268051981926
+Mean average error: 0.03260624408721924
+Accuracy: 100.0%
+----------------
+MEAN SQUARED ERROR FOR TEST SET: 0.33471197448670864
+MEAN AVERAGE ERROR FOR TEST SET: 0.38623773455619814
+MEAN ACCURACY: 55.00000000000001%
+MEAN F1 SCORE: 0.5076530824531801
+participant 2
+Using global connections
+Data(edge_attr=[1970], edge_index=[2, 1970], x=[104, 7680], y=[1, 4])
+==============================================================
+Number of nodes: 104
+Number of edges: 1970
+Average node degree: 18.94
+Contains isolated nodes: False
+Contains self-loops: True
+Is undirected: True
+Device: cuda
+Predictions:
+ [[1.   0.6  0.28 0.73]]
+Target (gt):
+ [[1. 0. 1. 0.]]
+Mean squared error: 0.3540005087852478
+Mean average error: 0.5134779810905457
+Accuracy: 25.0%
+Predictions:
+ [[0.99 0.6  1.   0.73]]
+Target (gt):
+ [[0. 1. 0. 0.]]
+Mean squared error: 0.6646767854690552
+Mean average error: 0.7774175405502319
+Accuracy: 25.0%
+Predictions:
+ [[0.91 0.6  1.   0.73]]
+Target (gt):
+ [[0. 1. 0. 0.]]
+Mean squared error: 0.6292605400085449
+Mean average error: 0.7587783336639404
+Accuracy: 25.0%
+Predictions:
+ [[1.   0.6  0.23 0.73]]
+Target (gt):
+ [[0. 0. 0. 0.]]
+Mean squared error: 0.48609834909439087
+Mean average error: 0.6403785943984985
+Accuracy: 25.0%
+Predictions:
+ [[0.04 0.6  1.   0.73]]
+Target (gt):
+ [[1. 1. 1. 1.]]
+Mean squared error: 0.2909024953842163
+Mean average error: 0.40901291370391846
+Accuracy: 75.0%
+----------------
+MEAN SQUARED ERROR FOR TEST SET: 0.484987735748291
+MEAN AVERAGE ERROR FOR TEST SET: 0.619813072681427
+MEAN ACCURACY: 35.0%
+MEAN F1 SCORE: 0.2799103271216154
+participant 3
+Using global connections
+Data(edge_attr=[1970], edge_index=[2, 1970], x=[104, 7680], y=[1, 4])
+==============================================================
+Number of nodes: 104
+Number of edges: 1970
+Average node degree: 18.94
+Contains isolated nodes: False
+Contains self-loops: True
+Is undirected: True
+Device: cuda
+Predictions:
+ [[0.   0.   0.   0.07]]
+Target (gt):
+ [[1. 1. 0. 0.]]
+Mean squared error: 0.4997261166572571
+Mean average error: 0.5166334509849548
+Accuracy: 50.0%
+Predictions:
+ [[0.   0.74 0.88 1.  ]]
+Target (gt):
+ [[0. 1. 1. 1.]]
+Mean squared error: 0.02032260224223137
+Mean average error: 0.09545453637838364
+Accuracy: 100.0%
+Predictions:
+ [[9.04e-04 5.58e-01 9.71e-01 1.01e-03]]
+Target (gt):
+ [[0. 1. 1. 1.]]
+Mean squared error: 0.29852694272994995
+Mean average error: 0.3677859306335449
+Accuracy: 75.0%
+Predictions:
+ [[1.   0.14 0.97 1.  ]]
+Target (gt):
+ [[0. 1. 1. 0.]]
+Mean squared error: 0.6839640140533447
+Mean average error: 0.7224944829940796
+Accuracy: 25.0%
+Predictions:
+ [[1.   0.55 1.   0.  ]]
+Target (gt):
+ [[1. 0. 1. 1.]]
+Mean squared error: 0.3243829011917114
+Mean average error: 0.38790130615234375
+Accuracy: 50.0%
+----------------
+MEAN SQUARED ERROR FOR TEST SET: 0.3653845153748989
+MEAN AVERAGE ERROR FOR TEST SET: 0.41805394142866137
+MEAN ACCURACY: 60.0%
+MEAN F1 SCORE: 0.38648650014656594

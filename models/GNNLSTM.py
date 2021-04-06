@@ -19,9 +19,9 @@ class GNNLSTM(torch.nn.Module):
     self.gconv2 = GraphConv(in_channels=4032, out_channels=512, aggr='mean')
     # self.gconv3 = GraphConv(in_channels=2016, out_channels=512, aggr='mean')
 
-    self.lstm = nn.LSTM(32, 32, 2,bidirectional=True)
+    self.lstm = nn.LSTM(104, 104, 2,bidirectional=True)
 
-    self.mlp = Sequential(Linear(32768, 128),ReLU(),Linear(128, 1))
+    self.mlp = Sequential(Linear(106496, 128),ReLU(),Linear(128, 1))
 
     # MODEL CLASS ATTRIBUTES
     self.best_val_loss = float('inf')
@@ -32,7 +32,7 @@ class GNNLSTM(torch.nn.Module):
     self.eval_patience_reached = False
      
 
-  def forward(self, batch, visualize_convolutions = False):
+  def forward(self, batch, args = False):
     # SETUP
     x = batch.x
     edge_index = batch.edge_index
@@ -40,20 +40,21 @@ class GNNLSTM(torch.nn.Module):
     batch = batch.batch
     bs = len(torch.unique(batch))
     # Information propagation trough graph visualization
-    if visualize_convolutions:
+  
+    if args.visualize_convs:
       visualize_graph(x[:32])
 
     # GRAPH CONVOLUTIONS
     x = self.gconv1(x,edge_index,edge_attr)
     x = F.relu(x)
-    x = F.dropout(x, p=0.3, training=self.training)
-    if visualize_convolutions:
+    x = F.dropout(x, p=0.1, training=self.training)
+    if args.visualize_convs:
       visualize_graph(x[:32])
 
     x = self.gconv2(x,edge_index,edge_attr)
     x = F.relu(x)
-    x = F.dropout(x, p=0.2, training=self.training)
-    if visualize_convolutions:
+    x = F.dropout(x, p=0.1, training=self.training)
+    if args.visualize_convs:
       visualize_graph(x[:32])
     
     # x = self.gconv3(x,edge_index,edge_attr)
@@ -68,7 +69,7 @@ class GNNLSTM(torch.nn.Module):
 
     # MLP
     x = rearrange(output,'sl b i -> b (sl i)')
-    x = F.dropout(x, p=0.2, training=self.training)
+    x = F.dropout(x, p=0.5, training=self.training)
     # print(x.shape)
     x = self.mlp(x)
     x = x.sigmoid()

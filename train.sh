@@ -5,7 +5,7 @@ do
   x=1
   while [ $x -lt 5 ]; 
   do 
-    ./main.py -esp 20 -sg 0.01 -lr 1 -l2 0.001 -t $x -pf $p -pt $p -dkv
+    ./main.py -esp 10 -sg 0 -lr 1 -l2 0.001 -t $x -pf $p -pt $p
     x=$(($x+1))
   done
   echo participant $p >> log.txt

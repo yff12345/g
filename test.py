@@ -21,7 +21,7 @@ def test(args, test_data_in, device):
   test_loader = DataLoader(test_data_in, batch_size=args.batch_size)
 
   target_index = {'valence':0,'arousal':1,'dominance':2,'liking':3}
-  models = [STGCN(window_size=128).to(device).eval() for target in targets]
+  models = [GNNLSTM().to(device).eval() for target in targets]
 
   # Load best performing params on validation
   for i,target in enumerate(targets):
