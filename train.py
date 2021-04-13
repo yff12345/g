@@ -82,8 +82,8 @@ def train (args, train_data_in, device):
   BATCH_SIZE = args.batch_size
 
   # Define loss function 
-  # criterion = torch.nn.MSELoss()
-  criterion = torch.nn.BCELoss() if args.classification_labels else torch.nn.MSELoss()
+  criterion = torch.nn.L1Loss()
+  # criterion = torch.nn.BCELoss() if args.classification_labels else torch.nn.MSELoss()
 
   # Define model targets. Each target has a model associated to it.
   # Train 1 target at a time
