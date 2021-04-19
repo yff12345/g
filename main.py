@@ -39,9 +39,9 @@ parser.add_argument('-l1', '--l1_reg_alpha',  type=float, default=0,
                     help='l1 regularization')
 parser.add_argument('-l2', '--l2_reg_alpha',  type=float, default=0,
                     help='l2 regularization')
-parser.add_argument('-lr', '--learning_rate',  type=float, default=0.001,
+parser.add_argument('-lr', '--learning_rate',  type=float, default=0.1,
                     help='learning rate')
-parser.add_argument('-sg', '--scheduler_gamma',  type=float, default=0.7,
+parser.add_argument('-sg', '--scheduler_gamma',  type=float, default=0.01,
                     help='learning rate')
 parser.add_argument('-dkv', '--dont_kfold_validation', default=False, action='store_true',
                     help='Disable k fold validation')

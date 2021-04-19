@@ -64,19 +64,19 @@ class DEAPDataset(InMemoryDataset):
   # 1 participant per dataset
   # Theoretically it doesn't make sense to train for all participants -> unless aiming for subject-independent classification (not atm)
   # PyG represents graphs sparsely, which refers to only holding the coordinates/values for which entries in  A  are non-zero.
-  def __init__(self, root, raw_dir,processed_dir,args, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None):
-      self.classification = args.classification_labels
+  def __init__(self, root, raw_dir,processed_dir,args, include_edge_attr=True, undirected_graphs = True, transform=None, pre_transform=None, expand_3d=True):
+      self.classification_labels = args.classification_labels
       self._raw_dir = raw_dir
       self._processed_dir = processed_dir
       self.participant_from = args.participant_from
-      self.participant_to = args.participant_from if args.participant_to is None else args.participant_to
+      self.participant_to = args.participant_to
       # Whether or not to include edge_attr in the dataset
       self.include_edge_attr = include_edge_attr
       # If true there will be 1024 links as opposed to 528
       self.undirected_graphs = undirected_graphs
       # Instantiate class to handle electrode positions
       print('Using global connections' if args.global_connections else 'Not using global connections')
-      self.electrodes = Electrodes(args.global_connections)
+      self.electrodes = Electrodes(args.global_connections, expand_3d = expand_3d)
       super(DEAPDataset, self).__init__(root, transform, pre_transform)
       self.data, self.slices = torch.load(self.processed_paths[0])
       

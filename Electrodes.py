@@ -25,6 +25,7 @@ class Electrodes:
     self.positions_2d = self.get_proyected_2d_positions()
     self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections)
     if expand_3d:
+      print('Augmenting datapoints by interpolation')
       self.original_positions_3d = self.positions_3d.copy()
       self.positions_3d = self.generate_in_between_positions(num_points = 1, verbose = False)
       self.adjacency_matrix = self.get_adjacency_matrix(add_global_connections=True,positions_3d = self.positions_3d )

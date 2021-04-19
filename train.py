@@ -110,7 +110,7 @@ def train (args, train_data_in, device):
   # optim = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate, alpha=0.99, eps=1e-08, weight_decay=args.l2_reg_alpha, momentum=0, centered=False)
 
   # Instantiate optimizer
-  scheduler = StepLR(optim, step_size=30, gamma=args.scheduler_gamma)
+  scheduler = StepLR(optim, step_size=1, gamma=args.scheduler_gamma)
 
   # Number of slices (7 of 5 videos each)
   k_fold_splits = 7

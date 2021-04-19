@@ -35,6 +35,8 @@ class SpatioTemporalBlock(torch.nn.Module):
             b = edge_attr + e_edge_attr.max() + 1 
             e_edge_index = torch.cat([e_edge_index,a],dim=1)
             e_edge_attr = torch.cat([e_edge_attr,b],dim=0)
+            # THIS IS WRONG. EDGE ATTR SHOULD REPEAT AND NOT INCREMENT.
+            raise 'err'
         
         # print(e_edge_attr)
 
