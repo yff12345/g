@@ -1,10 +1,8 @@
 import torch
 import time
 import numpy as np
-import torch.nn as nn
 from util import get_split_indices
 from test import test_epoch
-from GNNModel import GNNModel
 from torch_geometric.data import  DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from metrics import accuracy_metric, f1_metric, precision_metric, recall_metric
@@ -26,7 +24,7 @@ def train_epoch(model, loader ,optimizer ,criterion,args):
 
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
 
-def main(args,dataset):
+def main(model,dataset,criterion, args):
 
     train_mask,val_mask = get_split_indices(args.target,args.number_validation_targets,len(dataset))
 
@@ -39,20 +37,6 @@ def main(args,dataset):
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=args.shuffle_train)
     val_loader = DataLoader(val_dataset, batch_size=args.batch_size)
 
-    in_channels = dataset[0].x.shape[1]
-    n_graphs = dataset[0].x.shape[0]//32
-    n_classes = np.unique(np.array([d.y for d in dataset])).shape[0]
-    print(f'Number of classes: {n_classes}')
-
-    if args.model == 'GNN':
-        model = GNNModel(in_channels,n_graphs,args.hidden_channels, n_classes).to(args.device) 
-
-    elif args.model == 'NOGNN':
-        pass
-
-    pytorch_total_params = sum(p.numel() for p in model.parameters())
-    print(f'Model parameter count: {pytorch_total_params}')
-
     if args.optimizer == 'Adam':
         optimizer = torch.optim.Adam(model.parameters(),lr=args.learning_rate, weight_decay=args.learning_rate_decay)
     elif args.optimizer == 'Adagrad':
@@ -60,14 +44,13 @@ def main(args,dataset):
     elif args.optimizer == 'SGD':
         optimizer = torch.optim.SGD(model.parameters(),lr=args.learning_rate, weight_decay=args.weight_decay)
 
-    criterion = nn.CrossEntropyLoss()
-
     writer = SummaryWriter()
 
     start_time = time.time()
 
     best_val_loss = np.inf
     early_stopping_count = 0
+    print('Training...')
     for epoch in range(1,args.max_epoch+1):
         # Train epoch
         mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
@@ -105,7 +88,7 @@ def main(args,dataset):
             print(f'Train recall: {train_reca:.3f} - Val recall: {val_reca:.3f} \n')
 
         # Early stopping and checkpoint
-        if mean_val_loss < best_val_loss:
+        if mean_val_loss < best_val_loss-0.0001:
             best_val_loss = mean_val_loss
             early_stopping_count = 0
             torch.save(model.state_dict(),'./best_params_tmp') 

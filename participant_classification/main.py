@@ -3,8 +3,12 @@
 import torch
 import argparse
 import numpy as np
+import torch.nn as nn
 from DEAPDataset import DEAPDataset
+from models.GNNModel import GNNModel
+from models.NoGNNModel import NoGNNModel
 from train import main as train_main
+from test import main as test_main
 from util import get_split_indices
 
 parser = argparse.ArgumentParser(description='Process eeg emotions. http://www.eecs.qmul.ac.uk/mmv/datasets/deap/')
@@ -35,6 +39,7 @@ parser.add_argument('-st', '--shuffle_train', default=False, action='store_true'
 parser.add_argument('-me', '--max_epoch', type=int, default=10000)
 
 # Test args
+parser.add_argument('-tmd', '--test_model_dict', type=str, default='best_params_tmp', help='Model to test')
 
 args = parser.parse_args()
 dataset = DEAPDataset(args)
@@ -44,12 +49,28 @@ train_mask,test_mask = get_split_indices(args.target,args.number_test_targets)
 train_dataset = dataset[train_mask]
 test_dataset = dataset[test_mask]
 
-print(f'Train dataset: {train_dataset} | Test dataset: {test_dataset}',)
+print(f'Train/Val dataset: {train_dataset} | Test dataset: {test_dataset}',)
 
 print(f'Device: {args.device}')
 
+in_channels = dataset[0].x.shape[1]
+n_graphs = dataset[0].x.shape[0]//32
+n_classes = np.unique(np.array([d.y for d in dataset])).shape[0]
+print(f'Number of classes: {n_classes}')
+
+if args.model == 'GNN':
+    model = GNNModel(in_channels,n_graphs,args.hidden_channels, n_classes).to(args.device) 
+
+elif args.model == 'NOGNN':
+    model = NoGNNModel(in_channels,n_graphs,args.hidden_channels, n_classes).to(args.device) 
+
+pytorch_total_params = sum(p.numel() for p in model.parameters())
+print(f'Model parameter count: {pytorch_total_params}')
+
+criterion = nn.CrossEntropyLoss()
+
 if not args.dont_train:
-    train_main(args,train_dataset)
+    train_main(model,train_dataset,criterion,args)
 
-
+test_main(model,test_dataset,criterion,args)
 
