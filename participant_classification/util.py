@@ -10,8 +10,11 @@ def get_split_indices(target, number_targets, dataset_len = 32*40):
             test_mask = np.concatenate([test_mask,test_video_indices])
         train_mask = np.delete(np.arange(0,dataset_len),test_mask)
     elif target == 'video_id':
-        train_mask = np.arange(0,number_targets*40)
-        test_mask = np.arange(number_targets*40,32*40-already_removed*32)
+        raise 'err, recheck implementation'
+        # train_mask = np.arange(0,number_targets*40)
+        # test_mask = np.arange(number_targets*40,32*40-already_removed*32)
     else:
-        raise 'Emotion classification not implemented'
+        # Subject-dependant emotion classification
+        test_mask = np.arange(0,number_targets)
+        train_mask = np.arange(number_targets, dataset_len)
     return list(train_mask), list(test_mask)

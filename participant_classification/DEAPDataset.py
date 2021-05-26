@@ -11,6 +11,9 @@ from signal_processing import remove_baseline_mean, process_video_wavelet, proce
 class DEAPDataset(InMemoryDataset):
   def __init__(self, args, participant_from=1, participant_to=32, n_videos=40):
       self.args = args
+      if args.participant is not None:
+        participant_from = args.participant
+        participant_to = args.participant
       self._raw_dir = args.raw_data_dir
       self._processed_dir = args.processed_data_dir
       self.feature = args.eeg_feature
@@ -93,8 +96,8 @@ class DEAPDataset(InMemoryDataset):
                     raise 'Invalid feature'
                 
                 if self.target == 'emotion_labels':
-                    target = [participant_data['labels'][video_index]]
-                if self.target == 'participant_id':
+                    target = participant_data['labels'][video_index]
+                elif self.target == 'participant_id':
                     target = participant_id-1
                 elif self.target == 'video_id':
                     target = video_index

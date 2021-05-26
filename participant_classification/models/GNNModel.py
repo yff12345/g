@@ -5,7 +5,7 @@ from torch_geometric.nn import GraphConv
 from einops import rearrange
 
 class GNNModel(torch.nn.Module):
-    def __init__(self, in_channels,n_graphs, hidden_channels, n_classes):
+    def __init__(self, in_channels,n_graphs, hidden_channels, n_classes, final_act = 'softmax'):
         super(GNNModel, self).__init__()
         
         self.in_channels = in_channels
@@ -19,7 +19,12 @@ class GNNModel(torch.nn.Module):
         self.lin1 = torch.nn.Linear(32*(hidden_channels//2 - (1 if hidden_channels%2 == 0 else 0)), hidden_channels)
         self.lin2 = torch.nn.Linear(hidden_channels, n_classes)
 
-        self.softmax = nn.Softmax(dim=-1)
+        if final_act == 'softmax':
+            self.act = nn.Softmax(dim=-1)
+        elif final_act =='sigmoid':
+            self.act = nn.Sigmoid()
+        else:
+            raise 'Error, not known activation'
 
         
     def forward(self, batch):
@@ -37,5 +42,5 @@ class GNNModel(torch.nn.Module):
         x = self.lin1(x)
         x = x.relu()
         x = self.lin2(x)
-        x = self.softmax(x)
+        x = self.act(x)
         return x

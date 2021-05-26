@@ -9,12 +9,14 @@ def test_epoch(model, loader ,criterion,args):
     losses, outputs, targets = [], [] , []
     for batch in loader:
         batch = batch.to(args.device)
+        y = batch.y if args.target != 'emotion_labels' else (batch.y[:,args.target_emotion] > 5).long()
         out = model(batch)
         outputs.append(out)
-        targets.append(batch.y)
-        loss = criterion(out,batch.y)
+        targets.append(y)
+        loss = criterion(out,y)
         losses.append(loss.item())
 
+    print(torch.cat(outputs))
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
 
 
