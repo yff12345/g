@@ -4,9 +4,9 @@ import torch.nn.functional as F
 from torch_geometric.nn import GraphConv
 from einops import rearrange
 
-class GNNModel(torch.nn.Module):
+class GraphConvModel(torch.nn.Module):
     def __init__(self, in_channels,n_graphs, hidden_channels, n_classes, final_act = 'softmax'):
-        super(GNNModel, self).__init__()
+        super(GraphConvModel, self).__init__()
         
         self.in_channels = in_channels
         self.hidden_channels = hidden_channels

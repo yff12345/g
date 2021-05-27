@@ -1,5 +1,5 @@
 import torch
-from sklearn.metrics import precision_score, recall_score, f1_score
+from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score
 
 # Inputs to all functions are tensors
 
@@ -18,3 +18,6 @@ def precision_metric(outputs, targets):
 def recall_metric(outputs, targets):
     pred = torch.argmax(outputs,-1)
     return recall_score(targets.cpu().numpy(), pred.cpu().numpy(), average='micro')
+
+def roc_metric(outputs, targets):
+    return roc_auc_score(targets.cpu().numpy(), outputs.detach().cpu().numpy(), multi_class='ovo')

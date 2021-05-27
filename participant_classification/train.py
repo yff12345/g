@@ -51,7 +51,7 @@ def main(model,dataset,criterion, args):
     start_time = time.time()
 
     best_val_loss = np.inf
-    early_stopping_count = 0
+    early_stopping_count, best_epoch = 0, 0
     print('Training...')
     for epoch in range(1,args.max_epoch+1):
         # Train epoch
@@ -91,6 +91,7 @@ def main(model,dataset,criterion, args):
 
         # Early stopping and checkpoint
         if mean_val_loss < best_val_loss-0.0001:
+            best_epoch = epoch
             best_val_loss = mean_val_loss
             early_stopping_count = 0
             torch.save(model.state_dict(),'./best_params_tmp') 
@@ -107,5 +108,5 @@ def main(model,dataset,criterion, args):
     train_time = end_time-start_time
 
     print(f'Training time (s): { train_time:.2f}')
-    print(f'Total epochs: { epoch }')
+    print(f'Total epochs: { epoch } ; Model picked from epoch {best_epoch}')
     print(f'Average time per epoch: {(train_time / epoch):.2f}')

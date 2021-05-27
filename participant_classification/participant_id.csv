@@ -1,0 +1,2 @@
+model,eeg_feature,remove_global_connections,remove_baseline_signal_noise_removal,number_test_targets,number_validation_targets,batch_size,hidden_channels,learning_rate,mean_test_loss,test_acc,test_f1,test_prec,test_reca,test_roc,pytorch_total_params
+GatedGNN,wav,False,False,10,5,16,64,0.0005,2.518093001842499,1.0,1.0,1.0,1.0,1.0,94701
