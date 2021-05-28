@@ -16,7 +16,7 @@ def remove_baseline_mean(signal_data):
     return signal_data[:,:,128*3:] - signal_noise
 
 
-def process_video(video, feature='psd'):
+def process_video(video, feature='psd', window_step = 128):
     # Transform to frequency domain
     fft_vals = np.fft.rfft(video, axis=-1)
      # Get frequencies for amplitudes in Hz
@@ -34,7 +34,7 @@ def process_video(video, feature='psd'):
     
     band_data = np.fft.irfft(band_data)
 
-    windows = skimage.util.view_as_windows(band_data, (5,32,128), step=128).squeeze()
+    windows = skimage.util.view_as_windows(band_data, (5,32,128), step=window_step).squeeze()
     # (5, 32, 60, 128)
     windows = rearrange(windows, 'a b c d -> b c a d')
     

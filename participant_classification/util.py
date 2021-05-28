@@ -10,9 +10,9 @@ def get_split_indices(target, number_targets, dataset_len = 32*40, kfold_validat
             test_mask = np.concatenate([test_mask,test_video_indices])
         train_mask = np.delete(np.arange(0,dataset_len),test_mask)
     elif target == 'video_id':
-        raise 'err, recheck implementation'
-        # train_mask = np.arange(0,number_targets*40)
-        # test_mask = np.arange(number_targets*40,32*40-already_removed*32)
+        test_mask = np.arange(kfold_validation_offset*40, kfold_validation_offset*40 + number_targets*40)
+        test_mask = np.array([t if t < dataset_len else t-dataset_len for t in test_mask])
+        train_mask = np.delete(np.arange(0,dataset_len),test_mask)
     else:
         # Subject-dependant emotion classification
         test_mask = np.arange(kfold_validation_offset,kfold_validation_offset + number_targets)

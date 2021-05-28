@@ -48,7 +48,7 @@ parser.add_argument('-wtr', '--write_test_results', default=False, action='store
 
 args = parser.parse_args()
 dataset = DEAPDataset(args)
-dataset = dataset.shuffle()
+# dataset = dataset.shuffle()
 
 train_mask,test_mask = get_split_indices(args.target,args.number_test_targets, len(dataset), args.kfold_validation_offset )
 

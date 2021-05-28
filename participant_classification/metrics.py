@@ -20,4 +20,6 @@ def recall_metric(outputs, targets):
     return recall_score(targets.cpu().numpy(), pred.cpu().numpy(), average='micro')
 
 def roc_metric(outputs, targets):
+    print(outputs.shape, targets.shape)
+    # print(torch.unique(targets))
     return roc_auc_score(targets.cpu().numpy(), outputs.detach().cpu().numpy(), multi_class='ovo')
