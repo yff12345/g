@@ -6,8 +6,8 @@ import subprocess
 
 models = ['MLP','CNN','GRU']
 eeg_features = ['wav','psd']
-remove_global_connections = [False,True]
-remove_baseline_signal_noise_removal = [False,True]
+# remove_global_connections = [False,True]
+# remove_baseline_signal_noise_removal = [False,True]
 number_test_targets = [10, 30, 34]
 batch_sizes = [4, 16]
 hidden_channels = [16, 64 ,128]
