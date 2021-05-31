@@ -94,7 +94,7 @@ def main(model,dataset,criterion, args):
             best_epoch = epoch
             best_val_loss = mean_val_loss
             early_stopping_count = 0
-            torch.save(model.state_dict(),'./best_params_tmp') 
+            torch.save(model.state_dict(),f'./{args.test_model_dict}') 
         else:
             early_stopping_count += 1
             if early_stopping_count >= args.early_stopping_patience:

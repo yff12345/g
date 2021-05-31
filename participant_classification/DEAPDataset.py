@@ -88,7 +88,7 @@ class DEAPDataset(InMemoryDataset):
             for video_index, video in enumerate(signal_data[:self.n_videos,:,:]):
                 if self.feature == 'wav':
                     node_features = process_video_wavelet(video)
-                elif self.feature =='wav-entropy':
+                elif self.feature =='wav_entropy':
                     node_features = process_video_wavelet(video, feature='entropy')
                 elif self.feature =='psd':
                     node_features = process_video(video, feature=self.feature)
