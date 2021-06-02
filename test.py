@@ -3,50 +3,73 @@
 import torch
 import numpy as np
 import torch.nn.functional as F
-from GNNModel import GNN
-from DEAPDataset import DEAPDataset, train_val_test_split
+from models.GNNLSTM import GNNLSTM
+from models.STGCN.STGCN import STGCN
+from DEAPDataset import DEAPDataset
 from torch_geometric.data import DataLoader
-import itertools
-
+from util import f1_loss
 np.set_printoptions(precision=2)
 
-ROOT_DIR = './'
-RAW_DIR = 'data/matlabPREPROCESSED'
-PROCESSED_DIR = 'data/graphProcessedData'
+def test(args, test_data_in, device):
+  targets = ['valence','arousal','dominance','liking']
+  if args.single_target:
+    targets = [targets[args.n_targets-1]]
+  else:
+    targets = targets[:args.n_targets]
+    
 
-dataset = DEAPDataset(root= ROOT_DIR, raw_dir= RAW_DIR, processed_dir=PROCESSED_DIR, participant_from=1, participant_to=1)
+  test_loader = DataLoader(test_data_in, batch_size=args.batch_size)
 
-_, _, test_set = train_val_test_split(dataset)
+  target_index = {'valence':0,'arousal':1,'dominance':2,'liking':3}
+  models = [GNNLSTM().to(device).eval() for target in targets]
 
-test_loader = DataLoader(test_set, batch_size=32)
+  # Load best performing params on validation
+  for i,target in enumerate(targets):
+    index = target_index[target]
+    models[i].load_state_dict(torch.load(f'./best_params_{index}'))
 
-in_channels = test_set[0].num_node_features
+  metrics = {
+      "mse":[],
+      "l1":[],
+      "acc":[],
+      # "f1s":{
+      #   "val":[],
+      #   "aro":[],
+      #   "dom":[],
+      #   "lik":[],
+      # }
+      "f1":[]
+    }
+  for batch in test_loader:
+    batch = batch.to(device)
+    predictions = [model(batch,args) for model in models]
+    predictions = torch.stack(predictions,dim=1).view(-1,len(targets))
+    # target = batch.y.narrow(1,0,len(targets)).view(-1)
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f'Device: {device}')
+    if args.single_target:
+      target = batch.y[:,args.n_targets-1].view(-1,1)
+    else:
+      target = batch.y.narrow(1,0,len(targets)).view(-1,len(targets))
 
-# Instantiate models
-targets = ['valence','arousal','dominance','liking']
-models = [GNN(in_channels,hidden_channels=64, target=target).to(device).eval() for target in targets]
+    for p, t in zip(predictions.T,target.T):
+       metrics["f1"].append(f1_loss(p,t).item())
 
-# Load best performing params on validation
-for i in range(4):
-  models[i].load_state_dict(torch.load(f'./best_params_{i}'))
+    print(f'Predictions:\n {predictions.cpu().detach().numpy()}')
+    print(f'Target (gt):\n {target.cpu().detach().numpy()}')
+    
+    mse = F.mse_loss(predictions,target).item()
+    l1 = F.l1_loss(predictions,target).item()
+    right = (target > 5) == (predictions > 5) if args.regression_labels else (target > 0.5) == (predictions > 0.5)
+    acc = (right.sum().item()/(target.shape[0]*target.shape[1]))
+    metrics["mse"].append(mse)
+    metrics["l1"].append(l1)
+    metrics["acc"].append(acc)
+    print(f'Mean squared error: {mse}')
+    print(f'Mean average error: {l1}')
+    print(f'Accuracy: {acc*100}%')
 
-mses = []
-for batch in test_loader:
-  batch = batch.to(device)
-  predictions = [model(batch.x.float(),batch.edge_index,batch.batch,batch.edge_attr.float()) for model in models]
-  predictions = torch.stack(predictions,dim=1).squeeze()
-  print('-Predictions-')
-  print(predictions.cpu().detach().numpy(),'\n')
-  print('-Ground truth-')
-  print(batch.y.cpu().detach().numpy(),'\n')
-
-  mse = F.mse_loss(predictions,batch.y).item()
-  mses.append(mse)
-  print(f'Mean average error: {F.l1_loss(predictions,batch.y).item()}')
-  print(f'Mean squared error: {mse}')
-
-print('----------------')
-print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(mses).mean()}')
+  print('----------------')
+  print(f'MEAN SQUARED ERROR FOR TEST SET: {np.array(metrics["mse"]).mean()}')
+  print(f'MEAN AVERAGE ERROR FOR TEST SET: {np.array(metrics["l1"]).mean()}')
+  print(f'MEAN ACCURACY: {np.array(metrics["acc"]).mean()*100}%')
+  print(f'MEAN F1 SCORE: {np.array(metrics["f1"]).mean()}')

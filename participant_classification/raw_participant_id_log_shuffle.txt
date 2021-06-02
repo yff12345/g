@@ -1,0 +1,1202 @@
+torch) ➜  participant_classification git:(main) ./run_experiments.py                     
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 29.76\nTotal epochs: 35 ; Model picked from epoch 5\nAverage time per epoch: 0.85\n\n--Testing--\nTest loss: 3.13903\nTest acc: 0.378  \nTest F1: 0.378 \nTest precision: 0.378\nTest recall: 0.378\nTest ROC auc: 0.835 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 69.45\nTotal epochs: 83 ; Model picked from epoch 53\nAverage time per epoch: 0.84\n\n--Testing--\nTest loss: 2.59545\nTest acc: 0.922  \nTest F1: 0.922 \nTest precision: 0.922\nTest recall: 0.922\nTest ROC auc: 0.986 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 246.35\nTotal epochs: 299 ; Model picked from epoch 269\nAverage time per epoch: 0.82\n\n--Testing--\nTest loss: 2.57074\nTest acc: 0.947  \nTest F1: 0.947 \nTest precision: 0.947\nTest recall: 0.947\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 32.89\nTotal epochs: 39 ; Model picked from epoch 9\nAverage time per epoch: 0.84\n\n--Testing--\nTest loss: 3.29861\nTest acc: 0.219  \nTest F1: 0.219 \nTest precision: 0.219\nTest recall: 0.219\nTest ROC auc: 0.705 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 91.31\nTotal epochs: 104 ; Model picked from epoch 74\nAverage time per epoch: 0.88\n\n--Testing--\nTest loss: 2.52104\nTest acc: 0.997  \nTest F1: 0.997 \nTest precision: 0.997\nTest recall: 0.997\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 115.22\nTotal epochs: 130 ; Model picked from epoch 100\nAverage time per epoch: 0.89\n\n--Testing--\nTest loss: 2.51933\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 27.68\nTotal epochs: 32 ; Model picked from epoch 2\nAverage time per epoch: 0.87\n\n--Testing--\nTest loss: 3.49929\nTest acc: 0.019  \nTest F1: 0.019 \nTest precision: 0.019\nTest recall: 0.019\nTest ROC auc: 0.499 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 39.23\nTotal epochs: 45 ; Model picked from epoch 15\nAverage time per epoch: 0.87\n\n--Testing--\nTest loss: 2.52118\nTest acc: 0.997  \nTest F1: 0.997 \nTest precision: 0.997\nTest recall: 0.997\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 56.19\nTotal epochs: 64 ; Model picked from epoch 34\nAverage time per epoch: 0.88\n\n--Testing--\nTest loss: 2.51813\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 22.68\nTotal epochs: 41 ; Model picked from epoch 11\nAverage time per epoch: 0.55\n\n--Testing--\nTest loss: 3.07314\nTest acc: 0.445  \nTest F1: 0.445 \nTest precision: 0.445\nTest recall: 0.445\nTest ROC auc: 0.883 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 64.34\nTotal epochs: 115 ; Model picked from epoch 85\nAverage time per epoch: 0.56\n\n--Testing--\nTest loss: 2.52016\nTest acc: 0.998  \nTest F1: 0.998 \nTest precision: 0.998\nTest recall: 0.998\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 213.98\nTotal epochs: 407 ; Model picked from epoch 377\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 2.57711\nTest acc: 0.941  \nTest F1: 0.941 \nTest precision: 0.941\nTest recall: 0.941\nTest ROC auc: 0.997 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 28.72\nTotal epochs: 56 ; Model picked from epoch 26\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 3.42799\nTest acc: 0.089  \nTest F1: 0.089 \nTest precision: 0.089\nTest recall: 0.089\nTest ROC auc: 0.571 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 58.53\nTotal epochs: 114 ; Model picked from epoch 84\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 2.55802\nTest acc: 0.959  \nTest F1: 0.959 \nTest precision: 0.959\nTest recall: 0.959\nTest ROC auc: 0.999 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 149.83\nTotal epochs: 293 ; Model picked from epoch 263\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 2.55861\nTest acc: 0.959  \nTest F1: 0.959 \nTest precision: 0.959\nTest recall: 0.959\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 15.58\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.50\n\n--Testing--\nTest loss: 3.46954\nTest acc: 0.048  \nTest F1: 0.048 \nTest precision: 0.048\nTest recall: 0.048\nTest ROC auc: 0.515 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 47.04\nTotal epochs: 93 ; Model picked from epoch 63\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 2.51839\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 38.11\nTotal epochs: 75 ; Model picked from epoch 45\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 2.51973\nTest acc: 0.998  \nTest F1: 0.998 \nTest precision: 0.998\nTest recall: 0.998\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 10.48\nTotal epochs: 49 ; Model picked from epoch 19\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.26521\nTest acc: 0.251  \nTest F1: 0.251 \nTest precision: 0.251\nTest recall: 0.251\nTest ROC auc: 0.732 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 50.05\nTotal epochs: 238 ; Model picked from epoch 208\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 2.68825\nTest acc: 0.832  \nTest F1: 0.832 \nTest precision: 0.832\nTest recall: 0.832\nTest ROC auc: 0.963 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 115.67\nTotal epochs: 541 ; Model picked from epoch 511\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 2.81139\nTest acc: 0.705  \nTest F1: 0.705 \nTest precision: 0.705\nTest recall: 0.705\nTest ROC auc: 0.957 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 8.72\nTotal epochs: 41 ; Model picked from epoch 11\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.28705\nTest acc: 0.227  \nTest F1: 0.227 \nTest precision: 0.227\nTest recall: 0.227\nTest ROC auc: 0.718 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 59.97\nTotal epochs: 285 ; Model picked from epoch 255\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 2.61502\nTest acc: 0.902  \nTest F1: 0.902 \nTest precision: 0.902\nTest recall: 0.902\nTest ROC auc: 0.993 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 90.53\nTotal epochs: 426 ; Model picked from epoch 396\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 2.65155\nTest acc: 0.865  \nTest F1: 0.865 \nTest precision: 0.865\nTest recall: 0.865\nTest ROC auc: 0.991 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 6.76\nTotal epochs: 32 ; Model picked from epoch 2\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.42388\nTest acc: 0.095  \nTest F1: 0.095 \nTest precision: 0.095\nTest recall: 0.095\nTest ROC auc: 0.545 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 25.07\nTotal epochs: 117 ; Model picked from epoch 87\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 2.55234\nTest acc: 0.965  \nTest F1: 0.965 \nTest precision: 0.965\nTest recall: 0.965\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 45.79\nTotal epochs: 213 ; Model picked from epoch 183\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 2.52047\nTest acc: 0.998  \nTest F1: 0.998 \nTest precision: 0.998\nTest recall: 0.998\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 12.30\nTotal epochs: 131 ; Model picked from epoch 101\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.09400\nTest acc: 0.425  \nTest F1: 0.425 \nTest precision: 0.425\nTest recall: 0.425\nTest ROC auc: 0.816 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 15.98\nTotal epochs: 170 ; Model picked from epoch 140\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.03708\nTest acc: 0.491  \nTest F1: 0.491 \nTest precision: 0.491\nTest recall: 0.491\nTest ROC auc: 0.838 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9005\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 122.94\nTotal epochs: 1305 ; Model picked from epoch 1275\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.06061\nTest acc: 0.457  \nTest F1: 0.457 \nTest precision: 0.457\nTest recall: 0.457\nTest ROC auc: 0.819 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 11.63\nTotal epochs: 125 ; Model picked from epoch 95\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.20527\nTest acc: 0.312  \nTest F1: 0.312 \nTest precision: 0.312\nTest recall: 0.312\nTest ROC auc: 0.762 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 10.60\nTotal epochs: 113 ; Model picked from epoch 83\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.04770\nTest acc: 0.466  \nTest F1: 0.466 \nTest precision: 0.466\nTest recall: 0.466\nTest ROC auc: 0.817 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28205\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 52.85\nTotal epochs: 559 ; Model picked from epoch 529\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 2.99476\nTest acc: 0.522  \nTest F1: 0.522 \nTest precision: 0.522\nTest recall: 0.522\nTest ROC auc: 0.862 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 3.20\nTotal epochs: 34 ; Model picked from epoch 4\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.37775\nTest acc: 0.147  \nTest F1: 0.147 \nTest precision: 0.147\nTest recall: 0.147\nTest ROC auc: 0.623 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 24.54\nTotal epochs: 258 ; Model picked from epoch 228\nAverage time per epoch: 0.10\n\n--Testing--\nTest loss: 2.85461\nTest acc: 0.662  \nTest F1: 0.662 \nTest precision: 0.662\nTest recall: 0.662\nTest ROC auc: 0.947 \n\n'
+Running: python3 main.py -m GraphConv -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358445\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 29.49\nTotal epochs: 310 ; Model picked from epoch 280\nAverage time per epoch: 0.10\n\n--Testing--\nTest loss: 2.93658\nTest acc: 0.578  \nTest F1: 0.578 \nTest precision: 0.578\nTest recall: 0.578\nTest ROC auc: 0.885 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+s32.mat: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 32/32 [01:04<00:00,  2.03s/it]
+b'Processing...\nNumber of graphs (freq. bands) per video: 5\nDone!\nTrain/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 28.11\nTotal epochs: 35 ; Model picked from epoch 5\nAverage time per epoch: 0.80\n\n--Testing--\nTest loss: 3.49304\nTest acc: 0.025  \nTest F1: 0.025 \nTest precision: 0.025\nTest recall: 0.025\nTest ROC auc: 0.521 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 89.00\nTotal epochs: 111 ; Model picked from epoch 81\nAverage time per epoch: 0.80\n\n--Testing--\nTest loss: 2.93055\nTest acc: 0.597  \nTest F1: 0.597 \nTest precision: 0.597\nTest recall: 0.597\nTest ROC auc: 0.919 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 291.92\nTotal epochs: 364 ; Model picked from epoch 334\nAverage time per epoch: 0.80\n\n--Testing--\nTest loss: 2.94362\nTest acc: 0.572  \nTest F1: 0.572 \nTest precision: 0.572\nTest recall: 0.572\nTest ROC auc: 0.901 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 53.83\nTotal epochs: 67 ; Model picked from epoch 37\nAverage time per epoch: 0.80\n\n--Testing--\nTest loss: 3.34953\nTest acc: 0.163  \nTest F1: 0.163 \nTest precision: 0.163\nTest recall: 0.163\nTest ROC auc: 0.632 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 89.68\nTotal epochs: 111 ; Model picked from epoch 81\nAverage time per epoch: 0.81\n\n--Testing--\nTest loss: 3.02371\nTest acc: 0.494  \nTest F1: 0.494 \nTest precision: 0.494\nTest recall: 0.494\nTest ROC auc: 0.874 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 219.82\nTotal epochs: 274 ; Model picked from epoch 244\nAverage time per epoch: 0.80\n\n--Testing--\nTest loss: 3.00994\nTest acc: 0.503  \nTest F1: 0.503 \nTest precision: 0.503\nTest recall: 0.503\nTest ROC auc: 0.904 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 25.51\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.82\n\n--Testing--\nTest loss: 3.49929\nTest acc: 0.019  \nTest F1: 0.019 \nTest precision: 0.019\nTest recall: 0.019\nTest ROC auc: 0.492 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 143.26\nTotal epochs: 177 ; Model picked from epoch 147\nAverage time per epoch: 0.81\n\n--Testing--\nTest loss: 2.90543\nTest acc: 0.613  \nTest F1: 0.613 \nTest precision: 0.613\nTest recall: 0.613\nTest ROC auc: 0.907 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 275.03\nTotal epochs: 339 ; Model picked from epoch 309\nAverage time per epoch: 0.81\n\n--Testing--\nTest loss: 2.71861\nTest acc: 0.800  \nTest F1: 0.800 \nTest precision: 0.800\nTest recall: 0.800\nTest ROC auc: 0.981 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 35.01\nTotal epochs: 69 ; Model picked from epoch 39\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 3.35305\nTest acc: 0.164  \nTest F1: 0.164 \nTest precision: 0.164\nTest recall: 0.164\nTest ROC auc: 0.648 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 95.01\nTotal epochs: 187 ; Model picked from epoch 157\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 3.08060\nTest acc: 0.438  \nTest F1: 0.438 \nTest precision: 0.438\nTest recall: 0.438\nTest ROC auc: 0.870 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 15.72\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 3.46653\nTest acc: 0.030  \nTest F1: 0.030 \nTest precision: 0.030\nTest recall: 0.030\nTest ROC auc: 0.466 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 15.78\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 3.46245\nTest acc: 0.033  \nTest F1: 0.033 \nTest precision: 0.033\nTest recall: 0.033\nTest ROC auc: 0.567 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 87.98\nTotal epochs: 172 ; Model picked from epoch 142\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 2.68156\nTest acc: 0.839  \nTest F1: 0.839 \nTest precision: 0.839\nTest recall: 0.839\nTest ROC auc: 0.980 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 78.66\nTotal epochs: 154 ; Model picked from epoch 124\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 3.30309\nTest acc: 0.228  \nTest F1: 0.228 \nTest precision: 0.228\nTest recall: 0.228\nTest ROC auc: 0.739 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 16.35\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 3.49304\nTest acc: 0.025  \nTest F1: 0.025 \nTest precision: 0.025\nTest recall: 0.025\nTest ROC auc: 0.506 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 67.61\nTotal epochs: 133 ; Model picked from epoch 103\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 2.78057\nTest acc: 0.739  \nTest F1: 0.739 \nTest precision: 0.739\nTest recall: 0.739\nTest ROC auc: 0.954 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 130.88\nTotal epochs: 258 ; Model picked from epoch 228\nAverage time per epoch: 0.51\n\n--Testing--\nTest loss: 2.69725\nTest acc: 0.822  \nTest F1: 0.822 \nTest precision: 0.822\nTest recall: 0.822\nTest ROC auc: 0.979 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 9.94\nTotal epochs: 47 ; Model picked from epoch 17\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.41130\nTest acc: 0.103  \nTest F1: 0.103 \nTest precision: 0.103\nTest recall: 0.103\nTest ROC auc: 0.612 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 41.34\nTotal epochs: 194 ; Model picked from epoch 164\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.17867\nTest acc: 0.341  \nTest F1: 0.341 \nTest precision: 0.341\nTest recall: 0.341\nTest ROC auc: 0.820 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 24.92\nTotal epochs: 116 ; Model picked from epoch 86\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.44769\nTest acc: 0.067  \nTest F1: 0.067 \nTest precision: 0.067\nTest recall: 0.067\nTest ROC auc: 0.575 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 7.07\nTotal epochs: 33 ; Model picked from epoch 3\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.46393\nTest acc: 0.053  \nTest F1: 0.053 \nTest precision: 0.053\nTest recall: 0.053\nTest ROC auc: 0.530 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 32.81\nTotal epochs: 151 ; Model picked from epoch 121\nAverage time per epoch: 0.22\n\n--Testing--\nTest loss: 3.02785\nTest acc: 0.489  \nTest F1: 0.489 \nTest precision: 0.489\nTest recall: 0.489\nTest ROC auc: 0.845 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 102.06\nTotal epochs: 466 ; Model picked from epoch 436\nAverage time per epoch: 0.22\n\n--Testing--\nTest loss: 3.15102\nTest acc: 0.376  \nTest F1: 0.376 \nTest precision: 0.376\nTest recall: 0.376\nTest ROC auc: 0.837 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 6.91\nTotal epochs: 32 ; Model picked from epoch 2\nAverage time per epoch: 0.22\n\n--Testing--\nTest loss: 3.49095\nTest acc: 0.027  \nTest F1: 0.027 \nTest precision: 0.027\nTest recall: 0.027\nTest ROC auc: 0.523 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 22.28\nTotal epochs: 102 ; Model picked from epoch 72\nAverage time per epoch: 0.22\n\n--Testing--\nTest loss: 3.21270\nTest acc: 0.304  \nTest F1: 0.304 \nTest precision: 0.304\nTest recall: 0.304\nTest ROC auc: 0.769 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 69.04\nTotal epochs: 310 ; Model picked from epoch 280\nAverage time per epoch: 0.22\n\n--Testing--\nTest loss: 2.77482\nTest acc: 0.764  \nTest F1: 0.764 \nTest precision: 0.764\nTest recall: 0.764\nTest ROC auc: 0.961 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 3.23\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.10\n\n--Testing--\nTest loss: 3.47549\nTest acc: 0.029  \nTest F1: 0.029 \nTest precision: 0.029\nTest recall: 0.029\nTest ROC auc: 0.521 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 3.12\nTotal epochs: 33 ; Model picked from epoch 3\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.46572\nTest acc: 0.017  \nTest F1: 0.017 \nTest precision: 0.017\nTest recall: 0.017\nTest ROC auc: 0.517 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 9072\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 13.45\nTotal epochs: 135 ; Model picked from epoch 105\nAverage time per epoch: 0.10\n\n--Testing--\nTest loss: 3.46298\nTest acc: 0.030  \nTest F1: 0.030 \nTest precision: 0.030\nTest recall: 0.030\nTest ROC auc: 0.543 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 3.32\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.11\n\n--Testing--\nTest loss: 3.47420\nTest acc: 0.025  \nTest F1: 0.025 \nTest precision: 0.025\nTest recall: 0.025\nTest ROC auc: 0.517 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 19.29\nTotal epochs: 179 ; Model picked from epoch 149\nAverage time per epoch: 0.11\n\n--Testing--\nTest loss: 3.27597\nTest acc: 0.243  \nTest F1: 0.243 \nTest precision: 0.243\nTest recall: 0.243\nTest ROC auc: 0.713 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 28336\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 28.29\nTotal epochs: 265 ; Model picked from epoch 235\nAverage time per epoch: 0.11\n\n--Testing--\nTest loss: 3.42824\nTest acc: 0.080  \nTest F1: 0.080 \nTest precision: 0.080\nTest recall: 0.080\nTest ROC auc: 0.585 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 3.72\nTotal epochs: 33 ; Model picked from epoch 3\nAverage time per epoch: 0.11\n\n--Testing--\nTest loss: 3.48582\nTest acc: 0.032  \nTest F1: 0.032 \nTest precision: 0.032\nTest recall: 0.032\nTest ROC auc: 0.477 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 13.07\nTotal epochs: 124 ; Model picked from epoch 94\nAverage time per epoch: 0.11\n\n--Testing--\nTest loss: 3.27705\nTest acc: 0.238  \nTest F1: 0.238 \nTest precision: 0.238\nTest recall: 0.238\nTest ROC auc: 0.717 \n\n'
+Running: python3 main.py -m GraphConv -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 358960\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 21.72\nTotal epochs: 200 ; Model picked from epoch 170\nAverage time per epoch: 0.11\n\n--Testing--\nTest loss: 3.37395\nTest acc: 0.147  \nTest F1: 0.147 \nTest precision: 0.147\nTest recall: 0.147\nTest ROC auc: 0.636 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 30.26\nTotal epochs: 36 ; Model picked from epoch 6\nAverage time per epoch: 0.84\n\n--Testing--\nTest loss: 2.76179\nTest acc: 0.756  \nTest F1: 0.756 \nTest precision: 0.756\nTest recall: 0.756\nTest ROC auc: 0.886 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 32.78\nTotal epochs: 40 ; Model picked from epoch 10\nAverage time per epoch: 0.82\n\n--Testing--\nTest loss: 2.51807\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 52.51\nTotal epochs: 62 ; Model picked from epoch 32\nAverage time per epoch: 0.85\n\n--Testing--\nTest loss: 2.51811\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 16.70\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.54\n\n--Testing--\nTest loss: 3.49772\nTest acc: 0.020  \nTest F1: 0.020 \nTest precision: 0.020\nTest recall: 0.020\nTest ROC auc: 0.540 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 26.29\nTotal epochs: 49 ; Model picked from epoch 19\nAverage time per epoch: 0.54\n\n--Testing--\nTest loss: 2.51961\nTest acc: 0.998  \nTest F1: 0.998 \nTest precision: 0.998\nTest recall: 0.998\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 41.69\nTotal epochs: 78 ; Model picked from epoch 48\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 2.55979\nTest acc: 0.958  \nTest F1: 0.958 \nTest precision: 0.958\nTest recall: 0.958\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 6.91\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.22\n\n--Testing--\nTest loss: 3.48985\nTest acc: 0.028  \nTest F1: 0.028 \nTest precision: 0.028\nTest recall: 0.028\nTest ROC auc: 0.529 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 10.61\nTotal epochs: 47 ; Model picked from epoch 17\nAverage time per epoch: 0.23\n\n--Testing--\nTest loss: 2.55197\nTest acc: 0.967  \nTest F1: 0.967 \nTest precision: 0.967\nTest recall: 0.967\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 37.74\nTotal epochs: 166 ; Model picked from epoch 136\nAverage time per epoch: 0.23\n\n--Testing--\nTest loss: 2.64921\nTest acc: 0.868  \nTest F1: 0.868 \nTest precision: 0.868\nTest recall: 0.868\nTest ROC auc: 0.997 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6045\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23821\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 4.41\nTotal epochs: 43 ; Model picked from epoch 13\nAverage time per epoch: 0.10\n\n--Testing--\nTest loss: 3.03134\nTest acc: 0.484  \nTest F1: 0.484 \nTest precision: 0.484\nTest recall: 0.484\nTest ROC auc: 0.844 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 18.29\nTotal epochs: 183 ; Model picked from epoch 153\nAverage time per epoch: 0.10\n\n--Testing--\nTest loss: 2.93827\nTest acc: 0.581  \nTest F1: 0.581 \nTest precision: 0.581\nTest recall: 0.581\nTest ROC auc: 0.916 \n\n'
+Running: python3 main.py -m GatedGNN -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377773\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 43.10\nTotal epochs: 432 ; Model picked from epoch 402\nAverage time per epoch: 0.10\n\n--Testing--\nTest loss: 2.87137\nTest acc: 0.646  \nTest F1: 0.646 \nTest precision: 0.646\nTest recall: 0.646\nTest ROC auc: 0.935 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 26.39\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.85\n\n--Testing--\nTest loss: 3.46586\nTest acc: 0.019  \nTest F1: 0.019 \nTest precision: 0.019\nTest recall: 0.019\nTest ROC auc: 0.658 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 29.33\nTotal epochs: 34 ; Model picked from epoch 4\nAverage time per epoch: 0.86\n\n--Testing--\nTest loss: 3.48679\nTest acc: 0.031  \nTest F1: 0.031 \nTest precision: 0.031\nTest recall: 0.031\nTest ROC auc: 0.504 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 58.49\nTotal epochs: 69 ; Model picked from epoch 39\nAverage time per epoch: 0.85\n\n--Testing--\nTest loss: 3.16162\nTest acc: 0.356  \nTest F1: 0.356 \nTest precision: 0.356\nTest recall: 0.356\nTest ROC auc: 0.638 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 15.59\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.50\n\n--Testing--\nTest loss: 3.48367\nTest acc: 0.034  \nTest F1: 0.034 \nTest precision: 0.034\nTest recall: 0.034\nTest ROC auc: 0.500 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 19.44\nTotal epochs: 36 ; Model picked from epoch 6\nAverage time per epoch: 0.54\n\n--Testing--\nTest loss: 3.43118\nTest acc: 0.086  \nTest F1: 0.086 \nTest precision: 0.086\nTest recall: 0.086\nTest ROC auc: 0.519 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 118.27\nTotal epochs: 218 ; Model picked from epoch 188\nAverage time per epoch: 0.54\n\n--Testing--\nTest loss: 3.10475\nTest acc: 0.412  \nTest F1: 0.412 \nTest precision: 0.412\nTest recall: 0.412\nTest ROC auc: 0.689 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 7.30\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.24\n\n--Testing--\nTest loss: 3.48679\nTest acc: 0.031  \nTest F1: 0.031 \nTest precision: 0.031\nTest recall: 0.031\nTest ROC auc: 0.504 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 11.41\nTotal epochs: 55 ; Model picked from epoch 25\nAverage time per epoch: 0.21\n\n--Testing--\nTest loss: 3.48469\nTest acc: 0.033  \nTest F1: 0.033 \nTest precision: 0.033\nTest recall: 0.033\nTest ROC auc: 0.503 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 45.27\nTotal epochs: 206 ; Model picked from epoch 176\nAverage time per epoch: 0.22\n\n--Testing--\nTest loss: 3.25516\nTest acc: 0.273  \nTest F1: 0.273 \nTest precision: 0.273\nTest recall: 0.273\nTest ROC auc: 0.587 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 6048\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+Traceback (most recent call last):
+  File "main.py", line 88, in <module>
+    train_main(model,train_dataset,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 58, in main
+    mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/train.py", line 18, in train_epoch
+    out = model(batch)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/Carlos/gnn-deap-eeg/participant_classification/models/GatedGNNModel.py", line 36, in forward
+    x = self.gconv2(x, edge_index, edge_attr)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/carlos/anaconda3/envs/torch/lib/python3.8/site-packages/torch_geometric/nn/conv/gated_graph_conv.py", line 62, in forward
+    raise ValueError('The number of input channels is not allowed to '
+ValueError: The number of input channels is not allowed to be larger than the number of output channels
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 23824\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.83\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.48495\nTest acc: 0.033  \nTest F1: 0.033 \nTest precision: 0.033\nTest recall: 0.033\nTest ROC auc: 0.500 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.89\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.48433\nTest acc: 0.032  \nTest F1: 0.032 \nTest precision: 0.032\nTest recall: 0.032\nTest ROC auc: 0.510 \n\n'
+Running: python3 main.py -m GatedGNN -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 377776\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 8.86\nTotal epochs: 95 ; Model picked from epoch 65\nAverage time per epoch: 0.09\n\n--Testing--\nTest loss: 3.44634\nTest acc: 0.075  \nTest F1: 0.075 \nTest precision: 0.075\nTest recall: 0.075\nTest ROC auc: 0.555 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 18.29\nTotal epochs: 33 ; Model picked from epoch 3\nAverage time per epoch: 0.55\n\n--Testing--\nTest loss: 2.68986\nTest acc: 0.828  \nTest F1: 0.828 \nTest precision: 0.828\nTest recall: 0.828\nTest ROC auc: 0.977 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 44.07\nTotal epochs: 81 ; Model picked from epoch 51\nAverage time per epoch: 0.54\n\n--Testing--\nTest loss: 2.51857\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 87.43\nTotal epochs: 164 ; Model picked from epoch 134\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 2.67677\nTest acc: 0.841  \nTest F1: 0.841 \nTest precision: 0.841\nTest recall: 0.841\nTest ROC auc: 0.991 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 17.96\nTotal epochs: 34 ; Model picked from epoch 4\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 2.85776\nTest acc: 0.659  \nTest F1: 0.659 \nTest precision: 0.659\nTest recall: 0.659\nTest ROC auc: 0.949 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 31.48\nTotal epochs: 59 ; Model picked from epoch 29\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 2.58897\nTest acc: 0.928  \nTest F1: 0.928 \nTest precision: 0.928\nTest recall: 0.928\nTest ROC auc: 0.999 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 75.42\nTotal epochs: 139 ; Model picked from epoch 109\nAverage time per epoch: 0.54\n\n--Testing--\nTest loss: 2.52217\nTest acc: 0.997  \nTest F1: 0.997 \nTest precision: 0.997\nTest recall: 0.997\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 17.87\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.58\n\n--Testing--\nTest loss: 3.15492\nTest acc: 0.362  \nTest F1: 0.363 \nTest precision: 0.362\nTest recall: 0.362\nTest ROC auc: 0.787 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 19.51\nTotal epochs: 35 ; Model picked from epoch 5\nAverage time per epoch: 0.56\n\n--Testing--\nTest loss: 2.51880\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 10 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 40.90\nTotal epochs: 78 ; Model picked from epoch 48\nAverage time per epoch: 0.52\n\n--Testing--\nTest loss: 2.51813\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 14.89\nTotal epochs: 45 ; Model picked from epoch 15\nAverage time per epoch: 0.33\n\n--Testing--\nTest loss: 3.00007\nTest acc: 0.517  \nTest F1: 0.517 \nTest precision: 0.517\nTest recall: 0.517\nTest ROC auc: 0.836 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 20.76\nTotal epochs: 62 ; Model picked from epoch 32\nAverage time per epoch: 0.33\n\n--Testing--\nTest loss: 2.55246\nTest acc: 0.966  \nTest F1: 0.966 \nTest precision: 0.966\nTest recall: 0.966\nTest ROC auc: 0.999 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 94.27\nTotal epochs: 277 ; Model picked from epoch 247\nAverage time per epoch: 0.34\n\n--Testing--\nTest loss: 2.65338\nTest acc: 0.864  \nTest F1: 0.864 \nTest precision: 0.864\nTest recall: 0.864\nTest ROC auc: 0.973 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 15.00\nTotal epochs: 39 ; Model picked from epoch 9\nAverage time per epoch: 0.38\n\n--Testing--\nTest loss: 2.76144\nTest acc: 0.756  \nTest F1: 0.756 \nTest precision: 0.756\nTest recall: 0.756\nTest ROC auc: 0.968 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 21.47\nTotal epochs: 60 ; Model picked from epoch 30\nAverage time per epoch: 0.36\n\n--Testing--\nTest loss: 2.54725\nTest acc: 0.970  \nTest F1: 0.970 \nTest precision: 0.970\nTest recall: 0.970\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 51.39\nTotal epochs: 148 ; Model picked from epoch 118\nAverage time per epoch: 0.35\n\n--Testing--\nTest loss: 2.64187\nTest acc: 0.875  \nTest F1: 0.875 \nTest precision: 0.875\nTest recall: 0.875\nTest ROC auc: 0.997 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 11.77\nTotal epochs: 33 ; Model picked from epoch 3\nAverage time per epoch: 0.36\n\n--Testing--\nTest loss: 3.03011\nTest acc: 0.487  \nTest F1: 0.487 \nTest precision: 0.487\nTest recall: 0.487\nTest ROC auc: 0.824 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 16.02\nTotal epochs: 47 ; Model picked from epoch 17\nAverage time per epoch: 0.34\n\n--Testing--\nTest loss: 2.51806\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 20 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 31.14\nTotal epochs: 88 ; Model picked from epoch 58\nAverage time per epoch: 0.35\n\n--Testing--\nTest loss: 2.51813\nTest acc: 1.000  \nTest F1: 1.000 \nTest precision: 1.000\nTest recall: 1.000\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 8.22\nTotal epochs: 54 ; Model picked from epoch 24\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 2.94153\nTest acc: 0.577  \nTest F1: 0.577 \nTest precision: 0.577\nTest recall: 0.577\nTest ROC auc: 0.892 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 13.84\nTotal epochs: 94 ; Model picked from epoch 64\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 2.62223\nTest acc: 0.897  \nTest F1: 0.897 \nTest precision: 0.897\nTest recall: 0.897\nTest ROC auc: 0.994 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 62.29\nTotal epochs: 422 ; Model picked from epoch 392\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 2.77641\nTest acc: 0.740  \nTest F1: 0.740 \nTest precision: 0.740\nTest recall: 0.740\nTest ROC auc: 0.929 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 9.90\nTotal epochs: 71 ; Model picked from epoch 41\nAverage time per epoch: 0.14\n\n--Testing--\nTest loss: 2.68580\nTest acc: 0.832  \nTest F1: 0.832 \nTest precision: 0.832\nTest recall: 0.832\nTest ROC auc: 0.957 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 11.64\nTotal epochs: 83 ; Model picked from epoch 53\nAverage time per epoch: 0.14\n\n--Testing--\nTest loss: 2.54971\nTest acc: 0.968  \nTest F1: 0.968 \nTest precision: 0.968\nTest recall: 0.968\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 45.52\nTotal epochs: 299 ; Model picked from epoch 269\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 2.55351\nTest acc: 0.965  \nTest F1: 0.965 \nTest precision: 0.965\nTest recall: 0.965\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 4.55\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 3.49200\nTest acc: 0.026  \nTest F1: 0.026 \nTest precision: 0.026\nTest recall: 0.026\nTest ROC auc: 0.489 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 9.62\nTotal epochs: 66 ; Model picked from epoch 36\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 2.56163\nTest acc: 0.956  \nTest F1: 0.956 \nTest precision: 0.956\nTest recall: 0.956\nTest ROC auc: 1.000 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 30 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 22.45\nTotal epochs: 158 ; Model picked from epoch 128\nAverage time per epoch: 0.14\n\n--Testing--\nTest loss: 2.55430\nTest acc: 0.966  \nTest F1: 0.966 \nTest precision: 0.966\nTest recall: 0.966\nTest ROC auc: 0.997 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 6.26\nTotal epochs: 96 ; Model picked from epoch 66\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.02588\nTest acc: 0.491  \nTest F1: 0.491 \nTest precision: 0.491\nTest recall: 0.491\nTest ROC auc: 0.824 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 9.98\nTotal epochs: 151 ; Model picked from epoch 121\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 2.93245\nTest acc: 0.584  \nTest F1: 0.584 \nTest precision: 0.584\nTest recall: 0.584\nTest ROC auc: 0.896 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15421\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 103.02\nTotal epochs: 1549 ; Model picked from epoch 1519\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 2.80914\nTest acc: 0.709  \nTest F1: 0.709 \nTest precision: 0.709\nTest recall: 0.709\nTest ROC auc: 0.942 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 4.33\nTotal epochs: 65 ; Model picked from epoch 35\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 2.89844\nTest acc: 0.619  \nTest F1: 0.619 \nTest precision: 0.619\nTest recall: 0.619\nTest ROC auc: 0.923 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 7.62\nTotal epochs: 112 ; Model picked from epoch 82\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 2.95971\nTest acc: 0.552  \nTest F1: 0.552 \nTest precision: 0.552\nTest recall: 0.552\nTest ROC auc: 0.891 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30797\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 53.41\nTotal epochs: 800 ; Model picked from epoch 770\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 2.91138\nTest acc: 0.607  \nTest F1: 0.607 \nTest precision: 0.607\nTest recall: 0.607\nTest ROC auc: 0.881 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 3.16\nTotal epochs: 48 ; Model picked from epoch 18\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.03359\nTest acc: 0.483  \nTest F1: 0.483 \nTest precision: 0.483\nTest recall: 0.483\nTest ROC auc: 0.861 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 14.86\nTotal epochs: 218 ; Model picked from epoch 188\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.08774\nTest acc: 0.449  \nTest F1: 0.449 \nTest precision: 0.449\nTest recall: 0.449\nTest ROC auc: 0.804 \n\n'
+Running: python3 main.py -m NOGNN -ef wav -ntt 34 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123053\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 33.71\nTotal epochs: 503 ; Model picked from epoch 473\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 2.82107\nTest acc: 0.701  \nTest F1: 0.701 \nTest precision: 0.701\nTest recall: 0.701\nTest ROC auc: 0.951 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 16.32\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 3.50867\nTest acc: 0.009  \nTest F1: 0.009 \nTest precision: 0.009\nTest recall: 0.009\nTest ROC auc: 0.506 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 65.97\nTotal epochs: 125 ; Model picked from epoch 95\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 2.70699\nTest acc: 0.816  \nTest F1: 0.816 \nTest precision: 0.816\nTest recall: 0.816\nTest ROC auc: 0.981 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 16.97\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.55\n\n--Testing--\nTest loss: 3.46669\nTest acc: 0.025  \nTest F1: 0.025 \nTest precision: 0.025\nTest recall: 0.025\nTest ROC auc: 0.499 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 17.74\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.57\n\n--Testing--\nTest loss: 3.46675\nTest acc: 0.019  \nTest F1: 0.019 \nTest precision: 0.019\nTest recall: 0.019\nTest ROC auc: 0.500 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 17.04\nTotal epochs: 32 ; Model picked from epoch 2\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 3.46576\nTest acc: 0.016  \nTest F1: 0.016 \nTest precision: 0.016\nTest recall: 0.016\nTest ROC auc: 0.500 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 455.58\nTotal epochs: 865 ; Model picked from epoch 835\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 3.06695\nTest acc: 0.463  \nTest F1: 0.463 \nTest precision: 0.463\nTest recall: 0.463\nTest ROC auc: 0.878 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 16.26\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.52\n\n--Testing--\nTest loss: 3.48991\nTest acc: 0.028  \nTest F1: 0.028 \nTest precision: 0.028\nTest recall: 0.028\nTest ROC auc: 0.486 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 61.94\nTotal epochs: 119 ; Model picked from epoch 89\nAverage time per epoch: 0.52\n\n--Testing--\nTest loss: 2.82676\nTest acc: 0.688  \nTest F1: 0.688 \nTest precision: 0.688\nTest recall: 0.688\nTest ROC auc: 0.945 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 10 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(960) | Test dataset: DEAPDataset(320)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(800) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 91.45\nTotal epochs: 173 ; Model picked from epoch 143\nAverage time per epoch: 0.53\n\n--Testing--\nTest loss: 2.75788\nTest acc: 0.784  \nTest F1: 0.784 \nTest precision: 0.784\nTest recall: 0.784\nTest ROC auc: 0.984 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 10.36\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.33\n\n--Testing--\nTest loss: 3.47563\nTest acc: 0.033  \nTest F1: 0.033 \nTest precision: 0.033\nTest recall: 0.033\nTest ROC auc: 0.509 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 72.34\nTotal epochs: 213 ; Model picked from epoch 183\nAverage time per epoch: 0.34\n\n--Testing--\nTest loss: 2.86235\nTest acc: 0.672  \nTest F1: 0.672 \nTest precision: 0.672\nTest recall: 0.672\nTest ROC auc: 0.953 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 177.13\nTotal epochs: 517 ; Model picked from epoch 487\nAverage time per epoch: 0.34\n\n--Testing--\nTest loss: 3.06215\nTest acc: 0.492  \nTest F1: 0.492 \nTest precision: 0.492\nTest recall: 0.492\nTest ROC auc: 0.904 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 21.67\nTotal epochs: 63 ; Model picked from epoch 33\nAverage time per epoch: 0.34\n\n--Testing--\nTest loss: 3.49004\nTest acc: 0.028  \nTest F1: 0.028 \nTest precision: 0.028\nTest recall: 0.028\nTest ROC auc: 0.506 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 99.58\nTotal epochs: 298 ; Model picked from epoch 268\nAverage time per epoch: 0.33\n\n--Testing--\nTest loss: 2.73005\nTest acc: 0.787  \nTest F1: 0.787 \nTest precision: 0.787\nTest recall: 0.787\nTest ROC auc: 0.971 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 220.40\nTotal epochs: 639 ; Model picked from epoch 609\nAverage time per epoch: 0.34\n\n--Testing--\nTest loss: 2.77645\nTest acc: 0.761  \nTest F1: 0.761 \nTest precision: 0.761\nTest recall: 0.761\nTest ROC auc: 0.958 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 11.21\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.36\n\n--Testing--\nTest loss: 3.48192\nTest acc: 0.036  \nTest F1: 0.036 \nTest precision: 0.036\nTest recall: 0.036\nTest ROC auc: 0.496 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 36.45\nTotal epochs: 101 ; Model picked from epoch 71\nAverage time per epoch: 0.36\n\n--Testing--\nTest loss: 2.78867\nTest acc: 0.734  \nTest F1: 0.734 \nTest precision: 0.734\nTest recall: 0.734\nTest ROC auc: 0.976 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 20 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(640) | Test dataset: DEAPDataset(640)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(480) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 74.71\nTotal epochs: 206 ; Model picked from epoch 176\nAverage time per epoch: 0.36\n\n--Testing--\nTest loss: 2.70113\nTest acc: 0.853  \nTest F1: 0.853 \nTest precision: 0.853\nTest recall: 0.853\nTest ROC auc: 0.990 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 4.89\nTotal epochs: 32 ; Model picked from epoch 2\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 3.47347\nTest acc: 0.025  \nTest F1: 0.025 \nTest precision: 0.025\nTest recall: 0.025\nTest ROC auc: 0.495 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 29.11\nTotal epochs: 190 ; Model picked from epoch 160\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 3.27929\nTest acc: 0.247  \nTest F1: 0.247 \nTest precision: 0.247\nTest recall: 0.247\nTest ROC auc: 0.750 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 6.05\nTotal epochs: 39 ; Model picked from epoch 9\nAverage time per epoch: 0.16\n\n--Testing--\nTest loss: 3.46657\nTest acc: 0.034  \nTest F1: 0.034 \nTest precision: 0.034\nTest recall: 0.034\nTest ROC auc: 0.539 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 5.07\nTotal epochs: 33 ; Model picked from epoch 3\nAverage time per epoch: 0.15\n\n--Testing--\nTest loss: 3.48827\nTest acc: 0.030  \nTest F1: 0.030 \nTest precision: 0.030\nTest recall: 0.030\nTest ROC auc: 0.509 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 7.60\nTotal epochs: 49 ; Model picked from epoch 19\nAverage time per epoch: 0.16\n\n--Testing--\nTest loss: 3.44252\nTest acc: 0.070  \nTest F1: 0.070 \nTest precision: 0.070\nTest recall: 0.070\nTest ROC auc: 0.549 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 10.29\nTotal epochs: 66 ; Model picked from epoch 36\nAverage time per epoch: 0.16\n\n--Testing--\nTest loss: 3.47047\nTest acc: 0.024  \nTest F1: 0.024 \nTest precision: 0.024\nTest recall: 0.024\nTest ROC auc: 0.519 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 4.84\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.16\n\n--Testing--\nTest loss: 3.48679\nTest acc: 0.031  \nTest F1: 0.031 \nTest precision: 0.031\nTest recall: 0.031\nTest ROC auc: 0.501 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 15.85\nTotal epochs: 99 ; Model picked from epoch 69\nAverage time per epoch: 0.16\n\n--Testing--\nTest loss: 3.10177\nTest acc: 0.426  \nTest F1: 0.426 \nTest precision: 0.426\nTest recall: 0.426\nTest ROC auc: 0.883 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 30 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(320) | Test dataset: DEAPDataset(960)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(160) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 28.84\nTotal epochs: 180 ; Model picked from epoch 150\nAverage time per epoch: 0.16\n\n--Testing--\nTest loss: 3.38347\nTest acc: 0.146  \nTest F1: 0.146 \nTest precision: 0.146\nTest recall: 0.146\nTest ROC auc: 0.601 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.47\nTotal epochs: 34 ; Model picked from epoch 4\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.48042\nTest acc: 0.032  \nTest F1: 0.032 \nTest precision: 0.032\nTest recall: 0.032\nTest ROC auc: 0.494 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 8.70\nTotal epochs: 120 ; Model picked from epoch 90\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.39803\nTest acc: 0.122  \nTest F1: 0.122 \nTest precision: 0.122\nTest recall: 0.122\nTest ROC auc: 0.614 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 16 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 15424\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 33.35\nTotal epochs: 457 ; Model picked from epoch 427\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.39988\nTest acc: 0.132  \nTest F1: 0.132 \nTest precision: 0.132\nTest recall: 0.132\nTest ROC auc: 0.649 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.53\nTotal epochs: 35 ; Model picked from epoch 5\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.39657\nTest acc: 0.113  \nTest F1: 0.113 \nTest precision: 0.113\nTest recall: 0.113\nTest ROC auc: 0.598 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 8.85\nTotal epochs: 117 ; Model picked from epoch 87\nAverage time per epoch: 0.08\n\n--Testing--\nTest loss: 3.45501\nTest acc: 0.060  \nTest F1: 0.060 \nTest precision: 0.060\nTest recall: 0.060\nTest ROC auc: 0.525 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 32 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 30800\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.79\nTotal epochs: 38 ; Model picked from epoch 8\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.46712\nTest acc: 0.028  \nTest F1: 0.028 \nTest precision: 0.028\nTest recall: 0.028\nTest ROC auc: 0.499 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.01 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.73\nTotal epochs: 38 ; Model picked from epoch 8\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.48585\nTest acc: 0.032  \nTest F1: 0.032 \nTest precision: 0.032\nTest recall: 0.032\nTest ROC auc: 0.491 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.27\nTotal epochs: 31 ; Model picked from epoch 1\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.46863\nTest acc: 0.029  \nTest F1: 0.029 \nTest precision: 0.029\nTest recall: 0.029\nTest ROC auc: 0.499 \n\n'
+Running: python3 main.py -m NOGNN -ef psd -ntt 34 -bs 4 -hc 128 -lr 0.0001 -st -wtr -esp 30
+b'Train/Val dataset: DEAPDataset(192) | Test dataset: DEAPDataset(1088)\nDevice: cuda\nNumber of classes: 32\nModel parameter count: 123056\nTrain dataset: DEAPDataset(32) | Validation dataset: DEAPDataset(160)\nTraining...\n--Finished training--\nTraining time (s): 2.78\nTotal epochs: 38 ; Model picked from epoch 8\nAverage time per epoch: 0.07\n\n--Testing--\nTest loss: 3.46683\nTest acc: 0.035  \nTest F1: 0.035 \nTest precision: 0.035\nTest recall: 0.035\nTest ROC auc: 0.515 \n\n'
