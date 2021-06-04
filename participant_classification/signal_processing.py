@@ -5,6 +5,7 @@ import skimage
 import scipy.signal
 import numpy as np
 from einops import repeat, rearrange
+import matplotlib.pyplot as plt
 
 def remove_baseline_mean(signal_data):
     # Take first three senconds of data
@@ -23,18 +24,18 @@ def process_video(video, feature='psd', window_step = 128):
     samplingFrequency = 128
     fft_freq = np.fft.rfftfreq(video.shape[-1], 1.0/samplingFrequency)
     # Delta, Theta, Alpha, Beta, Gamma
-    bands = [(0,4),(4,8),(8,12),(12,30),(30,45)]
+    bands = [(4,8),(8,12),(12,30),(30,45)]
     
     band_mask = np.array([np.logical_or(fft_freq < f, fft_freq > t) for f,t in bands])
     band_mask = repeat(band_mask,'a b -> a c b', c=32)
     band_data = np.array(fft_vals)
-    band_data = repeat(band_data,'a b -> c a b', c=5)
+    band_data = repeat(band_data,'a b -> c a b', c=len(bands))
      
     band_data[band_mask] = 0
     
     band_data = np.fft.irfft(band_data)
 
-    windows = skimage.util.view_as_windows(band_data, (5,32,128), step=window_step).squeeze()
+    windows = skimage.util.view_as_windows(band_data, (len(bands),32,128), step=window_step).squeeze()
     # (5, 32, 60, 128)
     windows = rearrange(windows, 'a b c d -> b c a d')
     
@@ -50,38 +51,31 @@ def process_video(video, feature='psd', window_step = 128):
 
     return features
 
-def process_video_wavelet(video, feature='energy', time_domain=False):
-    band_widths = [32,16,8,4]
-    features = []
-    for i in range(5):
-        if i == 0:
-            # Highest frequencies (64-128Hz) are not used
-            cA, cD = pywt.dwt(video.numpy(), 'db4')
-        else:
-            cA, cD = pywt.dwt(cA, 'db4')
-            
-            cA_windows = skimage.util.view_as_windows(cA, (32,band_widths[i-1]*2), step=band_widths[i-1]).squeeze()
-            cA_windows = np.transpose(cA_windows[:59,:,:],(1,0,2))
-            if feature == 'energy':
-                cA_windows = np.square(cA_windows)
-                cA_windows = np.sum(cA_windows, axis=-1)
-                features.append(cA_windows)
-            elif feature == 'entropy':
-                cA_windows = np.square(cA_windows) * np.log(np.square(cA_windows))
-                cA_windows = -np.sum(cA_windows, axis=-1)
-                features.append(cA_windows)
+def get_wavelet_energy(cD):
+    cD = np.square(cD)
+    return np.sum(cD, axis=-1)
 
-            else:
-                raise 'Error, invalid wavelet feature'
-                
-    if time_domain:
-        features = np.transpose(features,(2,1,0))
-    features = rearrange(features, 'a b c -> (a b) c')
+def process_video_wavelet(video):
+    video_windows = skimage.util.view_as_windows(video.numpy(), (32,256), step=128).squeeze()
+    video_windows = video_windows.transpose(1,0,2)
+    mother_wavelet = 'db4'
+    N = 5
+    cA, cD = pywt.dwt(video_windows, mother_wavelet)
+    # First Detail coefficient is disregarded. Noise frequencies -> (64-128Hz)
+    features = []
+    for i in range(N-1):
+        cA, cD = pywt.dwt(cA, mother_wavelet)
+        features.append(get_wavelet_energy(cD))
+
     features = torch.FloatTensor(features)
-    
+    features = rearrange(features, 'a b c -> (a b) c')
+
     # Normalization
     m = features.mean(0, keepdim=True)
     s = features.std(0, unbiased=False, keepdim=True)
     features -= m
     features /= s
+
     return features
+    
+    

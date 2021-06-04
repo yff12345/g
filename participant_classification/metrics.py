@@ -22,4 +22,4 @@ def recall_metric(outputs, targets):
 def roc_metric(outputs, targets):
     print(outputs.shape, targets.shape)
     # print(torch.unique(targets))
-    return roc_auc_score(targets.cpu().numpy(), outputs.detach().cpu().numpy(), multi_class='ovo')
+    return roc_auc_score(targets.cpu().numpy(), outputs.detach().cpu().numpy())

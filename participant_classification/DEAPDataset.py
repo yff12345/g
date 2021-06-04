@@ -62,8 +62,9 @@ class DEAPDataset(InMemoryDataset):
         edge_attr, edge_index = torch.FloatTensor(edge_attr), torch.tensor([source_nodes,target_nodes], dtype=torch.long)
         
         # Expand edge_index and edge_attr to match graphs
-        number_of_graphs_dict = {'wav':4,'wav_entropy':4,'psd':5}
-        number_of_graphs = number_of_graphs_dict[self.feature]
+        # number_of_graphs_dict = {'wav':4,'wav_entropy':4,'psd':5}
+        # number_of_graphs = number_of_graphs_dict[self.feature]
+        number_of_graphs = 4
         print(f'Number of graphs (freq. bands) per video: {number_of_graphs}')
         e_edge_index = edge_index.clone()
         e_edge_attr = edge_attr.clone()
@@ -89,7 +90,8 @@ class DEAPDataset(InMemoryDataset):
                 if self.feature == 'wav':
                     node_features = process_video_wavelet(video)
                 elif self.feature =='wav_entropy':
-                    node_features = process_video_wavelet(video, feature='entropy')
+                    raise 'err, not impl'
+                    # node_features = process_video_wavelet(video, feature='entropy')
                 elif self.feature =='psd':
                     node_features = process_video(video, feature=self.feature)
                 else:

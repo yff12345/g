@@ -17,7 +17,7 @@ def test_epoch(model, loader ,criterion,args):
         loss = criterion(out,y)
         losses.append(loss.item())
 
-    # print(torch.cat(outputs), torch.cat(targets))
+    print(torch.cat(outputs), torch.cat(targets))
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
 
 
@@ -31,8 +31,8 @@ def main(model, dataset, criterion , args):
     test_f1 = f1_metric(test_outputs, test_targets)
     test_prec = precision_metric(test_outputs, test_targets)
     test_reca = recall_metric(test_outputs, test_targets)
-    test_roc = roc_metric(test_outputs, test_targets)
-    # test_roc = -1
+    # test_roc = roc_metric(test_outputs, test_targets)
+    test_roc = -1
     
     print(f'\n--Testing--')
     print(f'Test loss: {mean_test_loss:.5f}')
@@ -40,7 +40,7 @@ def main(model, dataset, criterion , args):
     print(f'Test F1: {test_f1:.3f} ')
     print(f'Test precision: {test_prec:.3f}')
     print(f'Test recall: {test_reca:.3f}')
-    print(f'Test ROC auc: {test_roc:.3f} \n')
+    # print(f'Test ROC auc: {test_roc:.3f} \n')
 
 
     if args.write_test_results:
