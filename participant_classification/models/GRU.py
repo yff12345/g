@@ -22,7 +22,12 @@ class GRU(torch.nn.Module):
         bs = len(torch.unique(batch.batch))
         x = batch.x
 
+        print(x.shape)
+
         x = rearrange(x, '(bs g e) f -> g bs f e', bs=bs, e=32)
+
+        print(x.shape)
+        exit()
 
         xs = []
         for i, freq_band_x in enumerate(x):

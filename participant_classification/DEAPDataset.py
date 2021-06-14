@@ -64,7 +64,7 @@ class DEAPDataset(InMemoryDataset):
         # Expand edge_index and edge_attr to match graphs
         # number_of_graphs_dict = {'wav':4,'wav_entropy':4,'psd':5}
         # number_of_graphs = number_of_graphs_dict[self.feature]
-        number_of_graphs = 4
+        number_of_graphs = 59
         print(f'Number of graphs (freq. bands) per video: {number_of_graphs}')
         e_edge_index = edge_index.clone()
         e_edge_attr = edge_attr.clone()

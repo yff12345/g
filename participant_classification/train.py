@@ -37,7 +37,7 @@ def main(model,dataset,criterion, args):
     print(f'Train dataset: {train_dataset} | Validation dataset: {val_dataset}',)
 
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=args.shuffle_train)
-    val_loader = DataLoader(val_dataset, batch_size=args.batch_size)
+    val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True)
 
     if args.optimizer == 'Adam':
         optimizer = torch.optim.Adam(model.parameters(),lr=args.learning_rate, weight_decay=args.learning_rate_decay)

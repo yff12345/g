@@ -89,7 +89,7 @@ elif args.model == 'MLP':
 elif args.model == 'GRU':
     model = GRU(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
 elif args.model == 'test':
-    model = TestModel(in_channels,n_graphs,args.hidden_channels, n_classes).to(args.device) 
+    model = TestModel(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
 
 pytorch_total_params = sum(p.numel() for p in model.parameters())
 print(f'Model parameter count: {pytorch_total_params}')

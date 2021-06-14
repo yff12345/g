@@ -68,6 +68,11 @@ def process_video_wavelet(video):
         features.append(get_wavelet_energy(cD))
 
     features = torch.FloatTensor(features)
+
+    time_domain = True
+    if time_domain:
+        features = np.transpose(features,(2,1,0))
+
     features = rearrange(features, 'a b c -> (a b) c')
 
     # Normalization
