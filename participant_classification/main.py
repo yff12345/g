@@ -5,13 +5,16 @@ import argparse
 import numpy as np
 import torch.nn as nn
 from DEAPDataset import DEAPDataset
-from models.GatedGraphConv import GatedGraphConv
-from models.GraphConv import GraphConv
-from models.GCN import GCN
-from models.CNN import CNN
-from models.GRU import GRU
 from models.TestModel import TestModel
 from models.MLP import MLP
+from models.GCNMLP import GCNMLP
+from models.GatedGraphConvMLP import GatedGraphConvMLP
+from models.CNN import CNN
+from models.GCNCNN import GCNCNN
+from models.GatedGraphConvCNN import GatedGraphConvCNN
+from models.GRU import GRU
+from models.GCNGRU import GCNGRU
+from models.GatedGraphConvGRU import GatedGraphConvGRU
 from train import main as train_main
 from test import main as test_main
 from util import get_split_indices
@@ -36,7 +39,7 @@ parser.add_argument('-v', '--verbose', default=False, action='store_true', help=
 parser.add_argument('-kfvo', '--kfold_validation_offset', type=int, default=0)
 
 # Train args
-parser.add_argument('-m', '--model', type=str, default='GraphConv', choices=['GraphConv','GatedGraphConv','CNN','MLP','GCN','GRU', 'test'], help='Which model architecture to train')
+parser.add_argument('-m', '--model', type=str, default='GraphConv', choices=['MLP','GCNMLP','GatedGraphConvMLP','CNN','GCNCNN','GatedGraphConvCNN','GRU','GCNGRU', 'GatedGraphConvGRU'], help='Which model architecture to train')
 parser.add_argument('-hc', '--hidden_channels', type=int, default=32, help='Number of hidden channels in GNN and FCN')
 parser.add_argument('-opt', '--optimizer', type=str, default='Adam', choices=['Adam','Adagrad','SGD'])
 parser.add_argument('-lr', '--learning_rate', type=float, default=1e-3)
@@ -54,6 +57,7 @@ parser.add_argument('-trd', '--test_results_dir', type=str, default='test1')
 
 args = parser.parse_args()
 dataset = DEAPDataset(args)
+
 # dataset = dataset.shuffle()
 
 train_mask,test_mask = get_split_indices(args.target,args.number_test_targets, len(dataset), args.kfold_validation_offset )
@@ -76,20 +80,26 @@ criterion = nn.CrossEntropyLoss()
 print(f'Number of classes: {n_classes}')
 
 
-if args.model == 'GraphConv':
-    model = GraphConv(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
-elif args.model == 'GCN':
-    model = GCN(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+if args.model == 'MLP':
+    model = MLP(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+elif args.model == 'GCNMLP':
+    model = GCNMLP(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+elif args.model == 'GatedGraphConvMLP':
+    model = GatedGraphConvMLP(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
 elif args.model == 'CNN':
     model = CNN(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
-elif args.model == 'GatedGraphConv':
-    model = GatedGraphConv(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
-elif args.model == 'MLP':
-    model = MLP(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+elif args.model == 'GCNCNN':
+    model = GCNCNN(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+elif args.model == 'GatedGraphConvCNN':
+    model = GatedGraphConvCNN(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
 elif args.model == 'GRU':
     model = GRU(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
-elif args.model == 'test':
-    model = TestModel(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+elif args.model == 'GCNGRU':
+    model = GCNGRU(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+elif args.model == 'GatedGraphConvGRU':
+    model = GatedGraphConvGRU(in_channels,n_graphs,args.hidden_channels, n_classes, args.dropout_rate).to(args.device) 
+
+print(model)
 
 pytorch_total_params = sum(p.numel() for p in model.parameters())
 print(f'Model parameter count: {pytorch_total_params}')

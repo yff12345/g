@@ -17,7 +17,7 @@ def test_epoch(model, loader ,criterion,args):
         loss = criterion(out,y)
         losses.append(loss.item())
 
-    print(torch.cat(outputs), torch.cat(targets))
+    # print(torch.cat(outputs), torch.cat(targets))
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
 
 

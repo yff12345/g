@@ -18,7 +18,7 @@ class CNN(torch.nn.Module):
         
         
     def forward(self, batch):
-        bs = len(torch.unique(batch.batch))
+        bs = len(torch.unique(batch.batch)) if 'batch' in dir(batch) else 1
         x = batch.x
         x = rearrange(x, '(bs g e) f -> (bs e) g f', bs=bs, e=32)
         x = self.cnn1(x).squeeze()

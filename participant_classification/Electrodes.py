@@ -7,7 +7,7 @@ from einops import rearrange
 32 channels 
 '''
 class Electrodes:
-  def __init__(self,add_global_connections=True, expand_3d = True):
+  def __init__(self,add_global_connections=True, expand_3d = False):
     # X, Y, Z coordinates of the electrodes
     self.positions_3d = np.array([[-27,83,-3],[-36,76,24],[-71,51,-3],[-48,59,44],
       [-33,33,74],[-78,30,27],[-87,0,-3],[-63,0,61],

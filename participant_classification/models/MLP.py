@@ -9,16 +9,17 @@ class MLP(torch.nn.Module):
 
         self.dr = dr
 
-        self.lin1 = torch.nn.Linear(n_freq_bands*32*in_channels, hidden_channels*4)
-        self.lin2 = torch.nn.Linear(hidden_channels*4, hidden_channels*2)
-        self.lin3 = torch.nn.Linear(hidden_channels*2, hidden_channels)
-        self.lin4 = torch.nn.Linear(hidden_channels, n_classes)
+        self.lin1 = torch.nn.Linear(n_freq_bands*32*in_channels, hidden_channels)
+        self.lin2 = torch.nn.Linear(hidden_channels, hidden_channels//2)
+        self.lin3 = torch.nn.Linear(hidden_channels//2, hidden_channels//4)
+        self.lin4 = torch.nn.Linear(hidden_channels//4, n_classes)
 
         self.act = nn.Softmax(dim=-1)
 
 
     def forward(self, batch):
-        bs = len(torch.unique(batch.batch))
+
+        bs = len(torch.unique(batch.batch)) if 'batch' in dir(batch) else 1
         x = batch.x
 
         x = rearrange(x, '(bs g e) f -> bs (e g f)', bs=bs, e=32)
