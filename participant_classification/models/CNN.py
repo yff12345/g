@@ -9,9 +9,12 @@ class CNN(torch.nn.Module):
         
         self.dr = dr
         
-        self.cnn1 = torch.nn.Conv1d(n_graphs, 1, kernel_size=3, stride=2)
+        self.cnn1 = torch.nn.Conv1d(n_graphs, 1, kernel_size=1, stride=1)
         
-        self.lin1 = torch.nn.Linear(32*(in_channels//2 - (1 if in_channels%2 == 0 else 0)), hidden_channels)
+        # print('#aaaaaaaaaaaaaaaaaaaa')
+        # print(32*(in_channels//2 - (1 if in_channels%2 == 0 else 0)))
+        self.lin1 = torch.nn.Linear(32*in_channels, hidden_channels)
+        # print(';opk--------------------')
         self.lin2 = torch.nn.Linear(hidden_channels, n_classes)
 
         self.act = nn.Softmax(dim=-1)

@@ -37,12 +37,14 @@ parser.add_argument('-dt', '--dont_train', default=False, action='store_true', h
 parser.add_argument('-bs', '--batch_size', type=int, default=16)
 parser.add_argument('-v', '--verbose', default=False, action='store_true', help='Print logs to console')
 parser.add_argument('-kfvo', '--kfold_validation_offset', type=int, default=0)
+parser.add_argument('-spv', '--samples_per_video', type=int, default=1, choices=[1,2,4,8,10,20], help='Number of data samples per video')
+
 
 # Train args
 parser.add_argument('-m', '--model', type=str, default='GraphConv', choices=['MLP','GCNMLP','GatedGraphConvMLP','CNN','GCNCNN','GatedGraphConvCNN','GRU','GCNGRU', 'GatedGraphConvGRU'], help='Which model architecture to train')
-parser.add_argument('-hc', '--hidden_channels', type=int, default=32, help='Number of hidden channels in GNN and FCN')
+parser.add_argument('-hc', '--hidden_channels', type=int, default=64, help='Number of hidden channels in GNN and FCN')
 parser.add_argument('-opt', '--optimizer', type=str, default='Adam', choices=['Adam','Adagrad','SGD'])
-parser.add_argument('-lr', '--learning_rate', type=float, default=1e-3)
+parser.add_argument('-lr', '--learning_rate', type=float, default=0.009)
 parser.add_argument('-dr', '--dropout_rate', type=float, default=0.4)
 parser.add_argument('-lrd', '--learning_rate_decay', type=float, default=0)
 parser.add_argument('-wd', '--weight_decay', type=float, default=0)
@@ -56,16 +58,21 @@ parser.add_argument('-wtr', '--write_test_results', default=False, action='store
 parser.add_argument('-trd', '--test_results_dir', type=str, default='test1')
 
 args = parser.parse_args()
+
+print(f'-Creating {args.samples_per_video * 40} samples for each participant')
+print(f'-Train/Val/Test split: {args.samples_per_video * 40 - args.number_test_targets - args.number_validation_targets}/{args.number_validation_targets}/{args.number_test_targets}')
 dataset = DEAPDataset(args)
 
 # dataset = dataset.shuffle()
+
+print(f'-K fold offset: {args.kfold_validation_offset}')
 
 train_mask,test_mask = get_split_indices(args.target,args.number_test_targets, len(dataset), args.kfold_validation_offset )
 
 train_dataset = dataset[train_mask]
 test_dataset = dataset[test_mask]
 
-print(f'Train/Val dataset: {train_dataset} | Test dataset: {test_dataset}',)
+
 
 print(f'Device: {args.device}')
 
@@ -103,6 +110,7 @@ print(model)
 
 pytorch_total_params = sum(p.numel() for p in model.parameters())
 print(f'Model parameter count: {pytorch_total_params}')
+print(f'Train/Val dataset: {train_dataset} | Test dataset: {test_dataset}',)
 
 if not args.dont_train:
     train_main(model,train_dataset,criterion,args)

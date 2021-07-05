@@ -73,7 +73,7 @@ def process_video_wavelet(video):
     # if time_domain:
     #     features = np.transpose(features,(2,1,0))
 
-    features = rearrange(features, 'a b c -> (a b) c')
+    features = rearrange(features, 'a b c -> (a b) c') # (4,32,59)
 
     # Normalization
     m = features.mean(0, keepdim=True)

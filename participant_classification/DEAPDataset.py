@@ -23,6 +23,7 @@ class DEAPDataset(InMemoryDataset):
       self.n_videos = n_videos
       self.include_edge_attr = not args.remove_edge_attributes
       self.electrodes = Electrodes(not args.remove_global_connections, expand_3d = False)
+      self.samples_per_video = args.samples_per_video
       transform, pre_transform = None,None
       super(DEAPDataset, self).__init__('./', transform, pre_transform)
       self.data, self.slices = torch.load(self.processed_paths[0])
@@ -45,7 +46,7 @@ class DEAPDataset(InMemoryDataset):
   def processed_file_names(self):
       if not os.path.exists(self.processed_dir):
         os.makedirs(self.processed_dir)
-      return [f'deap_processed_graph.{self.participant_from}-{self.participant_to}_{self.feature}_{self.target}.dataset']
+      return [f'deap_processed_graph.{self.participant_from}-{self.participant_to}_{self.feature}_{self.target}_{self.samples_per_video*40}.dataset']
 
   def process(self):
         # Number of nodes per graph
@@ -61,11 +62,10 @@ class DEAPDataset(InMemoryDataset):
 
         edge_attr, edge_index = torch.FloatTensor(edge_attr), torch.tensor([source_nodes,target_nodes], dtype=torch.long)
         
-        # Expand edge_index and edge_attr to match graphs
-        # number_of_graphs_dict = {'wav':4,'wav_entropy':4,'psd':5}
-        # number_of_graphs = number_of_graphs_dict[self.feature]
         number_of_graphs = 4
-        print(f'Number of graphs (freq. bands) per video: {number_of_graphs}')
+        print(f'-Number of graphs (freq. bands) per sample: {number_of_graphs}')
+        
+        # Expand edges to match number of frequency bands
         e_edge_index = edge_index.clone()
         e_edge_attr = edge_attr.clone()
         for i in range(number_of_graphs-1):
@@ -87,16 +87,8 @@ class DEAPDataset(InMemoryDataset):
                 signal_data = torch.FloatTensor(remove_baseline_mean(participant_data['data'][:,:32,:]))
             processed = []
             for video_index, video in enumerate(signal_data[:self.n_videos,:,:]):
-                if self.feature == 'wav':
-                    node_features = process_video_wavelet(video)
-                elif self.feature =='wav_entropy':
-                    raise 'err, not impl'
-                    # node_features = process_video_wavelet(video, feature='entropy')
-                elif self.feature =='psd':
-                    node_features = process_video(video, feature=self.feature)
-                else:
-                    raise 'Invalid feature'
                 
+                ## Define targets for features
                 if self.target == 'emotion_labels':
                     target = participant_data['labels'][video_index]
                 elif self.target == 'participant_id':
@@ -105,8 +97,17 @@ class DEAPDataset(InMemoryDataset):
                     target = video_index
                 else:
                     raise 'Invalid target'
-                data = Data(x=torch.FloatTensor(node_features),edge_attr=e_edge_attr,edge_index=e_edge_index, y=torch.LongTensor([target])) if self.include_edge_attr else Data(x=torch.FloatTensor(node_features), edge_index=e_edge_index, y=torch.LongTensor([target]))
-                data_list.append(data) 
+
+
+                ## Split videos into windows and extract features
+                video_length = video.shape[1] 
+                window_size = video_length // self.samples_per_video
+
+                for i in range(self.samples_per_video):
+                    video_window = video[:,window_size*i:window_size*(i+1)]
+                    node_features =  process_video_wavelet(video_window) if self.feature == 'wav' else process_video(video_window,feature=self.feature)
+                    data = Data(x=torch.FloatTensor(node_features),edge_attr=e_edge_attr,edge_index=e_edge_index, y=torch.LongTensor([target])) if self.include_edge_attr else Data(x=torch.FloatTensor(node_features), edge_index=e_edge_index, y=torch.LongTensor([target]))
+                    data_list.append(data) 
                
         data, slices = self.collate(data_list)
         torch.save((data, slices), self.processed_paths[0])
