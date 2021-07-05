@@ -56,7 +56,10 @@ def get_wavelet_energy(cD):
     return np.sum(cD, axis=-1)
 
 def process_video_wavelet(video):
-    video_windows = skimage.util.view_as_windows(video.numpy(), (32,256), step=128).squeeze()
+    ## Edge cases for sample size < 2s
+    window_size = 256 if video.shape[-1] > 256 else 128
+    step_size = 128 if video.shape[-1] > 256 else 64
+    video_windows = skimage.util.view_as_windows(video.numpy(), (32,window_size), step=step_size).squeeze()
     video_windows = video_windows.transpose(1,0,2)
     mother_wavelet = 'db4'
     N = 5

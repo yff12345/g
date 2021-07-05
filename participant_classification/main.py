@@ -37,14 +37,14 @@ parser.add_argument('-dt', '--dont_train', default=False, action='store_true', h
 parser.add_argument('-bs', '--batch_size', type=int, default=16)
 parser.add_argument('-v', '--verbose', default=False, action='store_true', help='Print logs to console')
 parser.add_argument('-kfvo', '--kfold_validation_offset', type=int, default=0)
-parser.add_argument('-spv', '--samples_per_video', type=int, default=1, choices=[1,2,4,8,10,20], help='Number of data samples per video')
+parser.add_argument('-spv', '--samples_per_video', type=int, default=1, choices=[1,2,4,8,10,20,30], help='Number of data samples per video')
 
 
 # Train args
 parser.add_argument('-m', '--model', type=str, default='GraphConv', choices=['MLP','GCNMLP','GatedGraphConvMLP','CNN','GCNCNN','GatedGraphConvCNN','GRU','GCNGRU', 'GatedGraphConvGRU'], help='Which model architecture to train')
 parser.add_argument('-hc', '--hidden_channels', type=int, default=64, help='Number of hidden channels in GNN and FCN')
 parser.add_argument('-opt', '--optimizer', type=str, default='Adam', choices=['Adam','Adagrad','SGD'])
-parser.add_argument('-lr', '--learning_rate', type=float, default=0.009)
+parser.add_argument('-lr', '--learning_rate', type=float, default=0.005)
 parser.add_argument('-dr', '--dropout_rate', type=float, default=0.4)
 parser.add_argument('-lrd', '--learning_rate_decay', type=float, default=0)
 parser.add_argument('-wd', '--weight_decay', type=float, default=0)

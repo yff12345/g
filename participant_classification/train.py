@@ -85,9 +85,9 @@ def main(model,dataset,criterion, args):
             print(f'--Epoch : {epoch} --')
             print(f'Train loss: {mean_train_loss:.5f} - Val loss: {mean_val_loss:.5f} ')
             print(f'Train acc: {train_acc:.3f} - Val acc: {val_acc:.3f} ')
-            print(f'Train F1: {train_f1:.3f} - Val F1: {val_f1:.3f} ')
-            print(f'Train precision: {train_prec:.3f} - Val precision: {val_prec:.3f} ')
-            print(f'Train recall: {train_reca:.3f} - Val recall: {val_reca:.3f} \n')
+            # print(f'Train F1: {train_f1:.3f} - Val F1: {val_f1:.3f} ')
+            # print(f'Train precision: {train_prec:.3f} - Val precision: {val_prec:.3f} ')
+            # print(f'Train recall: {train_reca:.3f} - Val recall: {val_reca:.3f} \n')
 
         # Early stopping and checkpoint
         if mean_val_loss < best_val_loss-0.0001:
