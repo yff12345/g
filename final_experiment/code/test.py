@@ -1,13 +1,22 @@
 
 import torch
+import os
 import csv   
 import numpy as np
+import matplotlib.pyplot as plt
 from torch_geometric.data import  DataLoader
 from metrics import accuracy_metric, f1_metric, precision_metric, recall_metric, roc_metric
 
+
+
+from sklearn.manifold import TSNE
+
+
+
+
 def test_epoch(model, loader ,criterion,args):
     model.eval()
-    losses, outputs, targets = [], [] , []
+    losses, outputs, targets = [], [] , [] # This might waste GPU space during testing
     for batch in loader:
         batch = batch.to(args.device)
         y = batch.y if args.target != 'emotion_labels' else (batch.y[:,args.target_emotion] > 5).long()
@@ -16,41 +25,70 @@ def test_epoch(model, loader ,criterion,args):
         targets.append(y)
         loss = criterion(out,y)
         losses.append(loss.item())
-
-    # print(torch.cat(outputs), torch.cat(targets))
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
 
+def main(model, dataset, criterion , args, train_time, best_epoch):
+    # Load checkpoint
+    model.load_state_dict(torch.load(f'../checkpoints/{args.test_model_dict}'))
 
-def main(model, dataset, criterion , args):
-    model.load_state_dict(torch.load(f'./{args.test_model_dict}'))
-    test_loader = DataLoader(dataset, batch_size=args.batch_size)
+    # Create loader
+    test_loader = DataLoader(dataset, batch_size=args.batch_size) 
+
     # Test epoch
     mean_test_loss, test_outputs, test_targets = test_epoch(model, test_loader ,criterion,args)
+
     # Metrics
     test_acc = accuracy_metric(test_outputs, test_targets)
     test_f1 = f1_metric(test_outputs, test_targets)
     test_prec = precision_metric(test_outputs, test_targets)
     test_reca = recall_metric(test_outputs, test_targets)
-    # test_roc = roc_metric(test_outputs, test_targets)
-    test_roc = -1
+    test_roc = roc_metric(test_outputs, test_targets)
     
+    # Log to console
     print(f'\n--Testing--')
     print(f'Test loss: {mean_test_loss:.5f}')
     print(f'Test acc: {test_acc:.3f}  ')
     print(f'Test F1: {test_f1:.3f} ')
     print(f'Test precision: {test_prec:.3f}')
     print(f'Test recall: {test_reca:.3f}')
-    # print(f'Test ROC auc: {test_roc:.3f} \n')
+    print(f'Test ROC auc: {test_roc:.3f} \n')
+
+    # Visualize latent space (?) -> Needs more testing
+    # out_np = test_outputs.detach().cpu().numpy()
+    # target_np = test_targets.detach().cpu().numpy()
+    # z = TSNE(n_components=2).fit_transform(out_np)
+    # plt.figure(figsize=(10,10))
+    # plt.xticks([])
+    # plt.yticks([])
+
+    # plt.scatter(z[:, 0], z[:, 1], s=70, c=target_np, cmap="Set2", label=target_np)
+    # plt.show()
 
 
+
+    # Write results to CSV
     if args.write_test_results:
-        pytorch_total_params = sum(p.numel() for p in model.parameters())
+        print('Writing to logs...')
+        records = {}
+        # Define records
+        settings = ['eeg_feature','model','hidden_channels','window_size','batch_size','learning_rate','dropout_rate', 'activation_funct','number_train_samples']
+        for s in settings:
+            records[s] = getattr(args,s) 
+        records['number_val_samples'] = 100
+        records['number_test_samples'] = len(dataset) // 32
+        records['mean_test_loss'] = mean_test_loss
+        records['test_acc'] = test_acc
+        records['test_f1'] = test_f1
+        records['test_prec'] = test_prec
+        records['test_reca'] = test_reca
+        records['test_roc'] = test_roc
+        records['pytorch_total_params'] = sum(p.numel() for p in model.parameters())
+        records['train_time'] = train_time
+        records['best_epoch'] = best_epoch
+
         # Write results to csv
-        # fields = "model - eeg_feature - remove_global_connections - remove_baseline_signal_noise_removal - number_test_targets - batch_size - hidden_channels - learning_rate - dropout_rate - mean_test_loss - test_acc - test_f1 - test_prec - test_reca - test_roc - pytorch_total_params"
-        # fields = fields.replace(" ",'').split('-')
-        # print(fields)
-        # fields=['first','second','third']
-        fields = [args.model, args.eeg_feature, args.remove_global_connections, args.remove_baseline_signal_noise_removal, args.number_test_targets, args.batch_size, args.hidden_channels, args.learning_rate,args.dropout_rate, mean_test_loss, test_acc, test_f1, test_prec, test_reca, test_roc, pytorch_total_params ]
-        with open(f'{args.target}_{args.test_results_dir}.csv','a') as fd:
+        with open(f'../logs/{args.test_results_dir}.csv','a') as fd:
             writer = csv.writer(fd)
-            writer.writerow(fields)
+            if os.stat(f'../logs/{args.test_results_dir}.csv'). st_size == 0:
+                writer.writerow(records.keys())
+            writer.writerow(records.items())
