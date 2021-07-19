@@ -2,28 +2,34 @@
 
 import subprocess
 
-# fields = "model - eeg_feature - remove_global_connections - remove_baseline_signal_noise_removal - number_test_targets - number_validation_targets - batch_size - hidden_channels - learning_rate - mean_test_loss - test_acc - test_f1 - test_prec - test_reca - test_roc - pytorch_total_params"
-
-models = ['MLP','GCNMLP','GatedGraphConvMLP']
+window_sizes = [0.25, 0.5, 1, 2, 4]
 eeg_features = ['wav','psd']
-# remove_global_connections = [False,True]
-# remove_baseline_signal_noise_removal = [False,True]
-number_test_targets = [10, 30, 34]
-batch_sizes = [4, 16]
-hidden_channels = [16, 64 ,128]
-learning_rates = [0.0001, 0.0045, 0.0090]
-dropout_rates = [0, 0.4]
+models = ['CNN','MLP','GraphConv','GIN']
+hidden_channels = [8, 16, 32 ,64, 128]
+number_train_samples = [1, 2, 4, 8 , 16, 32, 64, 128 , 256]
+batch_sizes = [4, 8 , 16]
+learning_rates = [0.001, 0.0001, 0.01]
+dropout_rates = [0, 0.125,0.25, 0.5]
+activations = ['relu', 'tanh']
 
 
-for model in models:
-	for eeg_feature in eeg_features:
-		for number_test_target in number_test_targets:
-			for hidden_channel in hidden_channels:
-				for lr in learning_rates:
-					for dr in dropout_rates:
-						for bs in batch_sizes:
-							bashCommand = f"python3 main.py -m {model} -ef {eeg_feature} -ntt {number_test_target} -bs {bs} -hc {hidden_channel} -lr {lr} -dr {dr} -st -wtr -esp 30 -trd test_1"
-							print(f'Running: {bashCommand}')
-							process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-							output, error = process.communicate()
-							print(output)
+total_runs = len(window_sizes) * len(eeg_features) * len(models) * len(hidden_channels) * len(number_train_samples) * len(batch_sizes)  * len(learning_rates) * len(dropout_rates)  * len(activations) 
+print(f'Running {total_runs} experiments')
+exit()
+
+current_run = 1
+for ws in window_sizes:
+	for feature in eeg_features:
+		for model in models:
+			for hc in hidden_channels:
+				for nts in number_train_samples:
+					for bs in batch_sizes:
+						for lr in learning_rates:
+							for dr in dropout_rates:
+								for act in activations:
+
+									bashCommand = f"python3 main.py -ws {ws} -ef {feature} -m {model} -hc {hc} -nts {nts} -bs {bs} -lr {lr} -act {act} -dr {dr} -wtr -esp 30 -trd cnn_test_1"
+									print(f'Running ({current_run / total_runs}): {bashCommand}')
+									process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+									output, error = process.communicate()
+									print(output)

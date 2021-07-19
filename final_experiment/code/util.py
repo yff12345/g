@@ -23,7 +23,8 @@ def get_split_indices(target, number_train_samples, dataset_len, dont_shuffle_da
             [np.random.shuffle(x) for x in indices]
 
         indices = indices.flatten()
-        train_idx, val_idx = number_train_samples*32, number_train_samples*32 + 100 * 32
+        sample_size = 32 if target == 'participant_id' else 40
+        train_idx, val_idx = number_train_samples*sample_size, number_train_samples*sample_size + 100 * sample_size
 
         train_mask = indices[:train_idx]
         val_mask = indices[train_idx:val_idx]
