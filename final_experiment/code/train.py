@@ -6,7 +6,7 @@ from test import test_epoch
 from torch_geometric.data import  DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from metrics import accuracy_metric, f1_metric, precision_metric, recall_metric, roc_metric
-
+import matplotlib.pyplot as plt
 
 def train_epoch(model, loader ,optimizer ,criterion,args):
     model.train()
@@ -41,7 +41,20 @@ def main(model,train_dataset,val_dataset,criterion, args):
     best_val_loss, early_stopping_count, best_epoch = np.inf, 0, 0
     print('Training...')
     start_time = time.time()
+
+
+
+    lr = 1e-6
+    learning_rates = []
+    loss_dec = []
+    last_loss = None
+
     for epoch in range(1,args.max_epoch+1):
+
+        optimizer = torch.optim.Adam(model.parameters(),lr=lr, weight_decay=args.learning_rate_decay)
+
+
+
         # Train epoch
         mean_train_loss, train_outputs, train_targets = train_epoch(model, train_loader ,optimizer ,criterion,args)
         mean_val_loss, val_outputs, val_targets = test_epoch(model, val_loader ,criterion,args)
@@ -76,8 +89,25 @@ def main(model,train_dataset,val_dataset,criterion, args):
             torch.save(model.state_dict(),f'../checkpoints/{args.test_model_dict}') 
         else:
             early_stopping_count += 1
-            if early_stopping_count >= args.early_stopping_patience:
+            if early_stopping_count >= args.early_stopping_patience + 100:
                 break
+
+        if last_loss:
+            loss_dec.append(mean_train_loss)
+            learning_rates.append(lr)
+            lr += lr * 0.1
+            print(mean_train_loss,lr)
+        # exit()
+        last_loss = mean_train_loss
+        if epoch >= 100:
+            break
+
+    plt.plot(learning_rates,loss_dec)
+    plt.xlabel("Learning rate")
+    plt.ylabel("Loss")
+    plt.title(f"{args.model}")
+    # plt.xticks()
+    plt.show()
 
     end_time = time.time()
     print('--Finished training--')

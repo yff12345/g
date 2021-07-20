@@ -36,7 +36,7 @@ parser.add_argument('-ws', '--window_size', type=float, default=1.0, help='Size 
 parser.add_argument('-m', '--model', type=str, default='MLP', choices=['MLP','CNN','GraphConv','GIN'], help='Which model architecture to train')
 parser.add_argument('-hc', '--hidden_channels', type=int, default=64, help='Number of hidden channels')
 parser.add_argument('-opt', '--optimizer', type=str, default='Adam', choices=['Adam','Adagrad','SGD'])
-parser.add_argument('-lr', '--learning_rate', type=float, default=0.001)
+parser.add_argument('-lr', '--learning_rate', type=float, default=1e-4)
 parser.add_argument('-dr', '--dropout_rate', type=float, default=0.4)
 parser.add_argument('-lrd', '--learning_rate_decay', type=float, default=0)
 parser.add_argument('-wd', '--weight_decay', type=float, default=0)
