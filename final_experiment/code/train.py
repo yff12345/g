@@ -7,6 +7,7 @@ from torch_geometric.data import  DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from metrics import accuracy_metric, f1_metric, precision_metric, recall_metric, roc_metric
 
+
 def train_epoch(model, loader ,optimizer ,criterion,args):
     model.train()
     losses, outputs, targets = [], [] , []
@@ -15,10 +16,10 @@ def train_epoch(model, loader ,optimizer ,criterion,args):
         batch = batch.to(args.device)
         y = batch.y
         out = model(batch)
-        outputs.append(out)
+        outputs.append(out.detach())
         targets.append(y)
         loss = criterion(out,y)
-        losses.append(loss.item())
+        losses.append(loss.detach().item())
         loss.backward()
         optimizer.step()
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)

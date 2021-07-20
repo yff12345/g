@@ -8,7 +8,7 @@ from torch_geometric.data import  DataLoader
 from metrics import accuracy_metric, f1_metric, precision_metric, recall_metric, roc_metric
 
 
-
+# Visualize latent space
 from sklearn.manifold import TSNE
 
 
@@ -21,10 +21,10 @@ def test_epoch(model, loader ,criterion,args):
         batch = batch.to(args.device)
         y = batch.y if args.target != 'emotion_labels' else (batch.y[:,args.target_emotion] > 5).long()
         out = model(batch)
-        outputs.append(out)
+        outputs.append(out.detach())
         targets.append(y)
         loss = criterion(out,y)
-        losses.append(loss.item())
+        losses.append(loss.detach().item())
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
 
 def main(model, dataset, criterion , args, train_time, best_epoch):

@@ -32,12 +32,10 @@ def get_wavelet_energy(cD):
     return np.sum(cD, axis=-1)
 
 
-def process_window_wavelet(video):
-    # print(video.shape)
-    ## Edge cases for sample size < 2s
+def process_window_wavelet(window):
     mother_wavelet = 'db4'
     N = 5
-    cA, cD = pywt.dwt(video, mother_wavelet)
+    cA, cD = pywt.dwt(window, mother_wavelet)
     # First Detail coefficient is disregarded. Noise frequencies -> (64-128Hz)
     features = []
     for i in range(N-1):
@@ -45,6 +43,15 @@ def process_window_wavelet(video):
         features.append(get_wavelet_energy(cD))
 
     features = torch.FloatTensor(features).transpose(0,1)
+    # Normalization
+    m = features.mean(0, keepdim=True)
+    s = features.std(0, unbiased=False, keepdim=True)
+    features -= m
+    features /= s
+    return features
+
+def process_window_raw(window):
+    features = torch.FloatTensor(window)
     # Normalization
     m = features.mean(0, keepdim=True)
     s = features.std(0, unbiased=False, keepdim=True)

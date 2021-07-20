@@ -7,7 +7,7 @@ from tqdm import tqdm
 from torch_geometric.data import InMemoryDataset, Data
 from Electrodes import Electrodes
 from einops import repeat
-from signal_processing import process_window_wavelet, process_window_psd
+from signal_processing import process_window_wavelet, process_window_psd, process_window_raw
 
 class DEAPDataset(InMemoryDataset):
     def __init__(self, args, participant_from=1, participant_to=32, n_videos=40):
@@ -89,7 +89,13 @@ class DEAPDataset(InMemoryDataset):
                 # Non-overlapping windows
                 video_windows = skimage.util.view_as_windows(video.numpy(), (32,int(self.window_size*128)), step=int(self.window_size*128)).squeeze()
                 for window in video_windows:
-                    node_features =  process_window_wavelet(window) if self.feature == 'wav' else process_window_psd(window)
+                    if self.feature == 'wav':
+                        node_features = process_window_wavelet(window)
+                    elif self.feature == 'psd':
+                        node_features = process_window_psd(window)
+                    else:
+                        node_features = process_window_raw(window)
+
                     data = Data(x=node_features,edge_attr=edge_attr,edge_index=edge_index, y=torch.LongTensor([target])) if self.include_edge_attr else Data(x=torch.FloatTensor(node_features), edge_index=edge_index, y=torch.LongTensor([target]))
                     data_list.append(data) 
                

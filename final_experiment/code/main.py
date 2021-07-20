@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser(description='Process eeg emotions. http://www.e
 # Common args
 parser.add_argument('-rdd', '--raw_data_dir', type=str, default='../../data/matlabPREPROCESSED', help='Raw data files directory. (Matlab extension .mat)')
 parser.add_argument('-pdd', '--processed_data_dir', type=str, default='../data/processed_data', help='Where to put processed data files from DEAPDataset')
-parser.add_argument('-ef', '--eeg_feature', type=str, default='wav', choices=['wav','psd'], help='Feature extraction method for EEG signals')
+parser.add_argument('-ef', '--eeg_feature', type=str, default='wav', choices=['wav','psd','raw'], help='Feature extraction method for EEG signals')
 parser.add_argument('-t', '--target', type=str, default='participant_id', choices=['participant_id','video_id','emotions_combined','valence','arousal','dominance','liking'], help='Target for samples')
 parser.add_argument('-p', '--participant', type=int, default=None, choices=list(range(1,33)), help='If != None it specifies an individual participant to use as raw data')
 parser.add_argument('-rgc','--remove_global_connections', default=False, action='store_true',help='Remove global connections from the graph adjacency matrix')
