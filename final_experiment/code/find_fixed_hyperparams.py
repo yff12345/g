@@ -2,15 +2,20 @@
 
 import subprocess
 
-window_sizes = [0.25, 0.5, 1, 2, 4]
-eeg_features = ['wav','psd']
+# Choice
+eeg_features = ['wav','psd','raw']
 models = ['CNN','MLP','GraphConv','GIN']
-hidden_channels = [8, 16, 32 ,64, 128]
-number_train_samples = [1, 2, 4, 8 , 16, 32, 64, 128 , 256]
-batch_sizes = [4, 8 , 16]
-learning_rates = [0.001, 0.0001, 0.01]
-dropout_rates = [0, 0.125,0.25, 0.5]
+number_train_samples = [1, 2, 4, 8 , 16, 32]
+window_sizes = [0.5, 1, 1.5, 2]
+hidden_channels = [16, 32 ,64, 128]
 activations = ['relu', 'tanh']
+dropout_rates = [0,0.25, 0.5]
+batch_sizes = [1, 4 , 16]
+
+# Sample from range (loguniform)
+l2_range = [0, 0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64]
+lr_range = []
+lr_decay_range = []
 
 
 total_runs = len(window_sizes) * len(eeg_features) * len(models) * len(hidden_channels) * len(number_train_samples) * len(batch_sizes)  * len(learning_rates) * len(dropout_rates)  * len(activations) 
