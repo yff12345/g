@@ -1,35 +1,32 @@
 #!/usr/bin/env python
 
 import subprocess
+import argparse
 
-window_sizes = [0.25, 0.5, 1, 2, 4]
-eeg_features = ['wav','psd']
-models = ['CNN','MLP','GraphConv','GIN']
-hidden_channels = [8, 16, 32 ,64, 128]
-number_train_samples = [1, 2, 4, 8 , 16, 32, 64, 128 , 256]
-batch_sizes = [4, 8 , 16]
-learning_rates = [0.001, 0.0001, 0.01]
-dropout_rates = [0, 0.125,0.25, 0.5]
-activations = ['relu', 'tanh']
+parser = argparse.ArgumentParser()
+parser.add_argument('-m', '--model', type=str, default='MLP', choices=['MLP','CNN','GraphConv','GIN'], required=True)
+args = parser.parse_args()
+
+model = args.model
+lr = 5e-3 if model in ['MLP','CNN'] else 5e-4
+window_sizes = [0.5, 1, 1.5, 2]
+eeg_features = ['wav','psd','raw']
+hidden_channels = [32 ,64, 128]
+number_train_samples = [1, 2, 4, 8]
+l2s = [0,0.01,0.04,0.16, 0.64]
+drs = [0,0.25,0.5]
 
 
-total_runs = len(window_sizes) * len(eeg_features) * len(models) * len(hidden_channels) * len(number_train_samples) * len(batch_sizes)  * len(learning_rates) * len(dropout_rates)  * len(activations) 
+grid_search = [(ws,ef,hc,nts,l2,dr) for ws in window_sizes for nts in number_train_samples for ef in eeg_features for hc in hidden_channels for l2 in l2s for dr in drs ]
+total_runs = len(grid_search) 
+
+
 print(f'Running {total_runs} experiments')
-exit()
-
 current_run = 1
-for ws in window_sizes:
-	for feature in eeg_features:
-		for model in models:
-			for hc in hidden_channels:
-				for nts in number_train_samples:
-					for bs in batch_sizes:
-						for lr in learning_rates:
-							for dr in dropout_rates:
-								for act in activations:
-
-									bashCommand = f"python3 main.py -ws {ws} -ef {feature} -m {model} -hc {hc} -nts {nts} -bs {bs} -lr {lr} -act {act} -dr {dr} -wtr -esp 30 -trd cnn_test_1"
-									print(f'Running ({current_run / total_runs}): {bashCommand}')
-									process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-									output, error = process.communicate()
-									print(output)
+for ws,ef,hc,nts,l2,dr in grid_search:
+	bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model}_experiments -tmd {model}_checkpoint"
+	print(f'Running ({current_run} / {total_runs}): {bashCommand}')
+	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+	output, error = process.communicate()
+	print('-OK-')
+	current_run+=1

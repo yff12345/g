@@ -7,7 +7,7 @@ class CNN(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, n_classes, dr, activation_fn):
         super(CNN, self).__init__()
         
-        self.cnn1 = torch.nn.Conv1d(4, 1, kernel_size=1, stride=1)
+        self.cnn1 = torch.nn.Conv1d(in_channels, 1, kernel_size=1, stride=1)
         
         self.lin1 = torch.nn.Linear(32, hidden_channels)
         self.lin2 = torch.nn.Linear(hidden_channels, hidden_channels*2)

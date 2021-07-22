@@ -108,7 +108,7 @@ class Electrodes:
     # Add self-loops
     np.fill_diagonal(adj_matrix,1)
 
-    # Global connections get initialised to -1
+    # Global connections 
     if add_global_connections:
       global_indices = [[np.where(self.channel_names == e[0])[0],np.where(self.channel_names == e[1])[0]] for e in self.global_connections]
       global_indices = np.array(global_indices).squeeze()
@@ -120,10 +120,10 @@ class Electrodes:
 
   def generate_in_between_positions(self, num_points = 1, verbose = False):
     """
-    Returns new positions in-between current electrodes with a link between them
+    Returns new positions in-between electrodes with a link between them
     :param positions_3d: List of 3D electrode positional information [x,y,z]
-    :param adjacency_matrix: Graph adjacency matrix. Will determine where to include the new points
-    :param num_points: Number of points to include for each value in the adjacency matrix > 0
+    :param adjacency_matrix: Graph adjacency matrix. Where to include the new points
+    :param num_points: Number of points to include inside each link
     :return: List of positions [x,y,z]
     """
     if num_points < 1:

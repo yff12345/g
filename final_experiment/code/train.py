@@ -10,19 +10,19 @@ import matplotlib.pyplot as plt
 from scipy.ndimage.filters import gaussian_filter1d
 
 
-learning_rate = 1e-5
-lrs, losses2 = [], []
+# learning_rate = 1e-5
+# lrs, losses2 = [], []
 
 def train_epoch(model, loader ,optimizer ,criterion,args):
 
-    global learning_rate
-    global lrs
-    global losses
+    # global learning_rate
+    # global lrs
+    # global losses
 
     model.train()
     losses, outputs, targets = [], [] , []
     for batch in loader:
-        optimizer = torch.optim.Adam(model.parameters(),lr=learning_rate, weight_decay=args.learning_rate_decay)
+        # optimizer = torch.optim.Adam(model.parameters(),lr=learning_rate, weight_decay=args.learning_rate_decay)
         optimizer.zero_grad()
         batch = batch.to(args.device)
         y = batch.y
@@ -35,17 +35,17 @@ def train_epoch(model, loader ,optimizer ,criterion,args):
         optimizer.step()
 
 
-        lrs.append(learning_rate)
-        losses2.append(loss.detach().item())
-        learning_rate += learning_rate * 0.02
+        # lrs.append(learning_rate)
+        # losses2.append(loss.detach().item())
+        # learning_rate += learning_rate * 0.02
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
 
 def main(model,train_dataset,val_dataset,criterion, args):
 
 
-    global learning_rate
-    global lrs
-    global losses
+    # global learning_rate
+    # global lrs
+    # global losses
 
     # Create dataloaders
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=args.shuffle_train)
@@ -83,7 +83,7 @@ def main(model,train_dataset,val_dataset,criterion, args):
         # Log to console
         if args.verbose:
             print(f'--Epoch : {epoch} --')
-            print(learning_rate)
+            # print(learning_rate)
             print(f'Train loss: {mean_train_loss:.5f} - Val loss: {mean_val_loss:.5f} ')
             print(f'Train acc: {train_acc:.3f} - Val acc: {val_acc:.3f} ')
             print(f'Train precision: {train_prec:.3f} - Val precision: {val_prec:.3f} ')
@@ -102,25 +102,25 @@ def main(model,train_dataset,val_dataset,criterion, args):
             if early_stopping_count >= args.early_stopping_patience:
                 break
 
-        if learning_rate>=1e-1:
-            # fig, ax = plt.subplots()
-            # plt.subplot(1, 3, 1)
-            # plt.xlabel('batch number')
-            # plt.ylabel('learning rate')
-            # plt.yscale('log')
-            # plt.plot(lrs)
-            # plt.subplot(1, 3, 2)
-            # plt.xlabel('batch number')
-            # plt.ylabel('loss')
-            # plt.plot(losses2)
-            # plt.subplot(1, 3, 3)
-            plt.title(f'{args.model} ({args.hidden_channels} hidden channels)')
-            plt.xlabel('learning rate')
-            plt.ylabel('loss (smoothed)')
-            plt.xscale('log')
-            plt.plot(lrs,gaussian_filter1d(losses2, sigma=2))
-            plt.show()
-            exit()
+        # if learning_rate>=1e-1:
+        #     # fig, ax = plt.subplots()
+        #     # plt.subplot(1, 3, 1)
+        #     # plt.xlabel('batch number')
+        #     # plt.ylabel('learning rate')
+        #     # plt.yscale('log')
+        #     # plt.plot(lrs)
+        #     # plt.subplot(1, 3, 2)
+        #     # plt.xlabel('batch number')
+        #     # plt.ylabel('loss')
+        #     # plt.plot(losses2)
+        #     # plt.subplot(1, 3, 3)
+        #     plt.title(f'{args.model} ({args.hidden_channels} hidden channels)')
+        #     plt.xlabel('learning rate')
+        #     plt.ylabel('loss (smoothed)')
+        #     plt.xscale('log')
+        #     plt.plot(lrs,gaussian_filter1d(losses2, sigma=2))
+        #     plt.show()
+        #     exit()
 
     end_time = time.time()
     print('--Finished training--')
