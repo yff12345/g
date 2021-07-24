@@ -71,7 +71,7 @@ def main(model, dataset, criterion , args, train_time, best_epoch):
         print('Writing to logs...')
         records = {}
         # Define records
-        settings = ['eeg_feature','model','hidden_channels','window_size','batch_size','learning_rate','dropout_rate', 'activation_funct','number_train_samples']
+        settings = ['eeg_feature','model','hidden_channels','window_size','batch_size','learning_rate','dropout_rate','weight_decay', 'activation_funct','number_train_samples']
         for s in settings:
             records[s] = getattr(args,s) 
         records['number_val_samples'] = 100
