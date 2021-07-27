@@ -82,7 +82,7 @@ class DEAPDataset(InMemoryDataset):
             # Load raw file as np array
             participant_data = scipy.io.loadmat(f'{self.raw_dir}/{raw_name}')
             if self.args.remove_baseline_signal_noise_removal:
-                signal_data = torch.FloatTensor(participant_data['data'][:,:32,:])
+                signal_data = torch.FloatTensor(participant_data['data'][:,:32,128*3:])
             else:
                 signal_data = torch.FloatTensor(remove_baseline_mean(participant_data['data'][:,:32,:]))
             processed = []
