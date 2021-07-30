@@ -3,6 +3,8 @@ import math
 from numpy.random import MT19937
 from numpy.random import RandomState, SeedSequence
 
+from einops import rearrange
+
 def get_split_indices(target, number_train_samples, dataset_len, dont_shuffle_data = False):
     windows_per_participant = dataset_len // 32
     # Use number_train_samples as training samples, 100 for validation and the remaining for testing 
@@ -14,18 +16,19 @@ def get_split_indices(target, number_train_samples, dataset_len, dont_shuffle_da
         indices = np.arange(0,dataset_len).reshape((32,40,windows_per_participant // 40))
         # Define indices in shape p,v,w then transpose to w,v,p for participant classification and w,p,v for video classification
         indices = indices.transpose(2,1,0) if target == 'participant_id' else indices.transpose(2,0,1)
+
         if not dont_shuffle_data:
             # TODO: Shuffle
             print('Shuffling dataset before sub sampling train/val/test')
-            # Shuffle along first axis 
+            # Shuffle along first and second axis 
+            orig_shape = indices.shape
+            indices = rearrange(indices, 'a b c -> (a b) c')
             np.random.shuffle(indices)
-            # Shuffle along second axis 
-            [np.random.shuffle(x) for x in indices]
+            indices.reshape(orig_shape)
 
         indices = indices.flatten()
         sample_size = 32 if target == 'participant_id' else 40
         train_idx, val_idx = number_train_samples*sample_size, number_train_samples*sample_size + 100 * sample_size
-
         train_mask = indices[:train_idx]
         val_mask = indices[train_idx:val_idx]
         test_mask = indices[val_idx:]

@@ -4,11 +4,13 @@ import torch
 import argparse
 import numpy as np
 import torch.nn as nn
+import matplotlib.pyplot as plt
 from DEAPDataset import DEAPDataset
 from models.MLP import MLP
 from models.CNN import CNN
 from models.GraphConv import GraphConv
 from models.GIN import GIN
+# from decimals import *
 
 from train import main as train_main
 from test import main as test_main
@@ -60,9 +62,25 @@ print(dataset)
 
 train_mask, val_mask, test_mask = get_split_indices(args.target, args.number_train_samples, len(dataset) ,args.dont_shuffle_data)
 
+samples_per_participant = int((60/args.window_size)*40)
+
 train_dataset = dataset[train_mask]
 val_dataset = dataset[val_mask]
 test_dataset = dataset[test_mask]
+
+for i in range(args.number_train_samples):
+    idx = train_mask[32*i]
+    video = int(idx//(samples_per_participant/40))
+    second = idx/(samples_per_participant/40)*60%60
+    print(f'Picking train sample {idx}/{samples_per_participant} (Video {video} seconds {second}-{second+args.window_size}) - ({args.eeg_feature})')
+
+    # Plot feature matrices
+    if False:
+        for j in range(32):
+            plt.subplot(1, 32, j+1)
+            plt.imshow(train_dataset[i*32+j].x)
+            plt.axis('off')
+        plt.show()
 
 print(f'Device: {args.device}')
 

@@ -17,6 +17,7 @@ from sklearn.manifold import TSNE
 def test_epoch(model, loader ,criterion,args):
     model.eval()
     losses, outputs, targets = [], [] , [] # This might waste GPU space during testing
+    confusion_matrix = torch.zeros(32, 32)
     for batch in loader:
         batch = batch.to(args.device)
         y = batch.y if args.target != 'emotion_labels' else (batch.y[:,args.target_emotion] > 5).long()
@@ -25,14 +26,33 @@ def test_epoch(model, loader ,criterion,args):
         targets.append(y)
         loss = criterion(out,y)
         losses.append(loss.detach().item())
+
+        _, preds = torch.max(out, 1)
+        for t, p in zip(y.view(-1), preds.view(-1)):
+            confusion_matrix[t.long(), p.long()] += 1
+    plt.imshow(confusion_matrix)
+    plt.show()
+
+
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
+
+    with torch.no_grad():
+        for i, (inputs, classes) in enumerate(dataloaders['val']):
+            inputs = inputs.to(device)
+            classes = classes.to(device)
+            outputs = model_ft(inputs)
+            _, preds = torch.max(outputs, 1)
+            for t, p in zip(classes.view(-1), preds.view(-1)):
+                    confusion_matrix[t.long(), p.long()] += 1
+
+    print(confusion_matrix)
 
 def main(model, dataset, criterion , args, train_time, best_epoch):
     # Load checkpoint
     model.load_state_dict(torch.load(f'../checkpoints/{args.test_model_dict}'))
 
     # Create loader
-    test_loader = DataLoader(dataset, batch_size=args.batch_size) 
+    test_loader = DataLoader(dataset, batch_size=args.batch_size, shuffle=True) 
 
     # Test epoch
     mean_test_loss, test_outputs, test_targets = test_epoch(model, test_loader ,criterion,args)
