@@ -30,8 +30,8 @@ def test_epoch(model, loader ,criterion,args):
         _, preds = torch.max(out, 1)
         for t, p in zip(y.view(-1), preds.view(-1)):
             confusion_matrix[t.long(), p.long()] += 1
-    plt.imshow(confusion_matrix)
-    plt.show()
+    # plt.imshow(confusion_matrix)
+    # plt.show()
 
 
     return np.array(losses).mean(),torch.cat(outputs), torch.cat(targets)
