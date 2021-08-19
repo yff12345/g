@@ -68,11 +68,13 @@ train_dataset = dataset[train_mask]
 val_dataset = dataset[val_mask]
 test_dataset = dataset[test_mask]
 
+train_samples = []
 for i in range(args.number_train_samples):
     idx = train_mask[32*i]
     video = int(idx//(samples_per_participant/40))
     second = idx/(samples_per_participant/40)*60%60
     print(f'Picking train sample {idx}/{samples_per_participant} (Video {video} seconds {second}-{second+args.window_size}) - ({args.eeg_feature})')
+    train_samples.append({'idx':idx, 'samples_per_participant':samples_per_participant, 'video':video, 'second_f':second, 'second_t':second+args.window_size})
 
     # Plot feature matrices
     if False:
@@ -117,5 +119,5 @@ train_time, best_epoch = None, None
 if not args.dont_train:
     train_time, best_epoch = train_main(model,train_dataset,val_dataset,criterion,args)
 
-test_main(model,test_dataset,criterion,args,train_time, best_epoch)
+test_main(model,test_dataset,train_dataset,val_dataset,criterion,args,train_time, best_epoch, train_samples)
 
