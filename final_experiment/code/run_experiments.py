@@ -35,7 +35,7 @@ for model,ws,ef,hc,nts in grid_search:
 	if model == 'LR' and hc != 64:
 		continue
 
-	test_model_dict = f'{model}_{ws}'
+	test_model_dict = f'{model}_{ws}_{ef}'
 	bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {test_model_dict} -tmd {test_model_dict}"
 	print(f'Running ({current_run} / {total_runs}): {bashCommand}')
 	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
