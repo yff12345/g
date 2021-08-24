@@ -9,9 +9,9 @@ class GIN(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, n_classes, dr, activation_fn):
         super(GIN, self).__init__()
         
-        self.gconv1 = GINConv(nn.Linear(in_channels, hidden_channels))
+        self.gconv1 = GINConv(nn.Linear(in_channels, in_channels))
         
-        self.lin1 = nn.Linear(hidden_channels*32,hidden_channels)
+        self.lin1 = nn.Linear(in_channels*32,hidden_channels)
         self.lin2 = nn.Linear(hidden_channels, n_classes)
 
         self.act = nn.ReLU() if activation_fn == 'relu' else nn.Tanh()
@@ -25,7 +25,6 @@ class GIN(torch.nn.Module):
         x, edge_index, edge_attr = batch.x, batch.edge_index, batch.edge_attr
         x = self.gconv1(x, edge_index)
         x = self.act(x)
-        x = F.dropout(x, p=self.dr/2, training=self.training)
 
         # Flatten
         x = rearrange(x, '(bs e) f -> bs (f e)', bs=bs)

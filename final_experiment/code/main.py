@@ -9,7 +9,7 @@ from DEAPDataset import DEAPDataset
 from models.MLP import MLP
 from models.CNN import CNN
 from models.GraphConv import GraphConv
-from models.GIN import GIN
+from models.LogisticRegression import LogisticRegression
 # from decimals import *
 
 from train import main as train_main
@@ -28,14 +28,14 @@ parser.add_argument('-nts', '--number_train_samples', type=int, default=8, help=
 parser.add_argument('-dsd', '--dont_shuffle_data', default=False, action='store_true', help='Do not shuffle dataset before sub sampling ')
 parser.add_argument('-dev', '--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu', choices=['cuda','cpu'], help='Device')
 parser.add_argument('-dt', '--dont_train', default=False, action='store_true', help='Load checkpoint and test')
-parser.add_argument('-bs', '--batch_size', type=int, default=16)
+parser.add_argument('-bs', '--batch_size', type=int, default=32)
 parser.add_argument('-v', '--verbose', default=False, action='store_true', help='Print training logs to console')
 parser.add_argument('-kfvo', '--kfold_validation_offset', type=int, default=0)
 parser.add_argument('-ws', '--window_size', type=float, default=1.0, help='Size of the windows taken from each video (seconds). Should be divisible by 60')
 
 
 # Train args
-parser.add_argument('-m', '--model', type=str, default='MLP', choices=['MLP','CNN','GraphConv','GIN'], help='Which model architecture to train')
+parser.add_argument('-m', '--model', type=str, default='MLP', choices=['MLP','CNN','GraphConv','LR'], help='Which model architecture to train')
 parser.add_argument('-hc', '--hidden_channels', type=int, default=64, help='Number of hidden channels')
 parser.add_argument('-opt', '--optimizer', type=str, default='Adam', choices=['Adam','Adagrad','SGD'])
 parser.add_argument('-lr', '--learning_rate', type=float, default=5e-4)
@@ -105,8 +105,8 @@ elif args.model == 'CNN':
     model = CNN(in_channels,args.hidden_channels, n_classes, args.dropout_rate,args.activation_funct).to(args.device) 
 elif args.model == 'GraphConv':
     model = GraphConv(in_channels,args.hidden_channels, n_classes, args.dropout_rate,args.activation_funct).to(args.device) 
-elif args.model == 'GIN':
-    model = GIN(in_channels,args.hidden_channels, n_classes, args.dropout_rate,args.activation_funct).to(args.device) 
+elif args.model == 'LR':
+    model = LogisticRegression(in_channels,n_classes).to(args.device) 
 
 print(model)
 

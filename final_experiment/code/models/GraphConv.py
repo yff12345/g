@@ -9,10 +9,9 @@ class GraphConv(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, n_classes, dr, activation_fn):
         super(GraphConv, self).__init__()
         
-        self.gconv1 = nnGraphConv(in_channels,hidden_channels)
-        self.gconv2 = nnGraphConv(hidden_channels,hidden_channels)
+        self.gconv1 = nnGraphConv(in_channels,in_channels)
         
-        self.lin1 = torch.nn.Linear(hidden_channels*32,hidden_channels)
+        self.lin1 = torch.nn.Linear(in_channels*32,hidden_channels)
         self.lin2 = torch.nn.Linear(hidden_channels, n_classes)
 
         self.act = nn.ReLU() if activation_fn == 'relu' else nn.Tanh()
@@ -25,9 +24,6 @@ class GraphConv(torch.nn.Module):
         bs = len(torch.unique(batch.batch)) if 'batch' in dir(batch) else 1
         x, edge_index, edge_attr = batch.x, batch.edge_index, batch.edge_attr
         x = self.gconv1(x, edge_index, edge_attr)
-        x = self.act(x)
-        x = F.dropout(x, p=self.dr/2, training=self.training)
-        x = self.gconv2(x, edge_index, edge_attr)
         x = self.act(x)
 
         # Flatten
