@@ -5,8 +5,8 @@ do
 	do
 		for ef in "psd" "wav" "raw";
 		do
-			echo "export CUDA_VISIBLE_DEVICES=$i && nohup python code/run_experiments.py -m $model -ws $ws -ef $ef &"
-			export CUDA_VISIBLE_DEVICES=$i && nohup python code/run_experiments.py -m $model -ws $ws -ef $ef &
+			echo "export CUDA_VISIBLE_DEVICES=$i && nohup python run_experiments.py -m $model -ws $ws -ef $ef &"
+			export CUDA_VISIBLE_DEVICES=$i && nohup python run_experiments.py -m $model -ws $ws -ef $ef &
 			i=$((i+1))
 			if [ $i -gt 3 ]
 			then 
