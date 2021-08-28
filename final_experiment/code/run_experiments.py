@@ -2,6 +2,7 @@
 
 import subprocess
 import argparse
+import csv
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model', type=str, default=None, choices=['MLP','CNN','GraphConv','LR'])
@@ -29,16 +30,22 @@ total_runs = len(grid_search)
 
 
 print(f'Running {total_runs} experiments')
-current_run = 1
-for model,ws,ef,hc,nts in grid_search:
 
-	if model == 'LR' and hc != 64:
+if args.model and args.window_size and args.eeg_feature:
+	test_model_dict = f'{args.model}_{args.window_size}_{args.eeg_feature}'
+	file = open(f"../logs/{test_model_dict}.csv")
+	reader = csv.reader(file)
+	completed_exp_n = len(list(reader))-1
+	print('Starting from exp ',completed_exp_n)
+
+for i,(model,ws,ef,hc,nts) in enumerate(grid_search):
+
+	if (model == 'LR' and hc != 64) or i<completed_exp_n:
 		continue
 
 	test_model_dict = f'{model}_{ws}_{ef}'
 	bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {test_model_dict} -tmd {test_model_dict}"
-	print(f'Running ({current_run} / {total_runs}): {bashCommand}')
+	print(f'Running ({i+1} / {total_runs}): {bashCommand}')
 	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 	output, error = process.communicate()
 	print('-OK-')
-	current_run+=1
