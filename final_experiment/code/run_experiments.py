@@ -27,6 +27,7 @@ experiments = [(en,ef,ws,nts) for en in experiment_n for ef in features for ws i
 total_runs = len(experiments) * len(models)
 print(f'Running {total_runs} experiments')
 
+max_n_running = int(os.getenv('MAX_N_RUNNING')) or 4
 n_gpus, use_gpu_n = torch.cuda.device_count(), 0
 running_procs = []
 current_exp_n = 1
@@ -49,7 +50,6 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 		running_procs.append(process)
 		current_exp_n += 1		
 
-		max_n_running = os.getenv('MAX_N_RUNNING') or 4
 		while len(running_procs) >= max_n_running:
 			print('Max exp running...', end = "\r")
 			still_running = []
