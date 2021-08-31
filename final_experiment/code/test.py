@@ -144,7 +144,10 @@ def main(model, dataset,train_dataset,val_dataset, criterion , args, train_time,
         records['pytorch_total_params'] = sum(p.numel() for p in model.parameters())
         records['train_time'] = train_time
         records['best_epoch'] = best_epoch
-        records['train_samples'] = '\n'.join(['{idx}/{samples_per_participant} v{video} {second_f}-{second_t}'.format_map(ts) for ts in train_samples])
+        records['experiment_id'] = args.test_model_dict
+        records['train_samples'] = ' '.join([str(x) for x in args.train_val_sample_array[100:]])
+        records['val_samples'] = ' '.join([str(x) for x in args.train_val_sample_array[:100]])
+        # records['train_samples'] = '\n'.join(['{idx}/{samples_per_participant} v{video} {second_f}-{second_t}'.format_map(ts) for ts in train_samples])
 
         # Write results to csv
         with open(f'../logs/{args.test_results_dir}.csv','a') as fd:
