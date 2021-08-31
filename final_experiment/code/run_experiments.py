@@ -59,20 +59,25 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 			running_procs = still_running
 			time.sleep(5)
 
-		# Switch to next GPU. Use the one with most ammount of free memory
-		most_free_mem = 0 
-		for gpu_n in range(n_gpus):
-			bashCommand = f'nvidia-smi --query-gpu=memory.free --format=csv -i {gpu_n} | grep -Eo [0-9]+'
-			process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-			output, error = process.communicate()
-			if error == None:
-				free_mem_mb = int(re.search("[0-9]+", str(output))[0])
-				if free_mem_mb > most_free_mem:
-					most_free_mem = free_mem_mb
-					use_gpu_n = gpu_n
-			else:
-				print(error)
-				exit()
+		# Switch to next GPU. 
+		if current_exp_n <= max_n_running:
+			use_gpu_n += 1
+			use_gpu_n = use_gpu_n if use_gpu_n < n_gpus else 0
+		# Use the one with most ammount of free memory
+		else:
+			most_free_mem = 0 
+			for gpu_n in range(n_gpus):
+				bashCommand = f'nvidia-smi --query-gpu=memory.free --format=csv -i {gpu_n} | grep -Eo [0-9]+'
+				process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+				output, error = process.communicate()
+				if error == None:
+					free_mem_mb = int(re.search("[0-9]+", str(output))[0])
+					if free_mem_mb > most_free_mem:
+						most_free_mem = free_mem_mb
+						use_gpu_n = gpu_n
+				else:
+					print(error)
+					exit()
 
 
 
