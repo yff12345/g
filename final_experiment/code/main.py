@@ -25,6 +25,8 @@ parser.add_argument('-t', '--target', type=str, default='participant_id', choice
 parser.add_argument('-p', '--participant', type=int, default=None, choices=list(range(1,33)), help='If != None it specifies an individual participant to use as raw data')
 parser.add_argument('-rgc','--remove_global_connections', default=False, action='store_true',help='Remove global connections from the graph adjacency matrix')
 parser.add_argument('-nts', '--number_train_samples', type=int, default=8, help='Number of training samples per class')
+parser.add_argument('-tsa','--train_val_sample_array', nargs='+', type=int,default=[], help='First 100 indices are validation and then training')
+
 parser.add_argument('-dsd', '--dont_shuffle_data', default=False, action='store_true', help='Do not shuffle dataset before sub sampling ')
 parser.add_argument('-dev', '--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu', choices=['cuda','cpu'], help='Device')
 parser.add_argument('-dt', '--dont_train', default=False, action='store_true', help='Load checkpoint and test')
@@ -60,15 +62,15 @@ args = parser.parse_args()
 dataset = DEAPDataset(args)
 print(dataset)
 
-train_mask, val_mask, test_mask = get_split_indices(args.target, args.number_train_samples, len(dataset) ,args.dont_shuffle_data)
-
-samples_per_participant = int((60/args.window_size)*40)
+train_mask, val_mask, test_mask = get_split_indices(args.target, args.number_train_samples, len(dataset) ,args.dont_shuffle_data, args.train_val_sample_array)
 
 train_dataset = dataset[train_mask]
 val_dataset = dataset[val_mask]
 test_dataset = dataset[test_mask]
 
+
 train_samples = []
+samples_per_participant = int((60/args.window_size)*40)
 for i in range(args.number_train_samples):
     idx = train_mask[32*i]
     video = int(idx//(samples_per_participant/40))
@@ -114,7 +116,7 @@ pytorch_total_params = sum(p.numel() for p in model.parameters())
 print(f'Model parameter count: {pytorch_total_params}')
 # print(f'K fold offset: {args.kfold_validation_offset}')
 print(f'Train dataset: {train_dataset} | Validation dataset: {val_dataset} | Test dataset: {test_dataset}',)
-
+exit()
 train_time, best_epoch = None, None
 if not args.dont_train:
     train_time, best_epoch = train_main(model,train_dataset,val_dataset,criterion,args)

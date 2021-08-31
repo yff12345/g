@@ -6,6 +6,7 @@ import torch
 import time
 import subprocess
 import csv
+import numpy as np
 
 # Fixed hyperparameters
 lr = 5e-4
@@ -27,13 +28,18 @@ experiments = [(en,ef,ws,nts) for en in experiment_n for ef in features for ws i
 total_runs = len(experiments) * len(models)
 print(f'Running {total_runs} experiments')
 
-max_n_running = int(os.getenv('MAX_N_RUNNING')) or 4
+max_n_running = (os.getenv('MAX_N_RUNNING') and int(os.getenv('MAX_N_RUNNING'))) or 1
 n_gpus, use_gpu_n = torch.cuda.device_count(), 0
 running_procs = []
 current_exp_n = 1
 
 for i,(en,ef,ws,nts) in enumerate(experiments):
-	# TODO: Get train data indices for this set of experiments
+	# Get train data indices for this set of experiments
+	samples_per_participant = int((60/ws)*40)
+	# First 100 are validation indices, then train
+	val_train_samples_idx = np.random.default_rng().choice(samples_per_participant, size=nts+100, replace=False).astype(str)
+	
+	# Pick nts samples randomly
 	for model in models:
 		# Get model name and hidden channels
 		if model == 'LR':
@@ -44,19 +50,21 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 		# Run training job
 		my_env = os.environ.copy()
 		my_env['CUDA_VISIBLE_DEVICES'] = str(use_gpu_n)
-		bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model} -tmd {current_exp_n}"
+		bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model} -tmd {current_exp_n} -dsd -tsa {' '.join(val_train_samples_idx) }"
 		process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE, env=my_env)
 		print(f'Running ({current_exp_n} / {total_runs}) GPU({str(use_gpu_n)}) PID({process.pid}): {bashCommand}')
 		running_procs.append(process)
 		current_exp_n += 1		
 
 		while len(running_procs) >= max_n_running:
-			print('Max exp running...', end = "\r")
+			# print('Max exp running...', end = "\r")
 			still_running = []
 			for proc in running_procs:
 				res = proc.poll()
 				if res is None:
 					still_running.append(proc)
+				else:
+					print(f'-Process {res.pid} finished running (OK)-')
 			running_procs = still_running
 			time.sleep(5)
 
