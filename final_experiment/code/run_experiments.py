@@ -1,51 +1,79 @@
 #!/usr/bin/env python
 
+import os
+import re
+import torch
+import time
 import subprocess
-import argparse
 import csv
 
-parser = argparse.ArgumentParser()
-parser.add_argument('-m', '--model', type=str, default=None, choices=['MLP','CNN','GraphConv','LR'])
-parser.add_argument('-ws', '--window_size', type=float, default=None, choices=[0.5, 1, 1.5, 2])
-parser.add_argument('-ef', '--eeg_feature', type=str, default=None, choices=['wav','psd','raw'])
-args = parser.parse_args()
-
-models = [args.model] if args.model else ['MLP','CNN','GraphConv','LR']
-window_sizes = [args.window_size] if args.window_size else [0.5, 1, 1.5, 2]
-eeg_features = [args.eeg_feature] if args.eeg_feature else ['wav','psd','raw']
-
+# Fixed hyperparameters
 lr = 5e-4
 l2 = 0 
 dr = 0.25
 
-hidden_channels = [64, 128, 256, 512, 1024, 2048]
+# Experiments
+experiment_n = list(range(10))
+features = ['wav','psd','raw']
+window_sizes = [0.25, 0.5, 1, 1.5, 2]
 number_train_samples = [1, 2, 4, 8]
+# These should use the same training data
+model_names = ['MLP','CNN','GraphConv','LR']
+hidden_channels = [64, 128, 256, 512, 1024, 2048]
+models = list(filter(None, [f'{name}_{hc}' if not name == 'LR' else None if hc != 64 else 'LR' for name in model_names for hc in hidden_channels ]))
+experiments = [(en,ef,ws,nts) for en in experiment_n for ef in features for ws in window_sizes for nts in number_train_samples]
 
-if models[0] == 'LR':
-	hidden_channels = [64]
-
-
-grid_search = [(model,ws,ef,hc,nts) for model in models for ws in window_sizes for nts in number_train_samples for ef in eeg_features for hc in hidden_channels ]
-total_runs = len(grid_search) 
-
-
+# Number of experiments run in total
+total_runs = len(experiments) * len(models)
 print(f'Running {total_runs} experiments')
 
-if args.model and args.window_size and args.eeg_feature:
-	test_model_dict = f'{args.model}_{args.window_size}_{args.eeg_feature}'
-	file = open(f"../logs/{test_model_dict}.csv")
-	reader = csv.reader(file)
-	completed_exp_n = len(list(reader))-1
-	print('Starting from exp ',completed_exp_n)
+n_gpus, use_gpu_n = torch.cuda.device_count(), 0
+running_procs = []
+current_exp_n = 1
+max_n_running = 6 # Change to ENV var.
+for i,(en,ef,ws,nts) in enumerate(experiments):
+	# TODO: Get train data indices for this set of experiments
+	for model in models:
+		# Get model name and hidden channels
+		if model == 'LR':
+			hc = 0
+		else:
+			model, hc = model.split('_')
 
-for i,(model,ws,ef,hc,nts) in enumerate(grid_search):
+		# Run training job
+		my_env = os.environ.copy()
+		my_env['CUDA_VISIBLE_DEVICES'] = str(use_gpu_n)
+		bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model} -tmd {i}"
+		process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE, env=my_env)
+		print(f'Running ({current_exp_n} / {total_runs}) GPU({str(use_gpu_n)}) PID({process.pid}): {bashCommand}')
+		running_procs.append(process)
+		current_exp_n += 1		
 
-	if (model == 'LR' and hc != 64) or i<completed_exp_n:
-		continue
+		while len(running_procs) >= max_n_running:
+			print('Max exp running...', end = "\r")
+			still_running = []
+			for proc in running_procs:
+				res = proc.poll()
+				if res is None:
+					still_running.append(proc)
+			running_procs = still_running
+			time.sleep(5)
 
-	test_model_dict = f'{model}_{ws}_{ef}'
-	bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {test_model_dict} -tmd {test_model_dict}"
-	print(f'Running ({i+1} / {total_runs}): {bashCommand}')
-	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-	output, error = process.communicate()
-	print('-OK-')
+		# Switch to next GPU. Use the one with most ammount of free memory
+		most_free_mem = 0 
+		for gpu_n in range(n_gpus):
+			bashCommand = f'nvidia-smi --query-gpu=memory.free --format=csv -i {gpu_n} | grep -Eo [0-9]+'
+			process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+			output, error = process.communicate()
+			if error == None:
+				free_mem_mb = int(re.search("[0-9]+", str(output))[0])
+				if free_mem_mb > most_free_mem:
+					most_free_mem = free_mem_mb
+					use_gpu_n = gpu_n
+			else:
+				print(error)
+				exit()
+
+
+
+		
