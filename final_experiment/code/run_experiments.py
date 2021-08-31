@@ -30,7 +30,7 @@ print(f'Running {total_runs} experiments')
 n_gpus, use_gpu_n = torch.cuda.device_count(), 0
 running_procs = []
 current_exp_n = 1
-max_n_running = 6 # Change to ENV var.
+
 for i,(en,ef,ws,nts) in enumerate(experiments):
 	# TODO: Get train data indices for this set of experiments
 	for model in models:
@@ -49,6 +49,7 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 		running_procs.append(process)
 		current_exp_n += 1		
 
+		max_n_running = os.getenv('MAX_N_RUNNING') or 4
 		while len(running_procs) >= max_n_running:
 			print('Max exp running...', end = "\r")
 			still_running = []
