@@ -44,7 +44,7 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 		# Run training job
 		my_env = os.environ.copy()
 		my_env['CUDA_VISIBLE_DEVICES'] = str(use_gpu_n)
-		bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model} -tmd {i}"
+		bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model} -tmd {current_exp_n}"
 		process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE, env=my_env)
 		print(f'Running ({current_exp_n} / {total_runs}) GPU({str(use_gpu_n)}) PID({process.pid}): {bashCommand}')
 		running_procs.append(process)
