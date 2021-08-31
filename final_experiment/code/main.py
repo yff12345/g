@@ -116,7 +116,6 @@ pytorch_total_params = sum(p.numel() for p in model.parameters())
 print(f'Model parameter count: {pytorch_total_params}')
 # print(f'K fold offset: {args.kfold_validation_offset}')
 print(f'Train dataset: {train_dataset} | Validation dataset: {val_dataset} | Test dataset: {test_dataset}',)
-exit()
 train_time, best_epoch = None, None
 if not args.dont_train:
     train_time, best_epoch = train_main(model,train_dataset,val_dataset,criterion,args)
