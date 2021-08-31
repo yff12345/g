@@ -4,6 +4,7 @@ import os
 import re
 import torch
 import time
+from datetime import datetime
 import subprocess
 import csv
 import numpy as np
@@ -52,7 +53,7 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 		my_env['CUDA_VISIBLE_DEVICES'] = str(use_gpu_n)
 		bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model} -tmd {current_exp_n} -dsd -tsa {' '.join(val_train_samples_idx) }"
 		process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE, env=my_env)
-		print(f'Running ({current_exp_n} / {total_runs}) GPU({str(use_gpu_n)}) PID({process.pid}): {bashCommand}')
+		print(f'Running ({current_exp_n} / {total_runs}) GPU({str(use_gpu_n)}) PID({process.pid}) ({datetime.now().strftime("%D %H:%M:%S")}): {bashCommand} \n')
 		running_procs.append(process)
 		current_exp_n += 1		
 
