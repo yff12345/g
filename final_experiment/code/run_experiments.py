@@ -64,7 +64,7 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 				if res is None:
 					still_running.append(proc)
 				else:
-					print(f'-Process {res.pid} finished running (OK)-')
+					print(f'-Process {proc.pid} finished running (OK)-')
 			running_procs = still_running
 			time.sleep(5)
 
