@@ -67,7 +67,7 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 				else:
 					print(f'-Process {proc.pid} finished running (OK)-')
 			running_procs = still_running
-			time.sleep(5)
+			time.sleep(1)
 
 		# Switch to next GPU. 
 		if current_exp_n <= max_n_running:
