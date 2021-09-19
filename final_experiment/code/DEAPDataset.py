@@ -89,12 +89,51 @@ class DEAPDataset(InMemoryDataset):
                 # Non-overlapping windows
                 video_windows = skimage.util.view_as_windows(video.numpy(), (32,int(self.window_size*128)), step=int(self.window_size*128)).squeeze()
                 for window in video_windows:
+                    
+                    ### FIGURES
+                    import matplotlib
+                    import matplotlib.pyplot as plt
+                    from matplotlib import rc
+                    # fig, axs = plt.subplots(32, sharex=True, sharey=True)
+                    # fig.suptitle('Sharing both axes')
+                    # axs[0].plot(x, y ** 2)
+                    # axs[1].plot(x, 0.3 * y, 'o')
+                    # axs[2].plot(x, y, '+')
+                    # for i in range(32):
+                    #     # plt.subplots(1, i, sharey=True)
+                    #     axs[i].plot(window[i,:])
+                    #     # print(window[i,:].shape)
+                    # plt.show()
+                    # matplotlib.rcParams.update({'font.size': 22})
+                    # rc('font',**{'family':'','SourceSerifPro':['Regular']})
+                    # csfont = {'fontname':'SourceSerifPro-Regular'}
+                    # rc('text', usetex=True)
+                    matplotlib.rc('font', family='sans-serif') 
+                    matplotlib.rc('font', serif='Helvetica Neue') 
+                    matplotlib.rc('text', usetex='false') 
+                    matplotlib.rcParams.update({'font.size': 18})
+
+                    # plt.plot(np.arange(0,1,1/128),window.T)
+                    # plt.xlabel('time (s)', fontsize=22)
+                    # plt.ylabel('power', fontsize=22)
+                    # plt.show()
+                    ###
+                    
                     if self.feature == 'wav':
                         node_features = process_window_wavelet(window)
                     elif self.feature == 'psd':
                         node_features = process_window_psd(window)
                     else:
                         node_features = process_window_raw(window)
+
+                    fig = plt.figure()
+                    ax = fig.add_subplot(111)
+                    ax.matshow(node_features)
+                    # alpha = ['A', 'B', 'C', 'D']
+                    ax.set_xticklabels([''])
+                    plt.show()
+                    print(node_features.shape)
+                    exit()
 
                     data = Data(x=node_features,edge_attr=edge_attr,edge_index=edge_index, y=torch.LongTensor([target])) if self.include_edge_attr else Data(x=torch.FloatTensor(node_features), edge_index=edge_index, y=torch.LongTensor([target]))
                     data_list.append(data) 
