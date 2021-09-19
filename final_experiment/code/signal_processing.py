@@ -10,7 +10,15 @@ import matplotlib.pyplot as plt
 def process_window_psd(window):
     # Extract power spectral density using welch's method
     freqs, psd = signal.welch(window,fs=128,nperseg=256 if window.shape[1] > 256 else window.shape[1])
-    
+
+    # plt.plot(psd.T)
+    # plt.vlines(4,0,psd.T.max(),color='red',linestyles='dashdot')
+    # plt.vlines(8,0,psd.T.max(),color='red',linestyles='dashdot')
+    # plt.vlines(16,0,psd.T.max(),color='red',linestyles='dashdot')
+    # plt.vlines(32,0,psd.T.max(),color='red',linestyles='dashdot')
+    # plt.vlines(64,0,psd.T.max(),color='red',linestyles='dashdot')
+    # plt.show()
+
     bands = [(4,8),(8,16),(16,32),(32,64)]
     features = []
     for band_from,band_to in bands:
