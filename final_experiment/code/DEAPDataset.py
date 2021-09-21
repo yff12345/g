@@ -108,10 +108,10 @@ class DEAPDataset(InMemoryDataset):
                     # rc('font',**{'family':'','SourceSerifPro':['Regular']})
                     # csfont = {'fontname':'SourceSerifPro-Regular'}
                     # rc('text', usetex=True)
-                    matplotlib.rc('font', family='sans-serif') 
-                    matplotlib.rc('font', serif='Helvetica Neue') 
-                    matplotlib.rc('text', usetex='false') 
-                    matplotlib.rcParams.update({'font.size': 18})
+                    # matplotlib.rc('font', family='sans-serif') 
+                    # matplotlib.rc('font', serif='Helvetica Neue') 
+                    # matplotlib.rc('text', usetex='false') 
+                    # matplotlib.rcParams.update({'font.size': 18})
 
                     # plt.plot(np.arange(0,1,1/128),window.T)
                     # plt.xlabel('time (s)', fontsize=22)
@@ -126,14 +126,14 @@ class DEAPDataset(InMemoryDataset):
                     else:
                         node_features = process_window_raw(window)
 
-                    fig = plt.figure()
-                    ax = fig.add_subplot(111)
-                    ax.matshow(node_features)
-                    # alpha = ['A', 'B', 'C', 'D']
-                    ax.set_xticklabels([''])
-                    plt.show()
-                    print(node_features.shape)
-                    exit()
+                    # fig = plt.figure()
+                    # ax = fig.add_subplot(111)
+                    # ax.matshow(node_features)
+                    # # alpha = ['A', 'B', 'C', 'D']
+                    # ax.set_xticklabels([''])
+                    # plt.show()
+                    # print(node_features.shape)
+                    # exit()
 
                     data = Data(x=node_features,edge_attr=edge_attr,edge_index=edge_index, y=torch.LongTensor([target])) if self.include_edge_attr else Data(x=torch.FloatTensor(node_features), edge_index=edge_index, y=torch.LongTensor([target]))
                     data_list.append(data) 
