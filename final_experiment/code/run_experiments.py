@@ -15,7 +15,7 @@ l2 = 0
 dr = 0.25
 
 # Experiments
-experiment_n = list(range(10))
+experiment_n = list(range(5))
 features = ['raw']
 window_sizes = [1, 2]
 number_train_samples = [16, 32, 64, 128]
@@ -91,4 +91,13 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 
 
 
-		
+while len(running_procs) >= 0:
+	still_running = []
+	for proc in running_procs:
+		res = proc.poll()
+		if res is None:
+			still_running.append(proc)
+		else:
+			print(f'-Process {proc.pid} finished running (OK)-')
+	running_procs = still_running
+	time.sleep(1)		
