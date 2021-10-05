@@ -16,12 +16,12 @@ dr = 0.25
 
 # Experiments
 experiment_n = list(range(10))
-features = ['wav','psd','raw']
-window_sizes = [0.25, 0.5, 1, 1.5, 2]
-number_train_samples = [1, 2, 4, 8]
+features = ['raw']
+window_sizes = [1, 2]
+number_train_samples = [16, 32, 64, 128]
 # These should use the same training data
-model_names = ['MLP','CNN','GraphConv','LR']
-hidden_channels = [64, 128, 256, 512, 1024, 2048]
+model_names = ['GraphConv']
+hidden_channels = [512, 1024]
 models = list(filter(None, [f'{name}_{hc}' if not name == 'LR' else None if hc != 64 else 'LR' for name in model_names for hc in hidden_channels ]))
 experiments = [(en,ef,ws,nts) for en in experiment_n for ef in features for ws in window_sizes for nts in number_train_samples]
 
@@ -30,7 +30,7 @@ total_runs = len(experiments) * len(models)
 print(f'Running {total_runs} experiments')
 
 max_n_running = (os.getenv('MAX_N_RUNNING') and int(os.getenv('MAX_N_RUNNING'))) or 1
-n_gpus, use_gpu_n = torch.cuda.device_count(), 0
+n_gpus, use_gpu_n = torch.cuda.device_count(), 1
 running_procs = []
 current_exp_n = 1
 
@@ -72,7 +72,7 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 		# Switch to next GPU. 
 		if current_exp_n <= max_n_running:
 			use_gpu_n += 1
-			use_gpu_n = use_gpu_n if use_gpu_n < n_gpus else 0
+			use_gpu_n = use_gpu_n if use_gpu_n < n_gpus else 1
 		# Use the one with most ammount of free memory
 		else:
 			most_free_mem = 0 
