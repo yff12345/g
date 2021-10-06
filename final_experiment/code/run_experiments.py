@@ -17,11 +17,11 @@ dr = 0.25
 # Experiments
 experiment_n = list(range(5))
 features = ['raw']
-window_sizes = [1, 2]
-number_train_samples = [16, 32, 64, 128]
+window_sizes = [1, 2, 4]
+number_train_samples = [16, 32, 64, 128, 256, 512]
 # These should use the same training data
 model_names = ['GraphConv']
-hidden_channels = [512, 1024]
+hidden_channels = [512, 1024, 2048]
 models = list(filter(None, [f'{name}_{hc}' if not name == 'LR' else None if hc != 64 else 'LR' for name in model_names for hc in hidden_channels ]))
 experiments = [(en,ef,ws,nts) for en in experiment_n for ef in features for ws in window_sizes for nts in number_train_samples]
 
