@@ -12,7 +12,7 @@ import numpy as np
 # Fixed hyperparameters
 lr = 5e-4
 l2 = 0 
-dr = 0.25
+dr = 0.5
 
 # Experiments
 experiment_n = list(range(10))
