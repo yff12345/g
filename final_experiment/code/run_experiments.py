@@ -20,9 +20,10 @@ features = ['raw']
 window_sizes = [0.5, 1, 2]
 number_train_samples = [16, 32, 64, 128, 256, 512]
 # These should use the same training data
-model_names = ['GraphConv','MLP','LR','CNN']
-hidden_channels = [512, 1024]
+model_names = ['LR']
+hidden_channels = [0]
 models = list(filter(None, [f'{name}_{hc}' if not name == 'LR' else None if hc != 64 else 'LR' for name in model_names for hc in hidden_channels ]))
+models = model_names # just for LR
 experiments = [(en,ef,ws,nts) for en in experiment_n for ef in features for ws in window_sizes for nts in number_train_samples]
 
 # Number of experiments run in total
@@ -35,6 +36,7 @@ running_procs = []
 current_exp_n = 1
 
 for i,(en,ef,ws,nts) in enumerate(experiments):
+
 	# Get train data indices for this set of experiments
 	samples_per_participant = int((60/ws)*40)
 	# First 100 are validation indices, then train
@@ -47,6 +49,8 @@ for i,(en,ef,ws,nts) in enumerate(experiments):
 			hc = 0
 		else:
 			model, hc = model.split('_')
+
+		bashCommand = f"python3 main.py -ws {ws} -ef {ef} -hc {hc} -nts {nts} -wd {l2} -dr {dr} -m {model} -lr {lr} -wtr -esp 30 -trd {model}_{hc}_{ef}_{nts}_{ws} -tmd {current_exp_n} -dsd -tsa {' '.join(val_train_samples_idx) }"
 
 		# Run training job
 		my_env = os.environ.copy()
