@@ -1,0 +1,25 @@
+\begin{tabular}{lll}
+\toprule
+{} &                    95 &                     99 \\
+\midrule
+\textbf{LR            } &  0.96±0.00 wav 2.0 s. &   0.99±0.00 wav 4.0 s. \\
+\textbf{MLP\_64        } &  0.97±0.00 wav 2.0 s. &   0.99±0.00 wav 4.0 s. \\
+\textbf{MLP\_128       } &  0.97±0.00 wav 2.0 s. &   0.99±0.00 wav 3.0 s. \\
+\textbf{MLP\_256       } &  0.95±0.01 wav 1.0 s. &   0.99±0.00 wav 3.0 s. \\
+\textbf{MLP\_512       } &  0.95±0.00 wav 1.0 s. &   0.99±0.00 wav 3.0 s. \\
+\textbf{MLP\_1024      } &  0.95±0.00 wav 1.0 s. &   0.99±0.01 wav 3.0 s. \\
+\textbf{MLP\_2048      } &  0.95±0.01 wav 1.0 s. &   0.99±0.01 wav 3.0 s. \\
+\textbf{CNN\_64        } &  0.97±0.02 psd 4.0 s. &  0.99±0.00 wav 16.0 s. \\
+\textbf{CNN\_128       } &  0.97±0.02 psd 4.0 s. &   0.99±0.01 wav 6.0 s. \\
+\textbf{CNN\_256       } &  0.97±0.02 psd 4.0 s. &  0.99±0.01 wav 12.0 s. \\
+\textbf{CNN\_512       } &  0.95±0.02 wav 3.0 s. &  0.99±0.00 wav 16.0 s. \\
+\textbf{CNN\_1024      } &  0.95±0.03 wav 4.0 s. &  0.99±0.01 wav 12.0 s. \\
+\textbf{CNN\_2048      } &  0.95±0.03 wav 4.0 s. &  0.99±0.01 wav 16.0 s. \\
+\textbf{GraphConv\_64  } &  0.95±0.01 wav 2.0 s. &  0.99±0.00 wav 12.0 s. \\
+\textbf{GraphConv\_128 } &  0.97±0.01 wav 4.0 s. &   0.99±0.01 wav 8.0 s. \\
+\textbf{GraphConv\_256 } &  0.95±0.01 wav 2.0 s. &   0.99±0.01 wav 8.0 s. \\
+\textbf{GraphConv\_512 } &  0.95±0.02 wav 3.0 s. &   0.99±0.00 wav 8.0 s. \\
+\textbf{GraphConv\_1024} &  0.97±0.01 wav 4.0 s. &   0.99±0.01 wav 8.0 s. \\
+\textbf{GraphConv\_2048} &  0.96±0.02 wav 3.0 s. &  0.99±0.00 wav 12.0 s. \\
+\bottomrule
+\end{tabular}
